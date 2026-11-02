@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>합집합과 교집합 활동지</title>
+  <style>
+    :root { --blue:#276aa5; --light:#eef7ff; --line:#b9d0e2; --ink:#1f2b35; --green:#e2f4e9; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#f5f8fa; color:var(--ink); font-family:"Noto Sans KR", "Malgun Gothic", sans-serif; font-size:18px; line-height:1.55; }
+    main { max-width:1240px; margin:30px auto; padding:28px; background:white; border-radius:18px; box-shadow:0 5px 20px #27445a18; }
+    h1 { margin:0; text-align:center; font-size:32px; color:#174f82; }
+    .meta { display:flex; justify-content:flex-end; gap:32px; margin:16px 0 28px; }
+    .blank { display:inline-block; min-width:130px; border-bottom:2px solid #62727d; }
+    .grid { display:grid; gap:18px; margin:18px 0; }
+    .row-one { grid-template-columns:1.2fr repeat(3, 1fr); align-items:stretch; }
+    .row-three { grid-template-columns:repeat(3, 1fr); }
+    .row-two { grid-template-columns:repeat(2, 1fr); }
+    .card { padding:18px; border:2px solid var(--line); border-radius:14px; background:var(--light); min-width:0; }
+    .card h2 { margin:0 0 11px; font-size:22px; color:#174f82; }
+    .card p { margin:8px 0; }
+    .set { padding:8px 10px; background:#fff; border-radius:8px; font-weight:700; letter-spacing:.02em; }
+    .question { font-weight:700; }
+    input[type="text"] { width:100%; margin-top:9px; padding:10px; font-size:18px; border:2px solid #7898ae; border-radius:8px; background:#fff; }
+    input[type="text"]:disabled { background:#e5e9ec; border-color:#c3ced5; }
+    .answer-row { display:flex; gap:8px; align-items:flex-end; margin-top:9px; }
+    .answer-row input[type="text"] { margin-top:0; flex:1; min-width:0; }
+    .hint { min-height:25px; margin:5px 0 0; color:#8c3030; font-size:15px; }
+    .symbol { font-size:33px; font-weight:800; color:#174f82; }
+    .static { background:#fff8e7; border-color:#e5c878; }
+    .choices { display:flex; gap:9px; flex-wrap:wrap; margin-top:10px; }
+    button { padding:8px 13px; border:2px solid #4781ae; background:#fff; border-radius:8px; font-size:17px; cursor:pointer; }
+    .symbol-key { min-width:48px; font-size:24px; font-weight:800; color:#174f82; }
+    button:disabled { color:#84919a; border-color:#c3ced5; background:#e5e9ec; cursor:not-allowed; }
+    .done { border-color:#62a77c; background:var(--green); }
+    .remember { margin-top:20px; padding:18px; border-radius:14px; background:#f1f5df; }
+    .remember h2 { margin:0 0 8px; color:#405d1d; }
+    .completion-modal { position:fixed; inset:0; z-index:20; display:none; place-items:center; padding:20px; background:#102b4088; }
+    .completion-modal.show { display:grid; } .modal-card { width:min(410px, 100%); padding:30px; text-align:center; background:white; border-radius:20px; box-shadow:0 14px 40px #00101e66; } .modal-card h2 { margin:0; color:#2e6f40; font-size:2rem; } .modal-card button { margin-top:14px; cursor:pointer; border:0; border-radius:10px; padding:10px 24px; color:white; background:#174f82; font-weight:700; }
+    @media (max-width:850px) { .row-one,.row-three,.row-two { grid-template-columns:1fr; } main { margin:0; border-radius:0; padding:18px; } }
+    @media print { body { background:white; } main { box-shadow:none; margin:0; max-width:none; } .grid { break-inside:avoid; } }
+  </style>
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+  <main>
+    <h1>합집합과 교집합을 알아봅시다</h1>
+    <div class="meta">날짜: <span class="blank"></span></div>
+
+    <section class="grid row-one">
+      <article class="card">
+        <h2>1. 두 집합을 봐요</h2>
+        <p class="set">A = {사과, 바나나}</p>
+        <p class="set">B = {바나나, 포도}</p>
+      </article>
+      <article class="card" id="card-11">
+        <h2>1-1.</h2><p class="question">두 집합에 모두 있는 과일은?</p>
+        <div class="answer-row"><input id="q11" type="text" autocomplete="off" aria-label="1-1 답"><button id="check11">확인</button></div>
+        <p class="hint" id="hint11"></p>
+      </article>
+      <article class="card" id="card-12">
+        <h2>1-2.</h2><p class="question">A에만 있는 과일은?</p>
+        <div class="answer-row"><input id="q12" type="text" autocomplete="off" aria-label="1-2 답" disabled><button id="check12" disabled>확인</button></div>
+        <p class="hint" id="hint12"></p>
+      </article>
+      <article class="card" id="card-13">
+        <h2>1-3.</h2><p class="question">B에만 있는 과일은?</p>
+        <div class="answer-row"><input id="q13" type="text" autocomplete="off" aria-label="1-3 답" disabled><button id="check13" disabled>확인</button></div>
+        <p class="hint" id="hint13"></p>
+      </article>
+    </section>
+
+    <section class="grid row-three">
+      <article class="card" id="card-2">
+        <h2>2. 모두 모아요</h2>
+        <p>집합 A와 집합 B의 원소를 모두 모으면</p><p>   사과, 바나나, 바나나, 포도</p><p>같은 과일은 한 번만 써요.</p><p>아래 빈칸에 써 봅시다.</p>
+        <div class="answer-row"><input id="q2" type="text" autocomplete="off" aria-label="2번 답" disabled placeholder="예: 사과, 바나나, 포도"><button id="check2" disabled>확인</button></div>
+        <p class="hint" id="hint2"></p>
+      </article>
+      <article class="card static">
+        <h2>3. 합집합을 알아봐요</h2>
+        <p>두 집합의 원소를 <strong>모두 모은 집합</strong>을 합집합이라고 해요.</p>
+        <p class="set">A ∪ B = {사과, 바나나, 포도}</p>
+      </article>
+      <article class="card" id="card-4">
+        <h2>4. 합집합 기호를 따라 써요</h2>
+        <p><span class="symbol">∪</span> 는 모두 모으기라는 뜻입니다.</p>
+        <div class="answer-row"><input id="q4a" type="text" autocomplete="off" aria-label="A 합집합 B 따라쓰기" disabled placeholder="A ∪ B"><button class="symbol-key" data-target="q4a" data-symbol="∪" disabled aria-label="합집합 기호 입력">∪</button><button id="check4a" disabled>확인</button></div>
+        <div class="answer-row"><input id="q4b" type="text" autocomplete="off" aria-label="A 합집합 B 한글 따라쓰기" disabled placeholder="A 합집합 B"><button id="check4b" disabled>확인</button></div>
+        <p class="hint" id="hint4"></p>
+      </article>
+    </section>
+
+    <section class="grid row-three">
+      <article class="card" id="card-5">
+        <h2>5. 같이 있는 과일을 찾아요</h2>
+        <p class="question">집합 A와 집합 B에 같이 있는 과일은?</p>
+        <div class="answer-row"><input id="q5" type="text" autocomplete="off" aria-label="5번 답" disabled><button id="check5" disabled>확인</button></div>
+        <p class="hint" id="hint5"></p>
+      </article>
+      <article class="card static">
+        <h2>6. 교집합을 알아봐요</h2>
+        <p>두 집합에 <strong>같이 들어 있는 원소만 모은 집합</strong>을 교집합이라고 해요.</p>
+        <p class="set">A ∩ B = {바나나}</p>
+      </article>
+      <article class="card" id="card-7">
+        <h2>7. 교집합 기호를 따라 써요</h2>
+        <p><span class="symbol">∩</span> 는 같이 있는 것만 모으기라는 뜻입니다.</p>
+        <div class="answer-row"><input id="q7a" type="text" autocomplete="off" aria-label="A 교집합 B 따라쓰기" disabled placeholder="A ∩ B"><button class="symbol-key" data-target="q7a" data-symbol="∩" disabled aria-label="교집합 기호 입력">∩</button><button id="check7a" disabled>확인</button></div>
+        <div class="answer-row"><input id="q7b" type="text" autocomplete="off" aria-label="A 교집합 B 한글 따라쓰기" disabled placeholder="A 교집합 B"><button id="check7b" disabled>확인</button></div>
+        <p class="hint" id="hint7"></p>
+      </article>
+    </section>
+
+    <section class="grid row-two">
+      <article class="card" id="card-8">
+        <h2>8. 알맞은 말을 골라요</h2>
+        <p>두 집합의 원소를 <strong>모두</strong> 모으기</p>
+        <div class="choices"><button id="unionChoice" disabled>합집합</button><button id="wrongChoice" disabled>교집합</button></div>
+        <p>두 집합에 <strong>같이 있는 원소만</strong> 모으기</p>
+        <div class="choices"><button id="wrongUnionChoice" disabled>합집합</button><button id="intersectionChoice" disabled>교집합</button></div>
+        <p class="hint" id="hint8"></p>
+      </article>
+      <article class="card" id="card-9">
+        <h2>9. 숫자로 해 봐요</h2>
+        <p class="set">A = {1, 2, 3} &nbsp; B = {2, 3, 4}</p>
+        <label>A ∪ B = <input id="q9a" type="text" autocomplete="off" aria-label="합집합 답" disabled></label>
+        <label>A ∩ B = <input id="q9b" type="text" autocomplete="off" aria-label="교집합 답" disabled></label>
+        <button id="check9" disabled>확인</button>
+        <p class="hint" id="hint9"></p>
+      </article>
+    </section>
+
+    <section class="remember">
+      <h2>기억해요</h2>
+      <p><strong>합집합</strong>: 두 집합의 원소를 모두 모으기. 같은 원소는 한 번만 써요.</p>
+      <p><strong>교집합</strong>: 두 집합에 같이 있는 원소만 모으기.</p>
+    </section>
+  </main>
+  <div id="completion-modal" class="completion-modal" role="dialog" aria-modal="true" aria-labelledby="completion-title">
+    <div class="modal-card"><h2 id="completion-title">잘했어요!</h2><p>모든 문항을 해결했어요.</p><button id="completion-close" type="button">닫기</button></div>
+  </div>
+  <script>
+    const clean = s => s.replace(/[\s{}]/g, '').replace(/，/g, ',');
+    const reset = (...selectors) => selectors.forEach(selector => document.querySelectorAll(selector).forEach(el => {
+      if (el.tagName === 'INPUT') el.value='';
+      el.disabled=true;
+      el.closest('.card')?.classList.remove('done');
+    }));
+    const resetAfter = {
+      '#q11': () => reset('#q12','#check12','#q13','#check13','#q2','#check2','#q4a','#check4a','[data-target="q4a"]','#q4b','#check4b','#q5','#check5','#q7a','#check7a','[data-target="q7a"]','#q7b','#check7b','#card-8 button','#q9a','#q9b','#check9'),
+      '#q12': () => reset('#q13','#check13','#q2','#check2','#q4a','#check4a','[data-target="q4a"]','#q4b','#check4b','#q5','#check5','#q7a','#check7a','[data-target="q7a"]','#q7b','#check7b','#card-8 button','#q9a','#q9b','#check9'),
+      '#q13': () => reset('#q2','#check2','#q4a','#check4a','[data-target="q4a"]','#q4b','#check4b','#q5','#check5','#q7a','#check7a','[data-target="q7a"]','#q7b','#check7b','#card-8 button','#q9a','#q9b','#check9'),
+      '#q2': () => reset('#q4a','#check4a','[data-target="q4a"]','#q4b','#check4b','#q5','#check5','#q7a','#check7a','[data-target="q7a"]','#q7b','#check7b','#card-8 button','#q9a','#q9b','#check9'),
+      '#q4a': () => reset('#q4b','#check4b','#q5','#check5','#q7a','#check7a','[data-target="q7a"]','#q7b','#check7b','#card-8 button','#q9a','#q9b','#check9'),
+      '#q4b': () => reset('#q5','#check5','#q7a','#check7a','[data-target="q7a"]','#q7b','#check7b','#card-8 button','#q9a','#q9b','#check9'),
+      '#q5': () => reset('#q7a','#check7a','[data-target="q7a"]','#q7b','#check7b','#card-8 button','#q9a','#q9b','#check9'),
+      '#q7a': () => reset('#q7b','#check7b','#card-8 button','#q9a','#q9b','#check9'),
+      '#q7b': () => reset('#card-8 button','#q9a','#q9b','#check9')
+    };
+    const completionModal = document.querySelector('#completion-modal');
+    const showCompletion = () => completionModal.classList.add('show');
+    const resetWorksheet = () => {
+      document.querySelectorAll('input[type="text"]').forEach(input => input.value='');
+      document.querySelectorAll('.card').forEach(card => card.classList.remove('done'));
+      document.querySelectorAll('.hint').forEach(hint => hint.textContent='');
+      resetAfter['#q11']();
+      document.querySelector('#q11').disabled=false;
+      document.querySelector('#check11').disabled=false;
+      completionModal.classList.remove('show');
+      document.querySelector('h1').scrollIntoView({behavior:'smooth'});
+    };
+    document.querySelector('#completion-close').addEventListener('click',resetWorksheet);
+    const answer = (id, expected, next, hint) => {
+      const el=document.querySelector(id), btn=document.querySelector('#check' + id.slice(2)), msg=document.querySelector(hint);
+      btn.addEventListener('click', () => {
+        if (expected.includes(clean(el.value))) { el.closest('.card').classList.add('done'); msg.textContent='맞아요!'; next.forEach(x=>document.querySelector(x).disabled=false); }
+        else { el.closest('.card').classList.remove('done'); msg.textContent=el.value ? '다시 생각해 봐요.' : ''; resetAfter[id](); }
+      });
+    };
+    answer('#q11',['바나나'],['#q12','#check12'],'#hint11');
+    answer('#q12',['사과'],['#q13','#check13'],'#hint12');
+    answer('#q13',['포도'],['#q2','#check2'],'#hint13');
+    answer('#q2',['사과,바나나,포도','사과바나나포도'],['#q4a','#check4a','[data-target="q4a"]'],'#hint2');
+    answer('#q4a',['A∪B','a∪b'],['#q4b','#check4b'],'#hint4');
+    answer('#q4b',['A합집합B','a합집합b'],['#q5','#check5'],'#hint4');
+    answer('#q5',['바나나'],['#q7a','#check7a','[data-target="q7a"]'],'#hint5');
+    answer('#q7a',['A∩B','a∩b'],['#q7b','#check7b'],'#hint7');
+    answer('#q7b',['A교집합B','a교집합b'],['#unionChoice','#wrongChoice'],'#hint7');
+    document.querySelector('#unionChoice').addEventListener('click', ()=>{ document.querySelector('#hint8').textContent='맞아요! 이제 교집합도 골라 보세요.'; ['#wrongUnionChoice','#intersectionChoice'].forEach(x=>document.querySelector(x).disabled=false); });
+    document.querySelector('#wrongChoice').addEventListener('click', ()=>document.querySelector('#hint8').textContent='다시 생각해 봐요.');
+    document.querySelector('#intersectionChoice').addEventListener('click', e=>{ e.target.closest('.card').classList.add('done'); document.querySelector('#hint8').textContent='두 문제 모두 맞았어요!'; ['#q9a','#q9b','#check9'].forEach(x=>document.querySelector(x).disabled=false); document.querySelectorAll('#card-8 button').forEach(button=>button.disabled=true); });
+    document.querySelector('#wrongUnionChoice').addEventListener('click', ()=>document.querySelector('#hint8').textContent='다시 생각해 봐요.');
+    document.querySelectorAll('.symbol-key').forEach(button => button.addEventListener('click', () => {
+      const input = document.querySelector('#' + button.dataset.target);
+      input.value += button.dataset.symbol;
+      input.focus();
+    }));
+    const numbers=()=>{ const a=clean(document.querySelector('#q9a').value), b=clean(document.querySelector('#q9b').value); const okA=['1,2,3,4','1234'].includes(a), okB=['2,3','23'].includes(b), ok=okA&&okB; document.querySelector('#hint9').textContent=ok?'정답입니다!':'두 답을 모두 써 보세요.'; document.querySelector('#card-9').classList.toggle('done',ok); if(ok) showCompletion(); };
+    document.querySelector('#check9').addEventListener('click',numbers);
+  </script>
+</body>
+</html>

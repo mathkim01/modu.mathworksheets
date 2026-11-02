@@ -1,0 +1,90 @@
+/* Shared visual language for the worksheets. Interaction and layout rules stay local. */
+:root {
+  --theme-ink: #253746;
+  --theme-muted: #687b87;
+  --theme-blue: #49687f;
+  --theme-sage: #8eaa98;
+  --theme-sage-soft: #edf4ee;
+  --theme-amber: #e5b867;
+  --theme-amber-soft: #fff7e7;
+  --theme-line: #d9e2e5;
+  --theme-paper: #fffefb;
+  --theme-ground: #edf2f3;
+}
+
+body {
+  color: var(--theme-ink);
+  background: var(--theme-ground);
+  font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+}
+
+h1, h2, h3, .card-title, .step-title, .section-header h2 {
+  color: var(--theme-ink);
+  font-family: inherit;
+  letter-spacing: -.025em;
+}
+
+main, .top-sheet, .page-head, .head, .intro, .lesson-section,
+.review-card, .step-section, .self-eval-section {
+  border-color: var(--theme-line);
+}
+
+.card, .activity, .question-card, .sub-task, .step, .review-item {
+  border-color: var(--theme-line);
+  background-color: var(--theme-paper);
+  box-shadow: 0 3px 14px rgb(37 55 70 / 5%);
+}
+
+.card.done, .question-card.done, .sub-task.done, .step.done {
+  border-color: var(--theme-sage);
+  background-color: var(--theme-sage-soft);
+}
+
+.static, .remember, .notice, .summary-box, .domain-note {
+  border-color: var(--theme-amber);
+  background-color: var(--theme-amber-soft);
+}
+
+.question-box, .guide, .sentence-box {
+  border-color: var(--theme-amber);
+  border-left-color: var(--theme-amber);
+  background: var(--theme-amber-soft);
+  color: var(--theme-ink);
+}
+
+.teacher, .teacher-panel { background-color: var(--theme-sage-soft); }
+.student, .student-panel { background-color: var(--theme-amber-soft); }
+.badge, .num, .sheet-badge, .step-num {
+  background-color: var(--theme-sage-soft);
+  color: #365b50;
+}
+
+.topbar, .top-navbar, .page-head, .top-sheet, .head {
+  border-color: var(--theme-line);
+}
+
+a, .brand, .nav-title, .eyebrow, .symbol, .answer-label {
+  color: var(--theme-blue);
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+button { border-radius: 9px; }
+
+input:not([type="checkbox"]):not([type="radio"]), select, textarea {
+  border-color: #aebfc5;
+  color: var(--theme-ink);
+}
+
+button:not(:disabled):focus-visible, a:focus-visible,
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--theme-amber);
+  outline-offset: 2px;
+}
+
+@media print {
+  body { background: #fff; }
+  .card, .activity, .question-card, .sub-task, .step, .review-item { box-shadow: none; }
+}

@@ -1,0 +1,11 @@
+@charset "utf-8";
+* { box-sizing: border-box; }
+body { margin: 0; color: #17223a; background: #fff; font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif; }
+.worksheet { max-width: 860px; margin: 0 auto; padding: clamp(30px, 6vw, 76px) clamp(24px, 7vw, 82px); }
+.badge { display: inline-block; margin: 0 0 17px; padding: 6px 10px; border-radius: 99px; background: #eaf1ff; color: #1957bd; font-size: .82rem; font-weight: 750; }
+h1 { margin: 0; font-size: clamp(1.75rem, 4vw, 2.55rem); letter-spacing: -.055em; }
+.intro { margin: 16px 0 36px; color: #56647c; font-size: 1.02rem; line-height: 1.7; }
+.question { margin: 20px 0; padding: 25px; border: 1px solid #dce4f1; border-radius: 14px; background: #fbfcff; }
+h2 { margin: 0 0 22px; font-size: 1.1rem; line-height: 1.55; }
+.answer { margin: 22px 0 0; line-height: 2; }.answer span { display: inline-block; min-width: 80px; border-bottom: 1.5px solid #52627f; }
+.number-line { display: flex; align-items: center; justify-content: center; margin: 32px 0; font-weight: 700; }.number-line i { width: 55px; height: 1px; background: #51617d; }.number-line span, .number-line b { display: grid; width: 28px; height: 28px; place-items: center; transform: translateY(-14px); color: #1f59bd; }.number-line b { color: #c23b34; font-size: 1.25rem; }.math { padding: 15px; border-radius: 8px; background: #fff; font-family: Consolas, monospace; font-size: 1.35rem; letter-spacing: .08em; text-align: center; }

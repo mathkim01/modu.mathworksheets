@@ -1,0 +1,1953 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>26-2 공통수학2 활동지 - '모든'과 '어떤'을 포함한 명제 (p.91)</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        :root {
+            --bg-color: #f6f8fb;
+            --card-bg: #ffffff;
+            --primary: #4f46e5;
+            --primary-light: #eef2ff;
+            --primary-hover: #4338ca;
+            --accent-coral: #f43f5e;
+            --accent-emerald: #059669;
+            --emerald-bg: #ecfdf5;
+            --coral-bg: #fff1f2;
+            --teacher-bg: #fffbeb;
+            --teacher-border: #fcd34d;
+            --teacher-text: #92400e;
+            --student-bg: #f0f9ff;
+            --student-border: #7dd3fc;
+            --student-text: #0369a1;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-soft: #e2e8f0;
+            --shadow-soft: 0 10px 25px -4px rgba(15, 23, 42, 0.05), 0 4px 6px -2px rgba(15, 23, 42, 0.03);
+            --radius-lg: 18px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.65;
+            padding: 0 16px 80px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+            text-wrap: pretty;
+        }
+
+        /* 텍스트 줄바꿈 최적화 (한글 단어 단위 유지 & 균형 맞춤) */
+        h1, h2, h3, h4, .card-title, .question-box, .quiz-statement, .graphic-title, .summary-title {
+            word-break: keep-all;
+            overflow-wrap: break-word;
+            text-wrap: balance;
+        }
+
+        p, li, .bubble-text, .tip-box, .quiz-feedback, .summary-item, td, th {
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+
+        /* MathJax 인라인 수식 줄바꿈 방지 */
+        mjx-container[jax="CHTML"][display="false"],
+        .MathJax,
+        .MathJax_CHTML {
+            white-space: nowrap !important;
+        }
+
+        /* 플로팅 헤더 & 상단 빠른 바로가기 */
+        .top-navbar {
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border-radius: 9999px;
+            padding: 8px 18px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 920px;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .nav-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .nav-links::-webkit-scrollbar { display: none; }
+
+        .nav-link-btn {
+            font-size: 0.82rem;
+            padding: 6px 12px;
+            border-radius: 9999px;
+            text-decoration: none;
+            color: var(--text-muted);
+            background: transparent;
+            border: 1px solid transparent;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link-btn:hover {
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .toggle-all-dialogue-btn {
+            font-size: 0.82rem;
+            padding: 6px 14px;
+            background: #f1f5f9;
+            color: var(--text-main);
+            border: 1px solid var(--border-soft);
+            border-radius: 9999px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+        .toggle-all-dialogue-btn:hover {
+            background: #e2e8f0;
+        }
+
+        /* 카드 컨테이너 */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-soft);
+            width: 100%;
+            max-width: 880px;
+            margin-bottom: 28px;
+            padding: 30px 34px;
+            scroll-margin-top: 80px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 14px 30px -4px rgba(15, 23, 42, 0.08);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #eef2f6;
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.32rem;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-badge {
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 9999px;
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* 발문 / 질문 스타일 */
+        .question-box {
+            background: linear-gradient(135deg, #fff5f5 0%, #fff1f2 100%);
+            border: 1px solid #fecdd3;
+            border-left: 5px solid var(--accent-coral);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            margin: 16px 0;
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #9f1239;
+            box-shadow: 0 2px 8px rgba(244, 63, 94, 0.06);
+        }
+
+        /* 대화창 & 토글 기능 */
+        .dialogue-wrapper {
+            margin: 16px 0;
+            border: 1px solid #f1f5f9;
+            border-radius: var(--radius-md);
+            background: #fafbfc;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .dialogue-header {
+            padding: 10px 16px;
+            background: #f8fafc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .dialogue-header span {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .toggle-btn {
+            background: white;
+            border: 1px solid var(--border-soft);
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .toggle-btn:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: #cbd5e1;
+        }
+
+        .dialogue-content {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .dialogue-content.hidden {
+            display: none;
+        }
+
+        .dialogue-bubble {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .bubble-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+        }
+
+        .bubble-text {
+            border-radius: 14px;
+            padding: 10px 16px;
+            font-size: 0.95rem;
+            max-width: 85%;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            line-height: 1.5;
+        }
+
+        .bubble-teacher .bubble-avatar { background: #fef3c7; }
+        .bubble-teacher .bubble-text {
+            background: var(--teacher-bg);
+            border: 1px solid var(--teacher-border);
+            color: var(--teacher-text);
+            border-top-left-radius: 4px;
+        }
+
+        .bubble-student .bubble-avatar { background: #e0f2fe; }
+        .bubble-student .bubble-text {
+            background: var(--student-bg);
+            border: 1px solid var(--student-border);
+            color: var(--student-text);
+            border-top-left-radius: 4px;
+        }
+
+        /* 팁 / 하이라이트 박스 */
+        .tip-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-left: 4px solid #3b82f6;
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+            font-size: 0.94rem;
+            color: #1e40af;
+            margin: 16px 0;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #4338ca;
+            background: #e0e7ff;
+            padding: 2px 7px;
+            border-radius: 4px;
+        }
+
+        /* 인터랙티브 빈칸 버튼 */
+        .interactive-blank {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f1f5f9;
+            color: #64748b;
+            padding: 3px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1.5px dashed #94a3b8;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+            user-select: none;
+            margin: 2px 4px;
+            word-break: keep-all;
+        }
+
+        .interactive-blank:hover {
+            background-color: #e2e8f0;
+            border-color: #64748b;
+            color: #334155;
+            transform: translateY(-1px);
+        }
+
+        .interactive-blank.revealed {
+            background-color: var(--emerald-bg);
+            color: var(--accent-emerald);
+            border: 1.5px solid var(--accent-emerald);
+            box-shadow: 0 2px 4px rgba(5, 150, 105, 0.1);
+        }
+
+        .interactive-blank.revealed-false {
+            background-color: #fee2e2 !important;
+            color: #dc2626 !important;
+            border: 1.5px solid #ef4444 !important;
+            box-shadow: 0 2px 4px rgba(220, 38, 38, 0.12) !important;
+        }
+
+        /* 퀴즈 그리드 (도입부 예제 - 2x2 균형 배치) */
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 14px;
+        }
+
+        @media (max-width: 680px) {
+            .quiz-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .quiz-card {
+            background: #fafbfc;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            padding: 16px 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            transition: all 0.2s;
+        }
+
+        .quiz-card:hover {
+            background: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .quiz-badge {
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .quiz-statement {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 14px;
+            min-height: 44px;
+            line-height: 1.6;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+
+        .quiz-statement .phrase {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .tf-btn-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .tf-btn {
+            flex: 1;
+            padding: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            background: white;
+            font-weight: 700;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #475569;
+        }
+
+        .tf-btn:hover {
+            background: #f8fafc;
+            border-color: #94a3b8;
+        }
+
+        .tf-btn.selected-true {
+            background: var(--emerald-bg);
+            border-color: var(--accent-emerald);
+            color: var(--accent-emerald);
+        }
+
+        .tf-btn.selected-false {
+            background: var(--coral-bg);
+            border-color: var(--accent-coral);
+            color: var(--accent-coral);
+        }
+
+        .quiz-feedback {
+            display: none;
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 0.86rem;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .quiz-feedback.show {
+            display: block;
+        }
+
+        .quiz-feedback.correct {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+
+        .quiz-feedback.incorrect {
+            background: #fff1f2;
+            border: 1px solid #fecdd3;
+            color: #9f1239;
+        }
+
+        /* 인터랙티브 비교 테이블 스타일 */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 18px 0;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            background: white;
+        }
+
+        .truth-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.92rem;
+            min-width: 760px;
+        }
+
+        .truth-table th {
+            background: #f8fafc;
+            color: #334155;
+            font-weight: 700;
+            padding: 12px 14px;
+            border-bottom: 2px solid #e2e8f0;
+            white-space: nowrap;
+        }
+
+        .truth-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: middle;
+        }
+
+        .truth-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .truth-table tr.user-row {
+            background: #faf5ff;
+        }
+
+        .table-input {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            font-family: inherit;
+            background: white;
+            transition: all 0.2s;
+        }
+
+        .table-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+        }
+
+        .table-select {
+            padding: 6px 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            font-family: inherit;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .badge-tf {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .badge-true {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .badge-false {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .btn-check-row {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border: 1px solid #cbd5e1;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-check-row:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* SVG 일러스트 컨테이너 (안경 쓴 학생들) */
+        .illustration-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            padding: 22px 20px;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .compare-graphics-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .compare-graphics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .graphic-panel {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .graphic-title {
+            font-weight: 700;
+            font-size: 0.96rem;
+            color: #1e293b;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .graphic-badge {
+            font-size: 0.74rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 9999px;
+        }
+
+        .graphic-badge-original {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .graphic-badge-negation {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        /* 요약 카드 그리드 */
+        .summary-box {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 1px solid #cbd5e1;
+            border-radius: var(--radius-md);
+            padding: 20px 24px;
+            margin-top: 18px;
+        }
+
+        .summary-title {
+            font-weight: 700;
+            font-size: 1.08rem;
+            color: #0f172a;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 14px;
+        }
+
+        .summary-item {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .summary-item.coral {
+            border-left-color: var(--accent-coral);
+        }
+
+        .summary-item.emerald {
+            border-left-color: var(--accent-emerald);
+        }
+
+        .btn-fill-sample {
+            background: #ede9fe;
+            color: #6d28d9;
+            border: 1px solid #ddd6fe;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-fill-sample:hover {
+            background: #ddd6fe;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    <link rel="stylesheet" href="theme.css">
+
+    <!-- MathJax 수식 설정 -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <!-- 상단 스티키 내비게이션 바 -->
+    <header class="top-navbar">
+        <div class="nav-title">
+            <span>📐</span> 26-2 공통수학2 (p.91)
+        </div>
+        <nav class="nav-links">
+            <a href="#section1" class="nav-link-btn">1. 도입 예제</a>
+            <a href="#section2" class="nav-link-btn">2. '모든'</a>
+            <a href="#section3" class="nav-link-btn">3. '어떤'</a>
+            <a href="#section4" class="nav-link-btn">4. 부정</a>
+            <a href="#section5" class="nav-link-btn">5. p.91 요약</a>
+            <a href="#section6" class="nav-link-btn" style="color: var(--primary); font-weight:700;">6. 역과 대우</a>
+            <a href="#section7" class="nav-link-btn" style="color: var(--primary); font-weight:700;">7. 충분·필요조건</a>
+            <a href="#section8" class="nav-link-btn" style="color: var(--primary); font-weight:700;">8. 종합 요약</a>
+        </nav>
+        <button class="toggle-all-dialogue-btn" onclick="toggleAllDialogues()" title="화면의 모든 대화창을 숨기거나 표시합니다">
+            <span id="allDialogueIcon">👁️</span> <span id="allDialogueText">모든 대화 숨기기</span>
+        </button>
+    </header>
+
+    <!-- ==================== 섹션 1: 도입 예제 판별 ==================== -->
+    <section class="card" id="section1">
+        <div class="card-header">
+            <h2 class="card-title">1. '모든'과 '어떤'을 포함한 명제의 참·거짓 판별</h2>
+            <span class="card-badge">도입 탐구</span>
+        </div>
+
+        <div class="question-box">
+            " '모든'과 '어떤'이 포함된 다음 4가지 명제의 참·거짓을 직관적으로 선택해 봅시다! "
+        </div>
+
+        <!-- 4가지 예제 퀴즈 그리드 -->
+        <div class="quiz-grid">
+            <!-- 퀴즈 1 -->
+            <div class="quiz-card" id="quizCard1">
+                <div>
+                    <div class="quiz-header">
+                        <span class="quiz-badge">일상 예시 1</span>
+                        <span style="font-size:0.8rem; color:#64748b;">포도 이야기</span>
+                    </div>
+                    <div class="quiz-statement">
+                        <span class="phrase">"모든 포도는</span> <span class="phrase">보라색이다."</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="tf-btn-group">
+                        <button class="tf-btn" onclick="selectTF(1, true, false)">참 (T)</button>
+                        <button class="tf-btn" onclick="selectTF(1, false, false)">거짓 (F)</button>
+                    </div>
+                    <div class="quiz-feedback" id="feedback1">
+                        <strong>❌ 거짓(False)!</strong><br>
+                        💡 <strong>반례:</strong> 샤인머스캣(청포도) 등 초록색 포도가 존재합니다. '모든'이라는 표현은 <strong>단 1개의 반례</strong>만 있어도 거짓이 됩니다!
+                    </div>
+                </div>
+            </div>
+
+            <!-- 퀴즈 2 -->
+            <div class="quiz-card" id="quizCard2">
+                <div>
+                    <div class="quiz-header">
+                        <span class="quiz-badge">일상 예시 2</span>
+                        <span style="font-size:0.8rem; color:#64748b;">포도 이야기</span>
+                    </div>
+                    <div class="quiz-statement">
+                        <span class="phrase">"어떤 포도는</span> <span class="phrase">보라색이다."</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="tf-btn-group">
+                        <button class="tf-btn" onclick="selectTF(2, true, true)">참 (T)</button>
+                        <button class="tf-btn" onclick="selectTF(2, false, true)">거짓 (F)</button>
+                    </div>
+                    <div class="quiz-feedback" id="feedback2">
+                        <strong>✅ 참(True)!</strong><br>
+                        💡 보라색인 포도(캠벨, 거봉 등)가 <strong>적어도 1개 존재</strong>하므로 '어떤 포도는 보라색이다'는 참입니다.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 퀴즈 3 -->
+            <div class="quiz-card" id="quizCard3">
+                <div>
+                    <div class="quiz-header">
+                        <span class="quiz-badge">수학 예시 1</span>
+                        <span style="font-size:0.8rem; color:#64748b;">자연수 집합</span>
+                    </div>
+                    <div class="quiz-statement">
+                        <span class="phrase">"모든 자연수 $x$에 대하여</span> <span class="phrase">$x > 0$이다."</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="tf-btn-group">
+                        <button class="tf-btn" onclick="selectTF(3, true, true)">참 (T)</button>
+                        <button class="tf-btn" onclick="selectTF(3, false, true)">거짓 (F)</button>
+                    </div>
+                    <div class="quiz-feedback" id="feedback3">
+                        <strong>✅ 참(True)!</strong><br>
+                        💡 자연수 $U = \{1, 2, 3, \dots\}$ 의 모든 원소는 $0$보다 크므로, 예외 없이 모두 성립합니다.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 퀴즈 4 -->
+            <div class="quiz-card" id="quizCard4">
+                <div>
+                    <div class="quiz-header">
+                        <span class="quiz-badge">수학 예시 2</span>
+                        <span style="font-size:0.8rem; color:#64748b;">실수 집합</span>
+                    </div>
+                    <div class="quiz-statement">
+                        <span class="phrase">"어떤 실수 $x$에 대하여</span> <span class="phrase">$x^2 = -1$이다."</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="tf-btn-group">
+                        <button class="tf-btn" onclick="selectTF(4, true, false)">참 (T)</button>
+                        <button class="tf-btn" onclick="selectTF(4, false, false)">거짓 (F)</button>
+                    </div>
+                    <div class="quiz-feedback" id="feedback4">
+                        <strong>❌ 거짓(False)!</strong><br>
+                        💡 실수를 제곱하면 항상 $0$ 이상($x^2 \ge 0$)이므로, 제곱해서 $-1$이 되는 실수는 <strong>단 하나도 존재하지 않습니다</strong>.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 대화창 1 -->
+        <div class="dialogue-wrapper" style="margin-top: 22px;">
+            <div class="dialogue-header">
+                <span>💬 수업 대화: '모든'과 '어떤'의 핵심 직관</span>
+                <button class="toggle-btn" onclick="toggleDialogue(this)">
+                    <span>접기</span>
+                </button>
+            </div>
+            <div class="dialogue-content">
+                <div class="dialogue-bubble bubble-teacher">
+                    <div class="bubble-avatar">👨‍🏫</div>
+                    <div class="bubble-text"><strong>선생님:</strong> '모든'과 '어떤'이 들어간 문장의 참·거짓을 가르는 기준은 무엇일까요?</div>
+                </div>
+                <div class="dialogue-bubble bubble-student">
+                    <div class="bubble-avatar">🙋‍♂️</div>
+                    <div class="bubble-text"><strong>학생:</strong> <strong>'모든'</strong>은 단 1개의 예외(반례)도 없이 전부 성립해야 참이고, <strong>'어떤'</strong>은 조건을 만족하는 대상이 단 하나라도 있으면 참이 됩니다!</div>
+                </div>
+                <div class="dialogue-bubble bubble-teacher">
+                    <div class="bubble-avatar">👨‍🏫</div>
+                    <div class="bubble-text"><strong>선생님:</strong> 완벽합니다! 이제 이 직관을 수학적인 <strong>전체집합 $U$와 진리집합 $P$의 관계</strong>로 정확하게 정의해 봅시다.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 섹션 2: 진리집합과 '모든' ==================== -->
+    <section class="card" id="section2">
+        <div class="card-header">
+            <h2 class="card-title">2. 진리집합을 이용하여 '모든'을 포함한 명제 판별하기</h2>
+            <span class="card-badge">집합과 비교</span>
+        </div>
+
+        <p style="font-size: 1.02rem; margin-bottom: 12px;">
+            '모든'이 들어가는 명제의 참·거짓을 따질 때, <strong>전체집합 $U$</strong>와 조건을 참이 되게 하는 <strong>진리집합 $P$</strong>를 비교해 봅시다.
+        </p>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 0.9rem; font-weight: 700; color: #334155;">📊 [탐구 표] 전체집합과 진리집합 비교하기</span>
+            <button class="btn-fill-sample" onclick="fillEverySamples()">💡 3, 4행 추천 예시 자동 채우기</button>
+        </div>
+
+        <!-- 인터랙티브 테이블 1 -->
+        <div class="table-responsive">
+            <table class="truth-table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">명제</th>
+                        <th style="width: 20%;">조건 $p$</th>
+                        <th style="width: 17%;">전체집합 $U$</th>
+                        <th style="width: 17%;">진리집합 $P$</th>
+                        <th style="width: 11%;">비교</th>
+                        <th style="width: 10%;">참/거짓</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 행 1 -->
+                    <tr>
+                        <td><strong>모든</strong> 우리 반 친구는 안경을 썼다.</td>
+                        <td>우리 반 친구는 안경을 썼다.</td>
+                        <td>$U$: 우리 반 모든 학생</td>
+                        <td>$P$: 안경을 쓴 학생</td>
+                        <td>
+                            <select class="table-select" id="everyCmp1" onchange="checkTableRow(1, '!=', 'F')">
+                                <option value="">선택</option>
+                                <option value="=">$U = P$</option>
+                                <option value="!=">$U \neq P$</option>
+                            </select>
+                        </td>
+                        <td>
+                            <span class="badge-tf badge-false">거짓</span>
+                        </td>
+                    </tr>
+                    <!-- 행 2 -->
+                    <tr>
+                        <td><strong>모든</strong> 삼각형은 변이 3개이다.</td>
+                        <td>삼각형은 변이 3개이다.</td>
+                        <td>$U$: 모든 삼각형</td>
+                        <td>$P$: 변이 3개인 삼각형</td>
+                        <td>
+                            <select class="table-select" id="everyCmp2" onchange="checkTableRow(2, '=', 'T')">
+                                <option value="">선택</option>
+                                <option value="=">$U = P$</option>
+                                <option value="!=">$U \neq P$</option>
+                            </select>
+                        </td>
+                        <td>
+                            <span class="badge-tf badge-true">참</span>
+                        </td>
+                    </tr>
+                    <!-- 행 3 (사용자 입력) -->
+                    <tr class="user-row">
+                        <td>
+                            <input type="text" class="table-input" id="userEveryProp3" placeholder="예: 모든 실수는 제곱하면 0 이상이다" oninput="autoExtractCondition('userEveryProp3', 'userEveryCond3')">
+                        </td>
+                        <td>
+                            <input type="text" class="table-input" id="userEveryCond3" placeholder="실수는 제곱하면 0 이상이다">
+                        </td>
+                        <td>
+                            <input type="text" class="table-input" id="userEveryU3" placeholder="U: 모든 실수">
+                        </td>
+                        <td>
+                            <input type="text" class="table-input" id="userEveryP3" placeholder="P: 제곱해서 0 이상인 실수">
+                        </td>
+                        <td>
+                            <select class="table-select" id="userEveryCmp3">
+                                <option value="">선택</option>
+                                <option value="=">$U = P$</option>
+                                <option value="!=">$U \neq P$</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="table-select" id="userEveryTF3">
+                                <option value="">선택</option>
+                                <option value="T">참</option>
+                                <option value="F">거짓</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- 행 4 (사용자 입력) -->
+                    <tr class="user-row">
+                        <td>
+                            <input type="text" class="table-input" id="userEveryProp4" placeholder="예: 모든 소수는 홀수이다" oninput="autoExtractCondition('userEveryProp4', 'userEveryCond4')">
+                        </td>
+                        <td>
+                            <input type="text" class="table-input" id="userEveryCond4" placeholder="소수는 홀수이다">
+                        </td>
+                        <td>
+                            <input type="text" class="table-input" id="userEveryU4" placeholder="U: 모든 소수">
+                        </td>
+                        <td>
+                            <input type="text" class="table-input" id="userEveryP4" placeholder="P: 홀수인 소수 {3,5,7..}">
+                        </td>
+                        <td>
+                            <select class="table-select" id="userEveryCmp4">
+                                <option value="">선택</option>
+                                <option value="=">$U = P$</option>
+                                <option value="!=">$U \neq P$</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="table-select" id="userEveryTF4">
+                                <option value="">선택</option>
+                                <option value="T">참</option>
+                                <option value="F">거짓</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip-box" style="margin-top: 14px;">
+            <span>💡</span>
+            <div>
+                <strong>[위 표를 정리해 볼까요?]</strong><br>
+                '모든'이 들어가는 명제가 참일 경우 전체집합과 진리집합 사이의 관계는 어떻게 되나요?<br>
+                👉 <span class="interactive-blank" onclick="reveal(this, '전체집합과 진리집합이 같다. (P = U)')">__________ (클릭하여 확인)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 섹션 3: 진리집합과 '어떤' ==================== -->
+    <section class="card" id="section3">
+        <div class="card-header">
+            <h2 class="card-title">3. 진리집합을 이용하여 '어떤'을 포함한 명제 판별하기</h2>
+            <span class="card-badge">집합과 비교</span>
+        </div>
+
+        <p style="font-size: 1.02rem; margin-bottom: 12px;">
+            '어떤'이 들어가는 명제의 참·거짓을 따질 때, 조건을 만족하는 진리집합 $P$가 <strong>공집합($\emptyset$)인지 아닌지</strong>를 비교해 봅시다.
+        </p>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 0.9rem; font-weight: 700; color: #334155;">📊 [탐구 표] 진리집합과 공집합($\emptyset$) 비교하기</span>
+            <button class="btn-fill-sample" onclick="fillSomeSamples()">💡 3, 4행 추천 예시 자동 채우기</button>
+        </div>
+
+        <!-- 인터랙티브 테이블 2 -->
+        <div class="table-responsive">
+            <table class="truth-table">
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">명제</th>
+                        <th style="width: 20%;">조건 $p$</th>
+                        <th style="width: 17%;">전체집합 $U$</th>
+                        <th style="width: 17%;">진리집합 $P$</th>
+                        <th style="width: 11%;">비교</th>
+                        <th style="width: 10%;">참/거짓</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 행 1 -->
+                    <tr>
+                        <td><strong>어떤</strong> 우리 반 친구는 안경을 썼다.</td>
+                        <td>우리 반 친구는 안경을 썼다.</td>
+                        <td>$U$: 우리 반 모든 학생</td>
+                        <td>$P$: 안경을 쓴 학생</td>
+                        <td>
+                            <select class="table-select" id="someCmp1">
+                                <option value="">선택</option>
+                                <option value="!=">$P \neq \emptyset$</option>
+                                <option value="=">$P = \emptyset$</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="table-select" id="someTF1" onchange="checkSomeRow(1)">
+                                <option value="">선택</option>
+                                <option value="T">참</option>
+                                <option value="F">거짓</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- 행 2 -->
+                    <tr>
+                        <td><strong>어떤</strong> 삼각형은 변이 4개이다.</td>
+                        <td>삼각형은 변이 4개이다.</td>
+                        <td>$U$: 모든 삼각형</td>
+                        <td>$P$: 변이 4개인 삼각형</td>
+                        <td>
+                            <select class="table-select" id="someCmp2">
+                                <option value="">선택</option>
+                                <option value="=">$P = \emptyset$</option>
+                                <option value="!=">$P \neq \emptyset$</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="table-select" id="someTF2" onchange="checkSomeRow(2)">
+                                <option value="">선택</option>
+                                <option value="T">참</option>
+                                <option value="F">거짓</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- 행 3 (사용자 입력) -->
+                    <tr class="user-row">
+                        <td>
+                            <input type="text" class="table-input" id="userSomeProp3" placeholder="예: 어떤 실수는 x² < 0 이다" oninput="autoExtractCondition('userSomeProp3', 'userSomeCond3')">
+                        </td>
+                        <td>
+                            <input type="text" class="table-input" id="userSomeCond3" placeholder="실수는 x² < 0 이다">
+                        </td>
+                        <td>
+                            <input type="text" class="table-input" id="userSomeU3" placeholder="U: 모든 실수">
+                        </td>
+                        <td>
+                            <input type="text" class="table-input" id="userSomeP3" placeholder="P: { } (공집합)">
+                        </td>
+                        <td>
+                            <select class="table-select" id="userSomeCmp3">
+                                <option value="">선택</option>
+                                <option value="=">$P = \emptyset$</option>
+                                <option value="!=">$P \neq \emptyset$</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="table-select" id="userSomeTF3">
+                                <option value="">선택</option>
+                                <option value="T">참</option>
+                                <option value="F">거짓</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- 행 4 (사용자 입력) -->
+                    <tr class="user-row">
+                        <td>
+                            <input type="text" class="table-input" id="userSomeProp4" placeholder="예: 어떤 소수는 짝수이다" oninput="autoExtractCondition('userSomeProp4', 'userSomeCond4')">
+                        </td>
+                        <td>
+                            <input type="text" class="table-input" id="userSomeCond4" placeholder="소수는 짝수이다">
+                        </td>
+                        <td>
+                            <input type="text" class="table-input" id="userSomeU4" placeholder="U: 모든 소수">
+                        </td>
+                        <td>
+                            <input type="text" class="table-input" id="userSomeP4" placeholder="P: {2} (2가 존재)">
+                        </td>
+                        <td>
+                            <select class="table-select" id="userSomeCmp4">
+                                <option value="">선택</option>
+                                <option value="!=">$P \neq \emptyset$</option>
+                                <option value="=">$P = \emptyset$</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="table-select" id="userSomeTF4">
+                                <option value="">선택</option>
+                                <option value="T">참</option>
+                                <option value="F">거짓</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip-box" style="margin-top: 14px;">
+            <span>💡</span>
+            <div>
+                <strong>[위 표를 정리해 볼까요?]</strong><br>
+                '어떤'이 들어가는 명제가 참일 경우 진리집합 $P$의 조건은 무엇인가요?<br>
+                👉 <span class="interactive-blank" onclick="reveal(this, '진리집합이 공집합이 아니다. (P ≠ ∅)')">__________ (클릭하여 확인)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 섹션 4: '모든', '어떤'의 부정 ==================== -->
+    <section class="card" id="section4">
+        <div class="card-header">
+            <h2 class="card-title">4. '모든'과 '어떤'이 들어간 명제의 부정</h2>
+            <span class="card-badge">그림과 부정</span>
+        </div>
+
+        <p style="margin-bottom: 14px;">
+            다음 그림(우리 반 5명의 학생)을 참고하여 원래 명제와 부정 명제의 차이를 직관적으로 이해해 봅시다.
+        </p>
+
+        <!-- 안경 쓴 학생들 SVG 일러스트레이션 (대본 44행 시각화) -->
+        <div class="illustration-card">
+            <div class="compare-graphics-grid">
+                <!-- 원래 명제: 5명 모두 안경 착용 -->
+                <div class="graphic-panel">
+                    <div>
+                        <div class="graphic-title">
+                            <span class="graphic-badge graphic-badge-original">원래 명제</span>
+                            <span>모든 학생이 안경을 썼다</span>
+                        </div>
+                        <p style="font-size:0.84rem; color:#64748b; margin-bottom: 12px;">5명 중 5명 모두 안경(👓) 착용</p>
+                    </div>
+
+                    <svg width="310" height="110" viewBox="0 0 310 110" style="max-width: 100%; height: auto;">
+                        <!-- 학생 1 -->
+                        <g>
+                            <circle cx="31" cy="24" r="15" fill="#fde68a" stroke="#d97706" stroke-width="1.8"/>
+                            <path d="M 17 22 Q 31 8 45 22" fill="#78350f"/>
+                            <circle cx="26" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="36" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="26" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <circle cx="36" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <line x1="31" y1="24" x2="31" y2="24" stroke="#1e293b" stroke-width="2"/>
+                            <path d="M 27 32 Q 31 35 35 32" stroke="#92400e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            <rect x="19" y="40" width="24" height="26" rx="6" fill="#60a5fa"/>
+                            <path d="M 26 40 L 31 45 L 36 40" fill="#ffffff" opacity="0.9"/>
+                            <text x="31" y="86" font-size="11" font-weight="700" text-anchor="middle" fill="#475569">학생1👓</text>
+                        </g>
+                        <!-- 학생 2 -->
+                        <g>
+                            <circle cx="93" cy="24" r="15" fill="#fde68a" stroke="#d97706" stroke-width="1.8"/>
+                            <path d="M 79 22 Q 93 8 107 22" fill="#78350f"/>
+                            <circle cx="88" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="98" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="88" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <circle cx="98" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <line x1="93" y1="24" x2="93" y2="24" stroke="#1e293b" stroke-width="2"/>
+                            <path d="M 89 32 Q 93 35 97 32" stroke="#92400e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            <rect x="81" y="40" width="24" height="26" rx="6" fill="#34d399"/>
+                            <path d="M 88 40 L 93 45 L 98 40" fill="#ffffff" opacity="0.9"/>
+                            <text x="93" y="86" font-size="11" font-weight="700" text-anchor="middle" fill="#475569">학생2👓</text>
+                        </g>
+                        <!-- 학생 3 -->
+                        <g>
+                            <circle cx="155" cy="24" r="15" fill="#fde68a" stroke="#d97706" stroke-width="1.8"/>
+                            <path d="M 141 22 Q 155 8 169 22" fill="#78350f"/>
+                            <circle cx="150" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="160" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="150" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <circle cx="160" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <line x1="155" y1="24" x2="155" y2="24" stroke="#1e293b" stroke-width="2"/>
+                            <path d="M 151 32 Q 155 35 159 32" stroke="#92400e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            <rect x="143" y="40" width="24" height="26" rx="6" fill="#f472b6"/>
+                            <path d="M 150 40 L 155 45 L 160 40" fill="#ffffff" opacity="0.9"/>
+                            <text x="155" y="86" font-size="11" font-weight="700" text-anchor="middle" fill="#475569">학생3👓</text>
+                        </g>
+                        <!-- 학생 4 -->
+                        <g>
+                            <circle cx="217" cy="24" r="15" fill="#fde68a" stroke="#d97706" stroke-width="1.8"/>
+                            <path d="M 203 22 Q 217 8 231 22" fill="#78350f"/>
+                            <circle cx="212" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="222" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="212" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <circle cx="222" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <line x1="217" y1="24" x2="217" y2="24" stroke="#1e293b" stroke-width="2"/>
+                            <path d="M 213 32 Q 217 35 221 32" stroke="#92400e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            <rect x="205" y="40" width="24" height="26" rx="6" fill="#fb923c"/>
+                            <path d="M 212 40 L 217 45 L 222 40" fill="#ffffff" opacity="0.9"/>
+                            <text x="217" y="86" font-size="11" font-weight="700" text-anchor="middle" fill="#475569">학생4👓</text>
+                        </g>
+                        <!-- 학생 5 -->
+                        <g>
+                            <circle cx="279" cy="24" r="15" fill="#fde68a" stroke="#d97706" stroke-width="1.8"/>
+                            <path d="M 265 22 Q 279 8 293 22" fill="#78350f"/>
+                            <circle cx="274" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="284" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="274" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <circle cx="284" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <line x1="279" y1="24" x2="279" y2="24" stroke="#1e293b" stroke-width="2"/>
+                            <path d="M 275 32 Q 279 35 283 32" stroke="#92400e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            <rect x="267" y="40" width="24" height="26" rx="6" fill="#a78bfa"/>
+                            <path d="M 274 40 L 279 45 L 284 40" fill="#ffffff" opacity="0.9"/>
+                            <text x="279" y="86" font-size="11" font-weight="700" text-anchor="middle" fill="#475569">학생5👓</text>
+                        </g>
+                    </svg>
+
+                    <div style="font-size: 0.86rem; color: #1e40af; font-weight: 600; margin-top: 8px;">
+                        모든 원소가 조건을 만족 ($P = U$)
+                    </div>
+                </div>
+
+                <!-- 부정: 4명 안경, 1명 미착용 (반례 발생!) -->
+                <div class="graphic-panel" style="border: 2px dashed #f59e0b; background: #fffdfa;">
+                    <div>
+                        <div class="graphic-title">
+                            <span class="graphic-badge graphic-badge-negation">부정 (반례 발생)</span>
+                            <span>어떤 학생은 안경을 안 썼다</span>
+                        </div>
+                        <p style="font-size:0.84rem; color:#b45309; margin-bottom: 12px;">적어도 1명이 안경을 쓰지 않음 (반례!)</p>
+                    </div>
+
+                    <svg width="310" height="110" viewBox="0 0 310 110" style="max-width: 100%; height: auto;">
+                        <!-- 학생 1 (안경) -->
+                        <g>
+                            <circle cx="31" cy="24" r="15" fill="#fde68a" stroke="#d97706" stroke-width="1.8"/>
+                            <path d="M 17 22 Q 31 8 45 22" fill="#78350f"/>
+                            <circle cx="26" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="36" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="26" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <circle cx="36" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <line x1="31" y1="24" x2="31" y2="24" stroke="#1e293b" stroke-width="2"/>
+                            <path d="M 27 32 Q 31 35 35 32" stroke="#92400e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            <rect x="19" y="40" width="24" height="26" rx="6" fill="#60a5fa"/>
+                            <path d="M 26 40 L 31 45 L 36 40" fill="#ffffff" opacity="0.9"/>
+                            <text x="31" y="86" font-size="11" font-weight="700" text-anchor="middle" fill="#475569">학생1👓</text>
+                        </g>
+                        <!-- 학생 2 (안경) -->
+                        <g>
+                            <circle cx="93" cy="24" r="15" fill="#fde68a" stroke="#d97706" stroke-width="1.8"/>
+                            <path d="M 79 22 Q 93 8 107 22" fill="#78350f"/>
+                            <circle cx="88" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="98" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="88" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <circle cx="98" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <line x1="93" y1="24" x2="93" y2="24" stroke="#1e293b" stroke-width="2"/>
+                            <path d="M 89 32 Q 93 35 97 32" stroke="#92400e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            <rect x="81" y="40" width="24" height="26" rx="6" fill="#34d399"/>
+                            <path d="M 88 40 L 93 45 L 98 40" fill="#ffffff" opacity="0.9"/>
+                            <text x="93" y="86" font-size="11" font-weight="700" text-anchor="middle" fill="#475569">학생2👓</text>
+                        </g>
+                        <!-- 학생 3 (안경) -->
+                        <g>
+                            <circle cx="155" cy="24" r="15" fill="#fde68a" stroke="#d97706" stroke-width="1.8"/>
+                            <path d="M 141 22 Q 155 8 169 22" fill="#78350f"/>
+                            <circle cx="150" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="160" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="150" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <circle cx="160" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <line x1="155" y1="24" x2="155" y2="24" stroke="#1e293b" stroke-width="2"/>
+                            <path d="M 151 32 Q 155 35 159 32" stroke="#92400e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            <rect x="143" y="40" width="24" height="26" rx="6" fill="#f472b6"/>
+                            <path d="M 150 40 L 155 45 L 160 40" fill="#ffffff" opacity="0.9"/>
+                            <text x="155" y="86" font-size="11" font-weight="700" text-anchor="middle" fill="#475569">학생3👓</text>
+                        </g>
+                        <!-- 학생 4 (안경) -->
+                        <g>
+                            <circle cx="217" cy="24" r="15" fill="#fde68a" stroke="#d97706" stroke-width="1.8"/>
+                            <path d="M 203 22 Q 217 8 231 22" fill="#78350f"/>
+                            <circle cx="212" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="222" cy="24" r="1.5" fill="#1e293b"/>
+                            <circle cx="212" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <circle cx="222" cy="24" r="5" fill="none" stroke="#1e293b" stroke-width="1.8"/>
+                            <line x1="217" y1="24" x2="217" y2="24" stroke="#1e293b" stroke-width="2"/>
+                            <path d="M 213 32 Q 217 35 221 32" stroke="#92400e" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            <rect x="205" y="40" width="24" height="26" rx="6" fill="#fb923c"/>
+                            <path d="M 212 40 L 217 45 L 222 40" fill="#ffffff" opacity="0.9"/>
+                            <text x="217" y="86" font-size="11" font-weight="700" text-anchor="middle" fill="#475569">학생4👓</text>
+                        </g>
+                        <!-- 학생 5 (안경 미착용 - 반례 강조!) -->
+                        <g>
+                            <!-- 반례 강조 후광 원 -->
+                            <circle cx="279" cy="24" r="19" fill="#fef2f2" stroke="#f87171" stroke-width="2" stroke-dasharray="3,3"/>
+                            <circle cx="279" cy="24" r="15" fill="#fef9c3" stroke="#ef4444" stroke-width="2.2"/>
+                            <path d="M 265 22 Q 279 8 293 22" fill="#b91c1c"/>
+                            <!-- 크고 초롱초롱한 맨눈 (안경 없음!) -->
+                            <circle cx="274" cy="23" r="2.5" fill="#1e293b"/>
+                            <circle cx="275" cy="22" r="1" fill="#ffffff"/>
+                            <circle cx="284" cy="23" r="2.5" fill="#1e293b"/>
+                            <circle cx="285" cy="22" r="1" fill="#ffffff"/>
+                            <!-- 볼터치 -->
+                            <circle cx="270" cy="28" r="2.5" fill="#fca5a5" opacity="0.8"/>
+                            <circle cx="288" cy="28" r="2.5" fill="#fca5a5" opacity="0.8"/>
+                            <!-- 활짝 웃는 입 -->
+                            <path d="M 275 30 Q 279 35 283 30" stroke="#b91c1c" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                            <rect x="267" y="40" width="24" height="26" rx="6" fill="#f87171"/>
+                            <path d="M 274 40 L 279 45 L 284 40" fill="#ffffff" opacity="0.9"/>
+                            <text x="279" y="86" font-size="11" font-weight="800" text-anchor="middle" fill="#dc2626">학생5 (맨눈!)</text>
+                            <text x="279" y="100" font-size="9.5" font-weight="700" text-anchor="middle" fill="#ea580c">★ 반례</text>
+                        </g>
+                    </svg>
+
+                    <div style="font-size: 0.86rem; color: #b45309; font-weight: 600; margin-top: 8px;">
+                        안경 안 쓴 학생이 '적어도 1명' 존재함!
+                    </div>
+                </div>
+            </div>
+
+            <!-- 부정문 작성 빈칸 퀴즈 -->
+            <div style="background: white; border-radius: 8px; padding: 14px 18px; border: 1px solid #e2e8f0; margin-top: 4px;">
+                <p style="font-size: 1rem; font-weight: 600; color: #1e293b;">
+                    "모든 우리 반 친구는 안경을 썼다." 의 부정은?
+                </p>
+                <div style="margin-top: 8px;">
+                    👉 <span class="interactive-blank" onclick="reveal(this, '어떤 우리 반 친구는 안경을 안 썼다. (적어도 1명은 안경을 안 썼다)')">__________ (클릭하여 확인)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 대화창 2 -->
+        <div class="dialogue-wrapper">
+            <div class="dialogue-header">
+                <span>💬 수업 대화: '모든'의 부정이 '어떤'이 되는 이유</span>
+                <button class="toggle-btn" onclick="toggleDialogue(this)">
+                    <span>접기</span>
+                </button>
+            </div>
+            <div class="dialogue-content">
+                <div class="dialogue-bubble bubble-teacher">
+                    <div class="bubble-avatar">👨‍🏫</div>
+                    <div class="bubble-text"><strong>선생님:</strong> "모든 학생이 안경을 썼다"라는 주장을 거짓으로 만들려면, 모든 학생이 다 안경을 벗어야 할까요?</div>
+                </div>
+                <div class="dialogue-bubble bubble-student">
+                    <div class="bubble-avatar">🙋‍♂️</div>
+                    <div class="bubble-text"><strong>학생:</strong> 아니요! 안경을 안 쓴 친구가 <strong>단 한 명만 있어도</strong> 그 말은 거짓이 됩니다!</div>
+                </div>
+                <div class="dialogue-bubble bubble-teacher">
+                    <div class="bubble-avatar">👨‍🏫</div>
+                    <div class="bubble-text"><strong>선생님:</strong> 정답입니다! 그래서 '모든'의 부정은 '전부 안경을 안 썼다'가 아니라, <strong>'안경을 안 쓴 학생이 적어도 한 명 있다(어떤 학생은 안 썼다)'</strong>가 되는 것입니다.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 부정 공식 카드 -->
+        <div class="summary-box" style="margin-top: 20px;">
+            <div class="summary-title">
+                <span>⚡</span> '모든'과 '어떤'의 부정 공식 정리
+            </div>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <p style="font-size: 0.9rem; color: #64748b; font-weight: 600;">규칙 1</p>
+                    <p style="font-size: 1.05rem; font-weight: 700; color: #1e293b; margin: 4px 0;">
+                        "모든 $x$에 대하여 $p$이다."
+                    </p>
+                    <p style="font-size: 0.92rem; color: var(--primary); font-weight: 700;">
+                        $\xrightarrow{\text{부정}}$ "어떤 $x$에 대하여 $\sim p$이다."
+                    </p>
+                </div>
+                <div class="summary-item coral">
+                    <p style="font-size: 0.9rem; color: #64748b; font-weight: 600;">규칙 2</p>
+                    <p style="font-size: 1.05rem; font-weight: 700; color: #1e293b; margin: 4px 0;">
+                        "어떤 $x$에 대하여 $p$이다."
+                    </p>
+                    <p style="font-size: 0.92rem; color: var(--accent-coral); font-weight: 700;">
+                        $\xrightarrow{\text{부정}}$ "모든 $x$에 대하여 $\sim p$이다."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 섹션 5: 교과서 p.91 최종 핵심 정리 ==================== -->
+    <section class="card" id="section5">
+        <div class="card-header">
+            <h2 class="card-title">5. [정리] 교과서 p.91 핵심 요약</h2>
+            <span class="card-badge">교과서 핵심</span>
+        </div>
+
+        <p style="margin-bottom: 14px;">
+            전체집합 $U$에 대하여 조건 $p$의 진리집합을 $P$라 할 때, <strong>'모든'과 '어떤'을 포함한 명제의 참·거짓과 부정</strong>을 한눈에 정리합니다.
+        </p>
+
+        <div class="summary-grid">
+            <!-- 1. 모든 명제 -->
+            <div class="summary-item emerald" style="padding: 18px;">
+                <h3 style="font-size: 1.05rem; color: #15803d; margin-bottom: 8px;">
+                    ① 명제 <em>"모든 $x$에 대하여 $p$이다"</em>
+                </h3>
+                <ul style="padding-left: 20px; line-height: 1.8; font-size: 0.94rem;">
+                    <li><strong>참:</strong> $P = U$ (진리집합이 전체집합과 같을 때)</li>
+                    <li><strong>거짓:</strong> $P \neq U$ (조건을 만족하지 않는 반례가 적어도 하나 있을 때)</li>
+                </ul>
+            </div>
+
+            <!-- 2. 어떤 명제 -->
+            <div class="summary-item" style="padding: 18px;">
+                <h3 style="font-size: 1.05rem; color: var(--primary); margin-bottom: 8px;">
+                    ② 명제 <em>"어떤 $x$에 대하여 $p$이다"</em>
+                </h3>
+                <ul style="padding-left: 20px; line-height: 1.8; font-size: 0.94rem;">
+                    <li><strong>참:</strong> $P \neq \emptyset$ (진리집합이 공집합이 아닐 때, 즉 1개 이상 존재)</li>
+                    <li><strong>거짓:</strong> $P = \emptyset$ (조건을 만족하는 대상이 단 하나도 없을 때)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tip-box" style="margin-top: 18px; background: #faf5ff; border-color: #e9d5ff; border-left-color: #a855f7; color: #6b21a8;">
+            <span>✨</span>
+            <div>
+                <strong>부정의 원리 총정리:</strong><br>
+                - <strong>'모든'</strong>을 부정하면 <strong>'어떤'</strong>이 되고, 결론 조건 $p$는 부정($\sim p$)됩니다.<br>
+                - <strong>'어떤'</strong>을 부정하면 <strong>'모든'</strong>이 되고, 결론 조건 $p$는 부정($\sim p$)됩니다.
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px;">
+            <a href="#section6" class="btn-check-row" style="padding: 8px 18px; text-decoration: none; display: inline-block;">⬇️ 이어서 '6. 역과 대우' 학습하기</a>
+        </div>
+    </section>
+
+    <!-- ==================== 섹션 6: 명제의 역과 대우 ==================== -->
+    <section class="card" id="section6">
+        <div class="card-header">
+            <h2 class="card-title">6. $p \longrightarrow q$ 형태의 명제에서 가정과 결론 바꾸기</h2>
+            <span class="card-badge">역과 대우</span>
+        </div>
+
+        <p style="margin-bottom: 14px;">
+            명제 $p \longrightarrow q$ 에서 가정 $p$와 결론 $q$의 위치를 바꾸거나 부정을 취하여 새로운 명제를 만들어 봅시다.
+        </p>
+
+        <!-- 역과 대우 정의 요약 카드 -->
+        <div class="summary-box" style="margin-bottom: 20px;">
+            <div class="summary-grid">
+                <div class="summary-item" style="border-left-color: var(--primary);">
+                    <p style="font-size: 0.88rem; color: #64748b; font-weight: 700;">가정과 결론의 위치를 바꾼 명제</p>
+                    <h3 style="font-size: 1.2rem; color: var(--primary); margin: 6px 0;">
+                        역 (Converse) : <span class="highlight">$q \longrightarrow p$</span>
+                    </h3>
+                    <p style="font-size: 0.92rem; color: #475569;">" $q$ 이면 $p$ 이다 "</p>
+                </div>
+                <div class="summary-item coral" style="border-left-color: var(--accent-coral);">
+                    <p style="font-size: 0.88rem; color: #64748b; font-weight: 700;">각각 부정하여 위치를 바꾼 명제</p>
+                    <h3 style="font-size: 1.2rem; color: var(--accent-coral); margin: 6px 0;">
+                        대우 (Contrapositive) : <span class="highlight" style="background:#ffe4e6; color:#be123c;">$\sim q \longrightarrow \sim p$</span>
+                    </h3>
+                    <p style="font-size: 0.92rem; color: #475569;">" $q$ 가 아니면 $p$ 가 아니다 "</p>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-weight: 700; color: #1e293b; margin-bottom: 12px;">
+            🔍 [탐구 예시] 다음 명제의 역과 대우를 확인하고, 각각의 참·거짓을 판별해 봅시다. (빈칸 클릭)
+        </p>
+
+        <!-- 4가지 탐구 예제 그리드 -->
+        <div class="quiz-grid">
+            <!-- 예제 1 -->
+            <div class="quiz-card">
+                <div>
+                    <div class="quiz-header">
+                        <span class="quiz-badge">예시 1</span>
+                        <span class="badge-tf badge-true">원래 명제: 참 (T)</span>
+                    </div>
+                    <div class="quiz-statement" style="min-height: auto; margin-bottom: 12px;">
+                        "사과이면 과일이다."
+                    </div>
+                    <div style="background: white; border-radius: 8px; padding: 12px 14px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 10px;">
+                        <div>
+                            <strong>역:</strong> 
+                            <span class="interactive-blank" onclick="reveal(this, '과일이면 사과이다.')">👉 역 확인</span>
+                            <span class="interactive-blank" onclick="reveal(this, '❌ 거짓 (F) - 반례: 포도, 바나나 등')">참/거짓</span>
+                        </div>
+                        <div>
+                            <strong>대우:</strong> 
+                            <span class="interactive-blank" onclick="reveal(this, '과일이 아니면 사과가 아니다.')">👉 대우 확인</span>
+                            <span class="interactive-blank" onclick="reveal(this, '✅ 참 (T)')">참/거짓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 예제 2 -->
+            <div class="quiz-card">
+                <div>
+                    <div class="quiz-header">
+                        <span class="quiz-badge">예시 2</span>
+                        <span class="badge-tf badge-false">원래 명제: 거짓 (F)</span>
+                    </div>
+                    <div class="quiz-statement" style="min-height: auto; margin-bottom: 12px;">
+                        "물고기는 포유류이다."
+                    </div>
+                    <div style="background: white; border-radius: 8px; padding: 12px 14px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 10px;">
+                        <div>
+                            <strong>역:</strong> 
+                            <span class="interactive-blank" onclick="reveal(this, '포유류는 물고기이다.')">👉 역 확인</span>
+                            <span class="interactive-blank" onclick="reveal(this, '❌ 거짓 (F) - 반례: 사람, 호랑이 등')">참/거짓</span>
+                        </div>
+                        <div>
+                            <strong>대우:</strong> 
+                            <span class="interactive-blank" onclick="reveal(this, '포유류가 아니면 물고기가 아니다.')">👉 대우 확인</span>
+                            <span class="interactive-blank" onclick="reveal(this, '❌ 거짓 (F) - 반례: 붕어는 포유류가 아니지만 물고기임')">참/거짓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 예제 3 -->
+            <div class="quiz-card">
+                <div>
+                    <div class="quiz-header">
+                        <span class="quiz-badge">예시 3</span>
+                        <span class="badge-tf badge-true">원래 명제: 참 (T)</span>
+                    </div>
+                    <div class="quiz-statement" style="min-height: auto; margin-bottom: 12px;">
+                        "$x^2 = 0$ 이면 $x = 0$ 이다."
+                    </div>
+                    <div style="background: white; border-radius: 8px; padding: 12px 14px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 10px;">
+                        <div>
+                            <strong>역:</strong> 
+                            <span class="interactive-blank" onclick="reveal(this, 'x = 0 이면 x² = 0 이다.')">👉 역 확인</span>
+                            <span class="interactive-blank" onclick="reveal(this, '✅ 참 (T)')">참/거짓</span>
+                        </div>
+                        <div>
+                            <strong>대우:</strong> 
+                            <span class="interactive-blank" onclick="reveal(this, 'x ≠ 0 이면 x² ≠ 0 이다.')">👉 대우 확인</span>
+                            <span class="interactive-blank" onclick="reveal(this, '✅ 참 (T)')">참/거짓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 예제 4 -->
+            <div class="quiz-card">
+                <div>
+                    <div class="quiz-header">
+                        <span class="quiz-badge">예시 4</span>
+                        <span class="badge-tf badge-false">원래 명제: 거짓 (F)</span>
+                    </div>
+                    <div class="quiz-statement" style="min-height: auto; margin-bottom: 12px;">
+                        "$x - 1 > 0$ 이면 $x > 2$ 이다."
+                    </div>
+                    <div style="background: white; border-radius: 8px; padding: 12px 14px; border: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 10px;">
+                        <div>
+                            <strong>역:</strong> 
+                            <span class="interactive-blank" onclick="reveal(this, 'x > 2 이면 x - 1 > 0 이다.')">👉 역 확인</span>
+                            <span class="interactive-blank" onclick="reveal(this, '✅ 참 (T) - x > 2 이면 x - 1 > 1 > 0')">참/거짓</span>
+                        </div>
+                        <div>
+                            <strong>대우:</strong> 
+                            <span class="interactive-blank" onclick="reveal(this, 'x ≤ 2 이면 x - 1 ≤ 0 이다.')">👉 대우 확인</span>
+                            <span class="interactive-blank" onclick="reveal(this, '❌ 거짓 (F) - 반례: x = 1.5 일 때')">참/거짓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 대화창 3 -->
+        <div class="dialogue-wrapper" style="margin-top: 20px;">
+            <div class="dialogue-header">
+                <span>💬 수업 대화: 명제와 그 역, 대우의 참·거짓 관계</span>
+                <button class="toggle-btn" onclick="toggleDialogue(this)">
+                    <span>접기</span>
+                </button>
+            </div>
+            <div class="dialogue-content">
+                <div class="dialogue-bubble bubble-teacher">
+                    <div class="bubble-avatar">👨‍🏫</div>
+                    <div class="bubble-text"><strong>선생님:</strong> 위 4가지 예시에서 원래 명제와 그 <strong>역</strong>, 그리고 <strong>대우</strong>의 참·거짓 사이에는 어떤 관계가 발견되나요?</div>
+                </div>
+                <div class="dialogue-bubble bubble-student">
+                    <div class="bubble-avatar">🙋‍♂️</div>
+                    <div class="bubble-text"><strong>학생:</strong> 원래 명제가 참이어도 역은 거짓일 수도 있고 참일 수도 있어서 일정하지 않아요. 그런데 <strong>명제와 그 대우는 항상 참·거짓이 똑같이 일치</strong>해요!</div>
+                </div>
+                <div class="dialogue-bubble bubble-teacher">
+                    <div class="bubble-avatar">👨‍🏫</div>
+                    <div class="bubble-text"><strong>선생님:</strong> 정확합니다! 역의 참·거짓은 원래 명제와 일치하지 않을 수 있지만, <strong>명제와 그 대우의 참·거짓은 항상 일치</strong>합니다.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-box" style="margin-top: 14px;">
+            <span>💡</span>
+            <div>
+                <strong>[명제와 대우의 참·거짓 일치 원리]</strong><br>
+                두 조건 $p, q$의 진리집합을 각각 $P, Q$라 할 때, 
+                $$P \subset Q \iff Q^c \subset P^c$$
+                가 성립하므로, <strong>어떤 명제가 참이면 그 대우도 반드시 참이고, 명제가 거짓이면 대우도 반드시 거짓</strong>입니다. (직접 증명하기 까다로운 명제는 대우를 증명하는 귀류법/대우증명법에 활용됩니다!)
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 섹션 7: 충분조건과 필요조건 ==================== -->
+    <section class="card" id="section7">
+        <div class="card-header">
+            <h2 class="card-title">7. 조건 $p$와 $q$ 사이의 관계: 충분조건과 필요조건</h2>
+            <span class="card-badge">충분 · 필요 · 필요충분</span>
+        </div>
+
+        <p style="margin-bottom: 12px;">
+            명제 $p \longrightarrow q$ 가 <strong>참</strong>인 경우, 앞으로 기호로 <span class="highlight">$p \Longrightarrow q$</span> 와 같이 두 줄 화살표로 나타냅니다.
+        </p>
+
+        <div class="tip-box" style="background: #eef2ff; border-color: #c7d2fe; border-left-color: var(--primary); color: #3730a3;">
+            <span>📌</span>
+            <div>
+                <strong>충분조건과 필요조건의 정의:</strong><br>
+                $p \Longrightarrow q$ (참인 명제) 일 때,
+                <ul style="padding-left: 20px; margin-top: 6px; line-height: 1.8;">
+                    <li>조건 $p$는 $q$이기 위한 <strong style="color: var(--primary);">충분조건</strong> ($p$이기만 하면 $q$가 되기에 '충분'함)</li>
+                    <li>조건 $q$는 $p$이기 위한 <strong style="color: var(--accent-coral);">필요조건</strong> ($p$가 되기 위해 $q$는 반드시 '필요'한 바탕)</li>
+                </ul>
+            </div>
+        </div>
+
+        <p style="font-weight: 700; color: #1e293b; margin: 18px 0 10px 0;">
+            [빈칸 채우기 연습] 충분조건과 필요조건을 클릭하여 확인해 봅시다.
+        </p>
+
+        <div class="quiz-grid">
+            <div class="quiz-card">
+                <div class="quiz-header">
+                    <span class="quiz-badge">예시 1</span>
+                    <span style="font-weight:700; color:var(--primary);">사과 $\Longrightarrow$ 과일 (참)</span>
+                </div>
+                <ul style="list-style: none; padding: 0; line-height: 2.1; font-size: 0.95rem;">
+                    <li>• 사과는 과일이기 위한 <span class="interactive-blank" onclick="reveal(this, '충분조건')">클릭</span></li>
+                    <li>• 과일은 사과이기 위한 <span class="interactive-blank" onclick="reveal(this, '필요조건')">클릭</span></li>
+                </ul>
+            </div>
+
+            <div class="quiz-card">
+                <div class="quiz-header">
+                    <span class="quiz-badge">예시 2</span>
+                    <span style="font-weight:700; color:var(--primary);">$x^2 = 0 \Longrightarrow x = 0$ (참)</span>
+                </div>
+                <ul style="list-style: none; padding: 0; line-height: 2.1; font-size: 0.95rem;">
+                    <li>• $x^2 = 0$ 은 $x = 0$ 이기 위한 <span class="interactive-blank" onclick="reveal(this, '충분조건')">클릭</span></li>
+                    <li>• $x = 0$ 은 $x^2 = 0$ 이기 위한 <span class="interactive-blank" onclick="reveal(this, '필요조건')">클릭</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 꿀팁 박스: 총과 피 -->
+        <div class="tip-box" style="margin-top: 16px; background: #fffbeb; border-color: #fde68a; border-left-color: #f59e0b; color: #92400e;">
+            <span>🎯</span>
+            <div>
+                <strong>선생님의 기억 꿀팁! "총(銃)을 쏘면 피(血)를 흘린다!"</strong><br>
+                $$p \overset{\text{화살을 쏨(총)}}{\Longrightarrow} q \ (\text{화살을 맞음(피)})$$
+                - 화살표를 <strong>쏘는</strong> 쪽 $p$는 <strong style="color: #4338ca;">'충'</strong>(총)분조건!<br>
+                - 화살표를 <strong>맞는</strong> 쪽 $q$는 <strong style="color: #b91c1c;">'필'</strong>(피)요조건!
+            </div>
+        </div>
+
+        <!-- 필요충분조건 카드 -->
+        <div class="summary-box" style="margin-top: 20px;">
+            <div class="summary-title">
+                <span>🔄</span> 역도 참인 경우: 필요충분조건 ($p \Longleftrightarrow q$)
+            </div>
+            <p style="margin-bottom: 12px;">
+                두 번째 예시와 같이 $p \Longrightarrow q$ 도 참이고, 역인 $q \Longrightarrow p$ ($x = 0 \Longrightarrow x^2 = 0$) 도 참인 경우, 이를 기호로 다음과 같이 나타냅니다:
+            </p>
+            <div style="text-align: center; font-size: 1.25rem; font-weight: 700; color: var(--primary); padding: 12px; background: white; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 12px;">
+                $x^2 = 0 \Longleftrightarrow x = 0$ &nbsp;&nbsp;($p \Longleftrightarrow q$)
+            </div>
+            <p style="font-size: 0.95rem; line-height: 1.75;">
+                이때 <strong>$p$는 $q$이기 위한 <span class="highlight">필요충분조건</span></strong>이라고 합니다.<br>
+                (동시에 $q$도 $p$이기 위한 필요충분조건입니다.)<br>
+                진리집합 관점에서는 $P \subset Q$ 이고 $Q \subset P$ 이므로, <strong>두 진리집합이 완전히 같은 집합($P = Q$)</strong>임을 뜻합니다!
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== 섹션 8: 최종 종합 정리 ==================== -->
+    <section class="card" id="section8">
+        <div class="card-header">
+            <h2 class="card-title">8. [정리] 역·대우 및 충분·필요조건 종합 요약</h2>
+            <span class="card-badge">종합 정리</span>
+        </div>
+
+        <p style="margin-bottom: 14px;">
+            오늘 배운 <strong>명제의 역과 대우</strong>, 그리고 <strong>진리집합과 충분·필요조건의 관계</strong>를 한눈에 정리합니다.
+        </p>
+
+        <div class="summary-grid">
+            <!-- 1. 역과 대우 -->
+            <div class="summary-item" style="padding: 18px; border-left-color: var(--primary);">
+                <h3 style="font-size: 1.05rem; color: var(--primary); margin-bottom: 8px;">
+                    ① 명제 $p \longrightarrow q$ 의 역과 대우
+                </h3>
+                <ul style="padding-left: 20px; line-height: 1.8; font-size: 0.94rem;">
+                    <li><strong>역:</strong> $q \longrightarrow p$ (참·거짓은 원래 명제와 다를 수 있음)</li>
+                    <li><strong>대우:</strong> $\sim q \longrightarrow \sim p$ (<strong style="color: #b91c1c;">원래 명제와 참·거짓이 100% 일치!</strong>)</li>
+                </ul>
+            </div>
+
+            <!-- 2. 진리집합과 조건 -->
+            <div class="summary-item emerald" style="padding: 18px; border-left-color: var(--accent-emerald);">
+                <h3 style="font-size: 1.05rem; color: var(--accent-emerald); margin-bottom: 8px;">
+                    ② 진리집합의 포함관계와 조건 ($P, Q$)
+                </h3>
+                <ul style="padding-left: 20px; line-height: 1.8; font-size: 0.94rem;">
+                    <li>$P \subset Q$ 이면 $p \Longrightarrow q$ 이므로, <br><strong>$p$는 충분조건, $q$는 필요조건</strong></li>
+                    <li>$P = Q$ 이면 $p \Longleftrightarrow q$ 이므로, <br><strong>$p$와 $q$는 서로 필요충분조건</strong></li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 28px;">
+            <a href="#section1" class="btn-check-row" style="padding: 8px 18px; text-decoration: none; display: inline-block;">⬆️ 맨 위로 돌아가기</a>
+        </div>
+    </section>
+
+    <!-- 자바스크립트 로직 -->
+    <script>
+        // 1. 개별 대화창 접기/펼치기
+        function toggleDialogue(btn) {
+            const wrapper = btn.closest('.dialogue-wrapper');
+            const content = wrapper.querySelector('.dialogue-content');
+            const label = btn.querySelector('span');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                label.innerText = '접기';
+            } else {
+                content.classList.add('hidden');
+                label.innerText = '대화 보기';
+            }
+        }
+
+        // 2. 모든 대화창 일괄 숨기기 / 보이기 토글
+        let allHidden = false;
+        function toggleAllDialogues() {
+            allHidden = !allHidden;
+            const contents = document.querySelectorAll('.dialogue-content');
+            const btns = document.querySelectorAll('.dialogue-header .toggle-btn span');
+            const navIcon = document.getElementById('allDialogueIcon');
+            const navText = document.getElementById('allDialogueText');
+
+            contents.forEach(content => {
+                if (allHidden) {
+                    content.classList.add('hidden');
+                } else {
+                    content.classList.remove('hidden');
+                }
+            });
+
+            btns.forEach(btn => {
+                btn.innerText = allHidden ? '대화 보기' : '접기';
+            });
+
+            if (allHidden) {
+                navIcon.innerText = '🙈';
+                navText.innerText = '모든 대화 보이기';
+            } else {
+                navIcon.innerText = '👁️';
+                navText.innerText = '모든 대화 숨기기';
+            }
+        }
+
+        // 3. 인터랙티브 빈칸 클릭 시 정답 공개
+        function reveal(element, text) {
+            element.innerText = text;
+            element.classList.add('revealed');
+            if (text.includes('거짓') || text.includes('❌')) {
+                element.classList.add('revealed-false');
+            }
+        }
+
+        // 4. 섹션 1 퀴즈 선택 로직
+        function selectTF(cardNum, isTrueSelected, correctIsTrue) {
+            const card = document.getElementById(`quizCard${cardNum}`);
+            const feedback = document.getElementById(`feedback${cardNum}`);
+            const buttons = card.querySelectorAll('.tf-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('selected-true', 'selected-false');
+            });
+
+            if (isTrueSelected) {
+                buttons[0].classList.add('selected-true');
+            } else {
+                buttons[1].classList.add('selected-false');
+            }
+
+            feedback.classList.remove('correct', 'incorrect');
+            const isUserCorrect = (isTrueSelected === correctIsTrue);
+
+            if (isUserCorrect) {
+                feedback.classList.add('correct');
+            } else {
+                feedback.classList.add('incorrect');
+            }
+            feedback.classList.add('show');
+        }
+
+        // 5. 사용자가 명제를 입력했을 때 '모든/어떤'을 뺀 조건 자동 추출
+        function autoExtractCondition(propInputId, condInputId) {
+            const propVal = document.getElementById(propInputId).value;
+            const condInput = document.getElementById(condInputId);
+            
+            // "모든 " 또는 "어떤 " 제거
+            let clean = propVal.replace(/^모든\s*/, '').replace(/^어떤\s*/, '');
+            if (clean.trim() !== '') {
+                condInput.value = clean;
+            }
+        }
+
+        // 6. 섹션 2 '모든' 샘플 채우기
+        function fillEverySamples() {
+            document.getElementById('userEveryProp3').value = "모든 실수는 제곱하면 0 이상이다.";
+            document.getElementById('userEveryCond3').value = "실수는 제곱하면 0 이상이다.";
+            document.getElementById('userEveryU3').value = "U : 모든 실수";
+            document.getElementById('userEveryP3').value = "P : 제곱해서 0 이상인 실수";
+            document.getElementById('userEveryCmp3').value = "=";
+            document.getElementById('userEveryTF3').value = "T";
+
+            document.getElementById('userEveryProp4').value = "모든 소수는 홀수이다.";
+            document.getElementById('userEveryCond4').value = "소수는 홀수이다.";
+            document.getElementById('userEveryU4').value = "U : 모든 소수";
+            document.getElementById('userEveryP4').value = "P : 홀수인 소수 (2 제외)";
+            document.getElementById('userEveryCmp4').value = "!=";
+            document.getElementById('userEveryTF4').value = "F";
+        }
+
+        // 7. 섹션 3 '어떤' 샘플 채우기
+        function fillSomeSamples() {
+            document.getElementById('userSomeProp3').value = "어떤 실수는 x² < 0 이다.";
+            document.getElementById('userSomeCond3').value = "실수는 x² < 0 이다.";
+            document.getElementById('userSomeU3').value = "U : 모든 실수";
+            document.getElementById('userSomeP3').value = "P : ∅ (공집합)";
+            document.getElementById('userSomeCmp3').value = "=";
+            document.getElementById('userSomeTF3').value = "F";
+
+            document.getElementById('userSomeProp4').value = "어떤 소수는 짝수이다.";
+            document.getElementById('userSomeCond4').value = "소수는 짝수이다.";
+            document.getElementById('userSomeU4').value = "U : 모든 소수";
+            document.getElementById('userSomeP4').value = "P : { 2 } (공집합 아님)";
+            document.getElementById('userSomeCmp4').value = "!=";
+            document.getElementById('userSomeTF4').value = "T";
+        }
+
+        // 8. 표 내 1행, 2행 선택 시 즉각 피드백
+        function checkTableRow(rowNum, expectedCmp, expectedTF) {
+            const selectEl = document.getElementById(`everyCmp${rowNum}`);
+            if (selectEl.value === expectedCmp) {
+                selectEl.style.borderColor = "#059669";
+                selectEl.style.backgroundColor = "#ecfdf5";
+            } else if (selectEl.value !== "") {
+                selectEl.style.borderColor = "#f43f5e";
+                selectEl.style.backgroundColor = "#fff1f2";
+            } else {
+                selectEl.style.borderColor = "#cbd5e1";
+                selectEl.style.backgroundColor = "#ffffff";
+            }
+        }
+
+        function checkSomeRow(rowNum) {
+            const cmpEl = document.getElementById(`someCmp${rowNum}`);
+            const tfEl = document.getElementById(`someTF${rowNum}`);
+            
+            // row 1: P != 0 -> T
+            // row 2: P = 0 -> F
+            if (rowNum === 1) {
+                if (cmpEl.value === "!=" && tfEl.value === "T") {
+                    tfEl.style.borderColor = "#059669";
+                }
+            } else if (rowNum === 2) {
+                if (cmpEl.value === "=" && tfEl.value === "F") {
+                    tfEl.style.borderColor = "#059669";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

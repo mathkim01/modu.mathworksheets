@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>벤다이어그램 활동지</title>
+  <style>
+    :root { --blue:#21669a; --pale:#eef7ff; --line:#b6d0e2; --ok:#247340; --ink:#20303c; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#f4f8fb; color:var(--ink); font:18px/1.55 "Noto Sans KR","Malgun Gothic",sans-serif; }
+    main { max-width:1100px; margin:26px auto; padding:30px; background:#fff; border-radius:20px; box-shadow:0 5px 22px #244a621c; }
+    h1 { margin:0; color:#155581; text-align:center; font-size:34px; } .meta { text-align:right; margin:12px 0 24px; } .line { display:inline-block; min-width:115px; border-bottom:2px solid #687b88; }
+    section { margin:18px 0; padding:20px; border:2px solid var(--line); border-radius:16px; background:var(--pale); } h2 { margin:0 0 10px; color:#155581; font-size:25px; } p { margin:7px 0; }
+    .sets { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin:13px 0; } .set { padding:8px 14px; background:#fff; border:2px solid #8cabbe; border-radius:9px; font-weight:700; }
+    .answer { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:12px; } input { min-width:190px; flex:1; padding:10px; border:2px solid #789caf; border-radius:9px; font:inherit; } input:disabled { background:#e8edf0; border-color:#c2cbd1; }
+    button { padding:9px 14px; border:2px solid #3d7aa7; border-radius:10px; background:#fff; color:#173e5d; font:inherit; font-weight:700; cursor:pointer; } button:hover:not(:disabled),button.selected { background:#dcefff; } button:disabled { background:#e8edf0; color:#87949d; border-color:#c4cdd3; cursor:not-allowed; }
+    .feedback { min-height:26px; margin:7px 0 0; color:#983737; font-weight:700; } .ok { color:var(--ok); } .hidden { display:none; } .done { border-color:#63ae7b; background:#eaf7ed; }
+    .diagram { position:relative; height:390px; max-width:760px; margin:15px auto 5px; }
+    .circle { position:absolute; top:24px; width:340px; height:285px; border:4px solid #2b6b9d; border-radius:50%; background:transparent; pointer-events:none; } .circle.a { left:50px; } .circle.b { right:50px; }
+    .circle-label { position:absolute; top:42px; z-index:2; font-weight:800; color:#155581; } .label-a { left:115px; } .label-b { right:115px; }
+    .drop-zone { position:absolute; z-index:3; min-height:112px; padding:10px; border:3px dashed #47718c; border-radius:14px; background:#fff; text-align:center; } .drop-zone strong { display:block; margin-bottom:5px; } .drop-zone.drag-over { outline:5px solid #9ccce7; } #a-minus-b { left:67px; top:165px; width:190px; } #a-intersection-b { left:50%; transform:translateX(-50%); top:260px; width:190px; border-color:#3e8a60; } #b-minus-a { right:67px; top:165px; width:190px; }
+    .fruit-tray { display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin:14px 0; } .fruit { min-width:110px; font-size:20px; } .apple { border-color:#bf5656; } .banana { border-color:#b9911c; } .grape { border-color:#8056a5; } .placed { display:inline-block; margin:3px; padding:3px 8px; background:#f8fbfd; border:1px solid #9ab3c4; border-radius:7px; }
+    .learning-layout { display:grid; grid-template-columns:minmax(0, 1.1fr) minmax(360px, .9fr); gap:18px; align-items:start; } .learning-column { display:grid; gap:18px; } .learning-column section { margin:0; }
+    .symbol { min-width:54px; flex:0 0 54px; text-align:center; font-size:24px; font-weight:800; } .symbol-buttons { display:flex; gap:10px; margin:10px 0 0 42px; } .symbol-choice { min-width:54px; font-size:24px; font-weight:800; } .symbol-choice.selected { background:#dcefff; border-color:#155581; box-shadow:0 0 0 3px #a9d3ec; } .choice-row { display:flex; flex-wrap:wrap; gap:10px; margin:8px 0; }
+    .note { margin-top:22px; background:#e8f5e9; border-color:#a6cfae; } .note h2 { color:#2e6f40; }
+    .completion-modal { position:fixed; inset:0; z-index:20; display:none; place-items:center; padding:20px; background:#102b4088; } .completion-modal.show { display:grid; } .modal-card { width:min(410px, 100%); padding:30px; text-align:center; background:white; border-radius:20px; box-shadow:0 14px 40px #00101e66; } .modal-card h2 { margin:0; color:#247340; font-size:2rem; } .modal-card button { margin-top:14px; cursor:pointer; border:0; border-radius:10px; padding:10px 24px; color:white; background:#155581; font-weight:700; }
+    @media (max-width:900px) { .learning-layout { grid-template-columns:1fr; } } @media (max-width:760px) { main { margin:0; padding:17px; border-radius:0; } .diagram { height:570px; } .circle { top:20px; width:245px; height:235px; } .circle.a { left:0; } .circle.b { right:0; } .label-a { left:55px; } .label-b { right:55px; } #a-minus-b { left:8px; top:275px; width:180px; } #b-minus-a { right:8px; top:275px; width:180px; } #a-intersection-b { top:405px; width:205px; } .symbol-buttons { margin-left:0; } }
+  </style>
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+  <main>
+    <h1>벤다이어그램을 알아봅시다</h1>
+    <p class="meta">날짜: <span class="line"></span></p>
+
+    <div class="learning-layout">
+    <div class="learning-column">
+    <section id="step1"><h2>1. 두 집합을 봐요</h2><div class="sets"><div class="set">A = {사과, 바나나}</div><div class="set">B = {바나나, 포도}</div></div></section>
+    <section id="step2"><h2>2. 벤다이어그램을 봐요</h2><p>원 두 개가 겹쳐 있어요. 왼쪽은 A 집합, 오른쪽은 B 집합이에요. 겹치는 가운데는 A와 B에 같이 있는 곳이에요.</p>
+      <div class="diagram" aria-label="A 집합과 B 집합의 벤다이어그램"><div class="circle a"></div><div class="circle b"></div><span class="circle-label label-a">A 집합</span><span class="circle-label label-b">B 집합</span>
+        <button class="drop-zone step6-control hidden" id="a-minus-b" data-zone="a-minus-b"><strong>A에만 있는 곳</strong><span></span></button><button class="drop-zone step6-control hidden" id="a-intersection-b" data-zone="a-intersection-b"><strong>같이 있는 가운데</strong><span></span></button><button class="drop-zone step6-control hidden" id="b-minus-a" data-zone="b-minus-a"><strong>B에만 있는 곳</strong><span></span></button>
+      </div>
+      <div id="step6" class="step6-control hidden"><h2>6. 같은 벤다이어그램에 과일을 놓아요</h2><p>과일 카드를 <strong>끌어서</strong> 위의 알맞은 곳에 놓으세요. 카드를 누른 뒤, 놓을 곳을 누르는 방법도 사용할 수 있어요.</p>
+        <div class="fruit-tray"><button class="fruit apple" draggable="true" data-fruit="사과">사과</button><button class="fruit banana" draggable="true" data-fruit="바나나">바나나</button><button class="fruit grape" draggable="true" data-fruit="포도">포도</button></div>
+        <p id="selection" class="feedback">과일 카드 하나를 골라 보세요.</p><div class="choice-row"><button id="reset">처음부터</button><button id="check6">확인</button></div><p id="f6" class="feedback"></p>
+      </div>
+    </section>
+    </div>
+    <div class="learning-column">
+    <section id="step3"><h2>3. A에만 있는 것을 찾아요</h2><p>A에만 있는 과일은 무엇인가요?</p><div class="answer"><input id="q3" autocomplete="off"><button id="check3">확인</button></div><p id="f3" class="feedback"></p></section>
+    <section id="step4"><h2>4. B에만 있는 것을 찾아요</h2><p>B에만 있는 과일은 무엇인가요?</p><div class="answer"><input id="q4" autocomplete="off" disabled><button id="check4" disabled>확인</button></div><p id="f4" class="feedback"></p></section>
+    <section id="step5"><h2>5. 두 집합에 같이 있는 것을 찾아요</h2><p>A에도 있고 B에도 있는 과일은 무엇인가요?</p><div class="answer"><input id="q5" autocomplete="off" disabled><button id="check5" disabled>확인</button></div><p id="f5" class="feedback"></p></section>
+    </div>
+    </div>
+
+
+    <section id="step7" class="hidden"><h2>7. 교집합을 알아봐요</h2><p>겹치는 가운데에는 두 집합에 같이 있는 원소를 써요. 이것을 <strong>교집합</strong>이라고 해요.</p><div class="answer"><strong>A</strong><input id="symbol7" class="symbol" aria-label="교집합 기호"><strong>B = {</strong><input id="q7" placeholder="과일 이름" autocomplete="off"><strong>}</strong><button id="check7">확인</button></div><div class="symbol-buttons" id="symbol7-options" aria-label="교집합 또는 합집합 기호 고르기"><button class="symbol-choice" data-target="symbol7" data-symbol="∩">∩</button><button class="symbol-choice" data-target="symbol7" data-symbol="∪">∪</button></div><p id="f7" class="feedback"></p></section>
+    <section id="step8" class="hidden"><h2>8. 합집합을 알아봐요</h2><p>두 원 안에 있는 원소를 모두 모으면 <strong>합집합</strong>이에요. 같은 원소는 한 번만 써요.</p><div class="answer"><strong>A</strong><input id="symbol8" class="symbol" aria-label="합집합 기호" disabled><strong>B = {</strong><input id="q8" placeholder="사과, 바나나, 포도" autocomplete="off" disabled><strong>}</strong><button id="check8" disabled>확인</button></div><div class="symbol-buttons" id="symbol8-options" aria-label="교집합 또는 합집합 기호 고르기"><button class="symbol-choice" data-target="symbol8" data-symbol="∩" disabled>∩</button><button class="symbol-choice" data-target="symbol8" data-symbol="∪" disabled>∪</button></div><p id="f8" class="feedback"></p></section>
+    <section id="step9" class="hidden"><h2>9. 알맞은 말을 골라요</h2><p>① 두 집합에 같이 있는 원소만 모으기</p><div class="choice-row"><button data-answer="wrong" disabled>합집합</button><button data-answer="intersection" disabled>교집합</button></div><p>② 두 집합의 원소를 모두 모으기</p><div class="choice-row"><button data-answer="union-wrong" disabled>교집합</button><button data-answer="union" disabled>합집합</button></div><p id="f9" class="feedback"></p></section>
+    <section id="step10" class="hidden"><h2>10. 숫자로 해 봐요</h2><p class="set">A = {1, 2, 3} &nbsp; B = {2, 3, 4}</p><p>① A에만 있는 숫자: <input id="q10a" disabled></p><p>② 겹치는 가운데 숫자: <input id="q10b" disabled></p><p>③ B에만 있는 숫자: <input id="q10c" disabled></p><p>④ A ∩ B = <input id="q10d" disabled></p><p>⑤ A ∪ B = <input id="q10e" disabled></p><button id="check10" disabled>확인</button><p id="f10" class="feedback"></p></section>
+    <section id="remember" class="note hidden"><h2>기억해요</h2><p><strong>벤다이어그램</strong>: 두 집합을 원으로 나타낸 그림</p><p><strong>교집합 ∩</strong>: 겹치는 가운데, 같이 있는 원소</p><p><strong>합집합 ∪</strong>: 두 원 안의 원소를 모두 모은 것</p></section>
+  </main>
+  <div id="completion-modal" class="completion-modal" role="dialog" aria-modal="true" aria-labelledby="completion-title">
+    <div class="modal-card"><h2 id="completion-title">잘했어요!</h2><p>모든 문항을 해결했어요.</p><button id="completion-close" type="button">닫기</button></div>
+  </div>
+  <script>
+    const clean=s=>(s||'').replace(/[\s{}]/g,'').replace(/，/g,',');
+    const unlock=(...ids)=>ids.forEach(id=>document.querySelectorAll(id).forEach(el=>el.disabled=false));
+    const lock=(...ids)=>ids.forEach(id=>document.querySelectorAll(id).forEach(el=>el.disabled=true));
+    const hide=(...ids)=>ids.forEach(id=>document.querySelectorAll(id).forEach(el=>{el.classList.add('hidden');el.classList.remove('done');}));
+    const checkText=(input,button,expected,feedback,next,invalidate)=>document.querySelector(button).addEventListener('click',()=>{const field=document.querySelector(input),ok=expected.includes(clean(field.value)),f=document.querySelector(feedback);f.textContent=ok?'맞아요!':'다시 생각해 봐요.';f.classList.toggle('ok',ok);field.closest('section').classList.toggle('done',ok);if(ok&&next)next();if(!ok&&invalidate)invalidate();});
+    const places={'a-minus-b':[],'a-intersection-b':[],'b-minus-a':[]};let picked=null,dragged=null;
+    const paint=()=>Object.entries(places).forEach(([zone,fruits])=>document.querySelector('#'+zone+' span').innerHTML=fruits.map(f=>'<span class="placed">'+f+'</span>').join(''));
+    const choose=fruit=>{picked=fruit;document.querySelectorAll('.fruit').forEach(b=>b.classList.toggle('selected',b.dataset.fruit===fruit));document.querySelector('#selection').textContent=fruit+'을(를) 골랐어요. 놓을 곳을 누르거나 끌어 놓으세요.';document.querySelector('#selection').classList.add('ok');};
+    document.querySelectorAll('.fruit').forEach(card=>{card.addEventListener('click',()=>choose(card.dataset.fruit));card.addEventListener('dragstart',e=>{dragged=card.dataset.fruit;e.dataTransfer.setData('text/plain',dragged);choose(dragged);});});
+    const put=(zone,fruit)=>{if(!fruit){document.querySelector('#selection').textContent='먼저 과일 카드를 하나 고르세요.';return;}Object.values(places).forEach(list=>{const i=list.indexOf(fruit);if(i>-1)list.splice(i,1);});places[zone].push(fruit);paint();document.querySelector('#selection').textContent=fruit+'을(를) 놓았어요.';};
+    document.querySelectorAll('.drop-zone').forEach(zone=>{zone.addEventListener('click',()=>put(zone.dataset.zone,picked));zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('drag-over');});zone.addEventListener('dragleave',()=>zone.classList.remove('drag-over'));zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('drag-over');put(zone.dataset.zone,e.dataTransfer.getData('text/plain')||dragged);});});
+    const resetPlacement=()=>{Object.values(places).forEach(x=>x.splice(0));picked=dragged=null;paint();document.querySelectorAll('.fruit').forEach(x=>x.classList.remove('selected'));document.querySelector('#selection').textContent='과일 카드 하나를 골라 보세요.';document.querySelector('#selection').classList.remove('ok');document.querySelector('#f6').textContent='';};
+    const clear=(...ids)=>ids.forEach(id=>document.querySelector(id).value='');
+    const resetLaterSteps=()=>{clear('#symbol7','#q7','#symbol8','#q8','#q10a','#q10b','#q10c','#q10d','#q10e');document.querySelectorAll('.symbol-choice').forEach(button=>button.classList.remove('selected'));lock('#symbol8','#q8','#check8','#symbol8-options button','#step9 button','#q10a','#q10b','#q10c','#q10d','#q10e','#check10');hide('#step7','#step8','#step9','#step10','#remember');first=false;};
+    const resetAfter3=()=>{clear('#q4','#q5');lock('#q4','#check4','#q5','#check5');hide('.step6-control');resetLaterSteps();resetPlacement();};
+    const resetAfter4=()=>{clear('#q5');lock('#q5','#check5');hide('.step6-control');resetLaterSteps();resetPlacement();};
+    const resetAfter5=()=>{hide('.step6-control');resetLaterSteps();resetPlacement();};
+    checkText('#q3','#check3',['사과'],'#f3',()=>unlock('#q4','#check4'),resetAfter3);
+    checkText('#q4','#check4',['포도'],'#f4',()=>unlock('#q5','#check5'),resetAfter4);
+    checkText('#q5','#check5',['바나나'],'#f5',()=>{document.querySelectorAll('.step6-control').forEach(x=>x.classList.remove('hidden'));document.querySelector('#step2').scrollIntoView({behavior:'smooth'});},resetAfter5);
+    document.querySelector('#reset').addEventListener('click',resetPlacement);
+    const same=(a,b)=>a.length===b.length&&a.every(x=>b.includes(x));document.querySelector('#check6').addEventListener('click',()=>{const ok=same(places['a-minus-b'],['사과'])&&same(places['a-intersection-b'],['바나나'])&&same(places['b-minus-a'],['포도']);const f=document.querySelector('#f6');f.textContent=ok?'정답이에요! 3구역을 잘 구분했어요.':'다시 살펴보세요. A에만, 같이 있는 가운데, B에만 있는 곳을 생각해요.';f.classList.toggle('ok',ok);document.querySelector('#step6').classList.toggle('done',ok);if(ok)document.querySelector('#step7').classList.remove('hidden');else hide('#step7','#step8','#step9','#step10','#remember');});
+    document.querySelectorAll('.symbol-choice').forEach(button=>button.addEventListener('click',()=>{const input=document.querySelector('#'+button.dataset.target);input.value=button.dataset.symbol;button.parentElement.querySelectorAll('.symbol-choice').forEach(choice=>choice.classList.toggle('selected',choice===button));input.focus();}));
+    const resetAfter7=()=>{clear('#symbol8','#q8','#q10a','#q10b','#q10c','#q10d','#q10e');document.querySelectorAll('#symbol8-options .symbol-choice').forEach(button=>button.classList.remove('selected'));lock('#symbol8','#q8','#check8','#symbol8-options button','#step9 button','#q10a','#q10b','#q10c','#q10d','#q10e','#check10');hide('#step8','#step9','#step10','#remember');first=false;};
+    document.querySelector('#check7').addEventListener('click',()=>{const ok=document.querySelector('#symbol7').value==='∩'&&clean(document.querySelector('#q7').value)==='바나나';const f=document.querySelector('#f7');f.textContent=ok?'맞아요!':'기호와 겹치는 가운데의 과일을 다시 보세요.';f.classList.toggle('ok',ok);document.querySelector('#step7').classList.toggle('done',ok);if(ok){document.querySelector('#step8').classList.remove('hidden');unlock('#symbol8','#q8','#check8','#symbol8-options button');}else resetAfter7();});
+    const resetAfter8=()=>{clear('#q10a','#q10b','#q10c','#q10d','#q10e');lock('#step9 button','#q10a','#q10b','#q10c','#q10d','#q10e','#check10');hide('#step9','#step10','#remember');first=false;};
+    const completionModal=document.querySelector('#completion-modal');
+    const showCompletion=()=>completionModal.classList.add('show');
+    const resetWorksheet=()=>{clear('#q3');document.querySelectorAll('.feedback').forEach(feedback=>{feedback.textContent='';feedback.className='feedback';});document.querySelectorAll('.done').forEach(section=>section.classList.remove('done'));resetAfter3();document.querySelector('#q3').disabled=false;document.querySelector('#check3').disabled=false;completionModal.classList.remove('show');document.querySelector('h1').scrollIntoView({behavior:'smooth'});};
+    document.querySelector('#completion-close').addEventListener('click',resetWorksheet);
+    document.querySelector('#check8').addEventListener('click',()=>{const ok=document.querySelector('#symbol8').value==='∪'&&['사과,바나나,포도','사과바나나포도'].includes(clean(document.querySelector('#q8').value));const f=document.querySelector('#f8');f.textContent=ok?'맞아요!':'기호와 두 원 안의 과일을 다시 보세요.';f.classList.toggle('ok',ok);document.querySelector('#step8').classList.toggle('done',ok);if(ok){document.querySelector('#step9').classList.remove('hidden');document.querySelectorAll('#step9 button').forEach(b=>b.disabled=false);}else resetAfter8();});
+    let first=false;document.querySelectorAll('#step9 button').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.answer,f=document.querySelector('#f9');if(a==='intersection'){first=true;f.textContent='맞아요! 이제 ②를 골라 보세요.';f.classList.add('ok');}else if(a==='union'&&first){f.textContent='두 문제 모두 맞았어요!';f.classList.add('ok');document.querySelector('#step9').classList.add('done');document.querySelector('#step10').classList.remove('hidden');unlock('#q10a','#q10b','#q10c','#q10d','#q10e','#check10');}else{f.textContent='다시 생각해 봐요.';f.classList.remove('ok');clear('#q10a','#q10b','#q10c','#q10d','#q10e');hide('#step10','#remember');lock('#q10a','#q10b','#q10c','#q10d','#q10e','#check10');}}));
+    document.querySelector('#check10').addEventListener('click',()=>{const get=id=>clean(document.querySelector(id).value);const ok=get('#q10a')==='1'&&['2,3','23'].includes(get('#q10b'))&&get('#q10c')==='4'&&['2,3','23'].includes(get('#q10d'))&&['1,2,3,4','1234'].includes(get('#q10e'));const f=document.querySelector('#f10');f.textContent=ok?'정답이에요! 활동을 모두 마쳤어요.':'빈칸을 다시 살펴보세요.';f.classList.toggle('ok',ok);document.querySelector('#step10').classList.toggle('done',ok);if(ok){document.querySelector('#remember').classList.remove('hidden');showCompletion();}else hide('#remember');});
+  </script>
+</body>
+</html>

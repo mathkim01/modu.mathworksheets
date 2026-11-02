@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>진리집합 활동지</title>
+  <style>
+    :root { --ink:#173a5e; --sky:#eaf5ff; --line:#bdd4e8; --sun:#fff5c9; --good:#147a48; --bad:#b53737; }
+    * { box-sizing:border-box; } body { margin:0; background:#eff5f8; color:#1b2934; font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif; line-height:1.65; }
+    main { width:min(1180px,calc(100% - 28px)); margin:0 auto; padding:28px 0 52px; } .head,.step,.finish { background:#fff; border:2px solid var(--line); border-radius:20px; box-shadow:0 5px 18px #173a5e12; }
+    .head { padding:26px; margin-bottom:18px; } h1 { margin:0; color:var(--ink); font-size:clamp(1.7rem,5vw,2.5rem); line-height:1.3; } h2 { margin:0 0 9px; color:var(--ink); font-size:1.28rem; line-height:1.35; } p { margin:8px 0; }
+    .guide,.hint { margin:15px 0 0; padding:10px 13px; border-radius:11px; background:var(--sun); } .hint { margin:12px 0; border-left:4px solid #e9bf31; }
+    .stage-row { display:grid; gap:15px; margin:15px 0; align-items:stretch; } .three-up { grid-template-columns:repeat(3,minmax(0,1fr)); } .two-up { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .step { padding:21px; position:relative; } .step.locked { opacity:.52; background:#f6f8f9; } .step.locked::after { content:"앞 활동의 정답을 맞히면 열려요."; display:block; margin-top:10px; color:#536b7d; font-size:.9rem; }
+    .number { display:inline-grid; place-items:center; width:30px; height:30px; margin-right:7px; border-radius:50%; background:var(--ink); color:#fff; font-size:.95rem; vertical-align:2px; } .math { display:inline-block; margin:7px 0; padding:7px 12px; border-radius:9px; background:var(--sky); color:var(--ink); font-weight:800; }
+    input,button { font:inherit; } .answer-row,.word-cards { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-top:13px; } .answer { min-width:150px; flex:1 1 200px; max-width:390px; padding:8px 10px; border:2px solid #7898ae; border-radius:10px; }
+    .option { cursor:pointer; padding:8px 11px; border:2px solid #7b9bb1; border-radius:10px; color:var(--ink); background:var(--sky); font-weight:700; } .option[aria-pressed="true"] { border-color:#176da3; outline:3px solid #ffcd32; background:#237fbc; color:#fff; }
+    .check,.restart { cursor:pointer; border:0; border-radius:10px; padding:9px 15px; background:var(--ink); color:#fff; font-weight:800; } .feedback { min-height:27px; margin:7px 0 0; font-weight:800; } .good { color:var(--good); } .bad { color:var(--bad); }
+    .mini-table { width:100%; margin-top:12px; border-collapse:collapse; text-align:center; } .mini-table th,.mini-table td { padding:8px; border:1px solid var(--line); } .mini-table th { background:var(--sky); color:var(--ink); } .mini-table .option { min-width:53px; padding:5px 7px; }
+    .finish { display:none; padding:25px; margin-top:20px; border-color:#72bc94; background:#e6f9ed; text-align:center; } .finish.show { display:block; }
+    .examples { margin-top:20px; padding:24px; background:#fff; border:2px solid var(--line); border-radius:20px; box-shadow:0 5px 18px #173a5e12; }
+    .example-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:14px; }
+    .example { padding:16px; border:2px solid #c7deed; border-radius:15px; background:#f8fcff; }
+    .example h3 { margin:0 0 8px; color:var(--ink); font-size:1.05rem; }
+    .example-answer { width:100%; margin-top:6px; padding:8px 10px; border:2px solid #7898ae; border-radius:10px; background:#fff; }
+    .example-check { margin-top:8px; }
+    .example-feedback { min-height:23px; margin:6px 0 0; font-weight:800; font-size:.92rem; }
+    details { margin-top:12px; border-radius:9px; background:#e6f8ed; } summary { cursor:pointer; padding:7px 10px; color:#176b41; font-weight:800; } .answer-show { margin:0; padding:0 10px 9px; font-weight:800; color:#176b41; }
+    @media (max-width:850px) { .example-grid { grid-template-columns:1fr; } }
+    @media (max-width:850px) { .three-up { grid-template-columns:1fr; } } @media (max-width:620px) { .two-up { grid-template-columns:1fr; } } @media (max-width:560px) { main { width:min(100% - 18px,1180px); padding-top:12px; } .head,.step { padding:17px; } .mini-table { font-size:.88rem; } .mini-table th,.mini-table td { padding:5px 2px; } }
+    @media print { body { background:#fff; } main { width:100%; padding:0; } .head,.step,.finish { box-shadow:none; } .guide,.check,.restart,.feedback { display:none; } .step.locked { opacity:1; } .step.locked::after { display:none; } }
+  </style>
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+  <main>
+    <header class="head"><h1>진리집합을 알아봐요</h1><p class="guide">한 활동씩 해 보세요. 정답을 맞히면 다음 활동이 열립니다.</p></header>
+
+    <div class="stage-row three-up" aria-label="6단계부터 8단계">
+      <section class="step" data-step="6" data-kind="choice" data-answer="x">
+        <h2><span class="number">6</span>x가 있는 문장을 봐요</h2><p><span class="math">x &lt; 4</span>에서 숫자가 들어갈 자리를 나타내는 문자는 무엇인가요?</p>
+        <div class="answer-row"><button class="option" data-value="x" aria-pressed="false">x</button><button class="option" data-value="4" aria-pressed="false">4</button></div><div class="hint">x에 어떤 숫자를 넣는지에 따라 문장이 참 또는 거짓이 될 수 있어요.</div><div class="answer-row"><button class="check">확인</button></div><p class="feedback" aria-live="polite"></p>
+      </section>
+      <section class="step locked" data-step="7" data-kind="choice" data-answer="참">
+        <h2><span class="number">7</span>한 값을 넣어 봐요</h2><p><span class="math">x &lt; 4</span>에 x = 3을 넣으면 <strong>3 &lt; 4</strong>가 됩니다. 참일까요, 거짓일까요?</p>
+        <div class="answer-row"><button class="option" data-value="참" aria-pressed="false">참</button><button class="option" data-value="거짓" aria-pressed="false">거짓</button></div><div class="answer-row"><button class="check">확인</button></div><p class="feedback" aria-live="polite"></p>
+      </section>
+      <section class="step locked" data-step="8" data-kind="multi" data-answer="참,참,거짓">
+        <h2><span class="number">8</span>여러 값을 확인해요</h2><p><span class="math">x &lt; 4</span>를 확인해요. 각 칸에서 참 또는 거짓을 고르세요.</p>
+        <table class="mini-table"><thead><tr><th>x에 넣는 수</th><th>문장</th><th>참 / 거짓</th></tr></thead><tbody>
+          <tr><td>1</td><td>1 &lt; 4</td><td><button class="option" data-index="0" data-value="참" aria-pressed="false">참</button> <button class="option" data-index="0" data-value="거짓" aria-pressed="false">거짓</button></td></tr>
+          <tr><td>3</td><td>3 &lt; 4</td><td><button class="option" data-index="1" data-value="참" aria-pressed="false">참</button> <button class="option" data-index="1" data-value="거짓" aria-pressed="false">거짓</button></td></tr>
+          <tr><td>4</td><td>4 &lt; 4</td><td><button class="option" data-index="2" data-value="참" aria-pressed="false">참</button> <button class="option" data-index="2" data-value="거짓" aria-pressed="false">거짓</button></td></tr>
+        </tbody></table><div class="answer-row"><button class="check">확인</button></div><p class="feedback" aria-live="polite"></p>
+      </section>
+    </div>
+
+    <div class="stage-row two-up" aria-label="9단계와 10단계">
+      <section class="step locked" data-step="9" data-kind="text" data-answer="1,2,3|1，2，3">
+        <h2><span class="number">9</span>참이 되는 값을 찾아요</h2><p>전체집합은 <span class="math">U = {1, 2, 3, 4, 5, 6}</span>이에요.</p><p>전체집합에 있는 수 중에서 <span class="math">x &lt; 4</span>가 참이 되는 숫자를 작은 수부터 쉼표로 써 보세요.</p>
+        <div class="answer-row"><input class="answer" aria-label="참이 되는 값" placeholder="예: 1, 2, 3"><button class="check">확인</button></div><p class="feedback" aria-live="polite"></p>
+      </section>
+      <section class="step locked" data-step="10" data-kind="wordcards" data-answer="진,리,집,합">
+        <h2><span class="number">10</span>진리집합을 알아봐요</h2><p>문장을 참으로 만드는 값을 모은 집합을 <strong>진리집합</strong>이라고 합니다.</p><p>아래 단어 카드에서 <strong>진, 리, 집, 합</strong>을 차례로 찾아 눌러 보세요.</p>
+        <div class="word-cards" aria-label="진리집합 글자 카드"><button class="option" data-value="진" aria-pressed="false">진</button><button class="option" data-value="나" aria-pressed="false">나</button><button class="option" data-value="리" aria-pressed="false">리</button><button class="option" data-value="별" aria-pressed="false">별</button><button class="option" data-value="집" aria-pressed="false">집</button><button class="option" data-value="공" aria-pressed="false">공</button><button class="option" data-value="합" aria-pressed="false">합</button><button class="option" data-value="해" aria-pressed="false">해</button></div>
+        <div class="answer-row"><button class="check">확인</button></div><p class="feedback" aria-live="polite"></p>
+      </section>
+    </div>
+    <section class="examples" aria-label="진리집합 찾기 예제">
+      <h2>진리집합을 찾아봐요</h2>
+      <p>전체집합에 있는 수 중에서 문장을 참으로 만드는 수만 골라 보세요. 다 푼 뒤 정답을 열어 확인해요.</p>
+      <div class="example-grid">
+        <article class="example">
+          <h3>예제 1</h3>
+          <p><span class="math">U = {1, 2, 3, 4, 5, 6}</span></p>
+          <p><span class="math">x &lt; 3</span></p>
+          <p>진리집합: </p>
+          <input class="example-answer" aria-label="예제 1 진리집합 답" placeholder="{  }을 원소나열법으로 쓰세요.">
+          <button class="check example-check" data-answer="{1,2}">확인</button><p class="example-feedback" aria-live="polite"></p>
+          <details><summary>정답 보기</summary><p class="answer-show">{1, 2}</p></details>
+        </article>
+        <article class="example">
+          <h3>예제 2</h3>
+          <p><span class="math">U = {1, 2, 3, 4, 5, 6}</span></p>
+          <p><span class="math">x는 짝수이다.</span></p>
+          <p>진리집합: </p>
+          <input class="example-answer" aria-label="예제 2 진리집합 답" placeholder="{  }을 원소나열법으로 쓰세요.">
+          <button class="check example-check" data-answer="{2,4,6}">확인</button><p class="example-feedback" aria-live="polite"></p>
+          <details><summary>정답 보기</summary><p class="answer-show">{2, 4, 6}</p></details>
+        </article>
+        <article class="example">
+          <h3>예제 3</h3>
+          <p><span class="math">U = {1, 2, 3, 4, 5, 6}</span></p>
+          <p><span class="math">x &gt; 4</span></p>
+          <p>진리집합: </p>
+          <input class="example-answer" aria-label="예제 3 진리집합 답" placeholder="{  }을 원소나열법으로 쓰세요.">
+          <button class="check example-check" data-answer="{5,6}">확인</button><p class="example-feedback" aria-live="polite"></p>
+          <details><summary>정답 보기</summary><p class="answer-show">{5, 6}</p></details>
+        </article>
+      </div>
+    </section>
+
+    <section class="finish" id="finish" aria-live="polite"><h2>참 잘했어요! 🎉</h2><p>진리집합을 배우는 활동을 모두 마쳤어요.</p><button class="restart" type="button">처음부터 다시 하기</button></section>
+  </main>
+  <script>
+    (() => {
+      const steps=[...document.querySelectorAll('.step')], finish=document.getElementById('finish');
+      const normalize=v=>String(v).replace(/[\s.]/g,'').replace(/，/g,',');
+      const selected=step=>{ if(step.dataset.kind==='multi') return [...new Set([...step.querySelectorAll('.option[data-index]')].map(o=>o.dataset.index))].sort((a,b)=>a-b).map(i=>step.querySelector(`.option[data-index="${i}"][aria-pressed="true"]`)?.dataset.value||'').join(','); if(step.dataset.kind==='wordcards') return [...step.querySelectorAll('.option[aria-pressed="true"]')].map(o=>o.dataset.value).join(','); return step.querySelector('.option[aria-pressed="true"]')?.dataset.value||''; };
+      const correct=step=>step.dataset.answer.split('|').some(a=>normalize(step.dataset.kind==='text'?step.querySelector('.answer').value:selected(step))===normalize(a));
+      const unlock=n=>{const next=document.querySelector(`.step[data-step="${n}"]`); if(next){next.classList.remove('locked'); next.querySelectorAll('input,button').forEach(c=>c.disabled=false); next.querySelector('input,.option,.check')?.focus();}};
+      steps.filter(s=>s.classList.contains('locked')).forEach(s=>s.querySelectorAll('input,button').forEach(c=>c.disabled=true));
+      document.addEventListener('click',e=>{
+        const exampleCheck=e.target.closest('.example-check');
+        if(exampleCheck){
+          const example=exampleCheck.closest('.example'), input=example.querySelector('.example-answer'), feedback=example.querySelector('.example-feedback');
+          if(normalize(input.value)===normalize(exampleCheck.dataset.answer)){feedback.textContent='정답이에요!';feedback.className='example-feedback good';}else{feedback.textContent='다시 생각해 보세요.';feedback.className='example-feedback bad';}
+          return;
+        }
+        const option=e.target.closest('.option'); if(option){const step=option.closest('.step'); if(step.classList.contains('locked')||step.classList.contains('done'))return; if(step.dataset.kind==='wordcards'){option.setAttribute('aria-pressed',option.getAttribute('aria-pressed')==='true'?'false':'true');return;} const key=option.dataset.index, options=key===undefined?step.querySelectorAll('.option'):step.querySelectorAll(`.option[data-index="${key}"]`); options.forEach(o=>o.setAttribute('aria-pressed',o===option?'true':'false'));return;} const check=e.target.closest('.check'); if(!check)return; const step=check.closest('.step'), feedback=step.querySelector('.feedback'); if(correct(step)){step.classList.add('done');feedback.textContent='정답이에요! 다음 활동으로 가 볼까요?';feedback.className='feedback good';step.querySelectorAll('input,button').forEach(c=>c.disabled=true);unlock(Number(step.dataset.step)+1);if(document.querySelectorAll('.step.done').length===5)finish.classList.add('show');}else{feedback.textContent='다시 천천히 생각해 보고 답해 보세요.';feedback.className='feedback bad';}
+      });
+      document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches('.answer'))e.target.closest('.step').querySelector('.check').click();}); document.querySelector('.restart').addEventListener('click',()=>location.reload());
+    })();
+  </script>
+</body>
+</html>

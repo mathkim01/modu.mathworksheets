@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="수학 활동지 모음">
+  <title>수학 활동지 모음</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232567d8'/%3E%3Cpath d='M17 19h30M17 32h30M17 45h21' stroke='white' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="활동지 목록">
+      <div class="sidebar-head">
+        <div class="brand-mark" aria-hidden="true">∑</div>
+        <div>
+          <p class="eyebrow">공통수학2</p>
+          <h1>함께하는 수업시간</h1>
+        </div>
+      </div>
+      <p class="sidebar-guide">단원을 열고 활동지를 선택하세요.</p>
+      <nav id="worksheet-nav" class="worksheet-nav" aria-label="수학 활동지"></nav>
+      <div class="sidebar-foot">capyright. 2026. Math Kim<br>잘못된 부분이나 수정사항은 쌤에게 요청하세요.</div>
+    </aside>
+
+    <main class="content-area">
+      <header class="topbar">
+        <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="sidebar">
+          <span aria-hidden="true">☰</span><span>목록</span>
+        </button>
+        <div class="current-location">
+          <span class="location-label">현재 활동지</span>
+          <strong id="current-title">활동지를 선택하세요</strong>
+        </div>
+      </header>
+      <section class="viewer-wrap" aria-label="활동지 내용">
+        <section class="welcome-panel" id="welcome-panel" aria-label="환영 화면">
+          <img src="assets/welcome-math-character.png" alt="왼쪽 활동지 목록을 가리키며 수학 공부를 환영하는 선생님 캐릭터">
+        </section>
+        <iframe id="worksheet-viewer" title="선택한 수학 활동지" src="about:blank" hidden></iframe>
+      </section>
+    </main>
+  </div>
+  <script src="menu.js"></script>
+</body>
+</html>

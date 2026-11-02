@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>26-2 공통수학2 활동지 - 명제와 조건</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style>
+        :root {
+            --bg-color: #f6f8fb;
+            --card-bg: #ffffff;
+            --primary: #4f46e5;
+            --primary-light: #eef2ff;
+            --primary-hover: #4338ca;
+            --accent-coral: #f43f5e;
+            --accent-emerald: #059669;
+            --emerald-bg: #ecfdf5;
+            --teacher-bg: #fffbeb;
+            --teacher-border: #fcd34d;
+            --teacher-text: #92400e;
+            --student-bg: #f0f9ff;
+            --student-border: #7dd3fc;
+            --student-text: #0369a1;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-soft: #e2e8f0;
+            --shadow-soft: 0 10px 25px -4px rgba(15, 23, 42, 0.05), 0 4px 6px -2px rgba(15, 23, 42, 0.03);
+            --radius-lg: 18px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.65;
+            padding: 0 16px 80px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 플로팅 헤더 & 상단 빠른 바로가기 */
+        .top-navbar {
+            position: sticky;
+            top: 12px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-soft);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border-radius: 9999px;
+            padding: 8px 18px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            max-width: 900px;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .nav-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .nav-links::-webkit-scrollbar { display: none; }
+
+        .nav-link-btn {
+            font-size: 0.82rem;
+            padding: 6px 12px;
+            border-radius: 9999px;
+            text-decoration: none;
+            color: var(--text-muted);
+            background: transparent;
+            border: 1px solid transparent;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link-btn:hover {
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .toggle-all-dialogue-btn {
+            font-size: 0.82rem;
+            padding: 6px 14px;
+            background: #f1f5f9;
+            color: var(--text-main);
+            border: 1px solid var(--border-soft);
+            border-radius: 9999px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+        .toggle-all-dialogue-btn:hover {
+            background: #e2e8f0;
+        }
+
+        /* 카드 컨테이너 */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-soft);
+            box-shadow: var(--shadow-soft);
+            width: 100%;
+            max-width: 860px;
+            margin-bottom: 28px;
+            padding: 30px 34px;
+            scroll-margin-top: 80px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 14px 30px -4px rgba(15, 23, 42, 0.08);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #eef2f6;
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-badge {
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 9999px;
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* 발문 / 질문 스타일 */
+        .question-box {
+            background: linear-gradient(135deg, #fff5f5 0%, #fff1f2 100%);
+            border: 1px solid #fecdd3;
+            border-left: 5px solid var(--accent-coral);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            margin: 16px 0;
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: #9f1239;
+            box-shadow: 0 2px 8px rgba(244, 63, 94, 0.06);
+        }
+
+        /* 대화창 & 토글 기능 */
+        .dialogue-wrapper {
+            margin: 16px 0;
+            border: 1px solid #f1f5f9;
+            border-radius: var(--radius-md);
+            background: #fafbfc;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .dialogue-header {
+            padding: 10px 16px;
+            background: #f8fafc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .dialogue-header span {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .toggle-btn {
+            background: white;
+            border: 1px solid var(--border-soft);
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .toggle-btn:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: #cbd5e1;
+        }
+
+        .dialogue-content {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .dialogue-content.hidden {
+            display: none;
+        }
+
+        .dialogue-bubble {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .bubble-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+        }
+
+        .bubble-text {
+            border-radius: 14px;
+            padding: 10px 16px;
+            font-size: 0.95rem;
+            max-width: 85%;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            line-height: 1.5;
+        }
+
+        .bubble-teacher .bubble-avatar {
+            background: #fef3c7;
+        }
+        .bubble-teacher .bubble-text {
+            background: var(--teacher-bg);
+            border: 1px solid var(--teacher-border);
+            color: var(--teacher-text);
+            border-top-left-radius: 4px;
+        }
+
+        .bubble-student .bubble-avatar {
+            background: #e0f2fe;
+        }
+        .bubble-student .bubble-text {
+            background: var(--student-bg);
+            border: 1px solid var(--student-border);
+            color: var(--student-text);
+            border-top-left-radius: 4px;
+        }
+
+        /* 증명 단계 리스트 */
+        .step-list {
+            margin: 16px 0;
+            padding-left: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .step-item {
+            background: #f8fafc;
+            border: 1px solid #edf2f7;
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            display: flex;
+            gap: 12px;
+            align-items: baseline;
+            font-size: 0.96rem;
+        }
+
+        .step-number {
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            font-size: 0.8rem;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* 캔버스 및 컨트롤 도구 */
+        .canvas-card {
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin: 18px 0;
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .canvas-toolbar {
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-bottom: 1px solid var(--border-soft);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .toolbar-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover { background: var(--primary-hover); }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #334155;
+            border-color: #cbd5e1;
+        }
+        .btn-secondary:hover { background: #e2e8f0; }
+
+        .btn-active {
+            background: #4338ca !important;
+            color: white !important;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+            border-color: #312e81;
+        }
+
+        .btn-auto {
+            background: #0284c7;
+            color: white;
+        }
+        .btn-auto:hover { background: #0369a1; }
+
+        .btn-danger {
+            background: #fef2f2;
+            color: #dc2626;
+            border-color: #fecaca;
+        }
+        .btn-danger:hover { background: #fee2e2; }
+
+        .canvas-status {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        #geometryCanvas {
+            display: block;
+            background-color: #ffffff;
+            width: 100%;
+            height: 300px;
+            cursor: crosshair;
+        }
+
+        /* 이미지 컨테이너 */
+        .image-box {
+            margin: 20px 0 10px 0;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border-soft);
+            background: #f8fafc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        .source-tag {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            text-align: right;
+            margin-top: 8px;
+            font-style: normal;
+        }
+
+        /* 인터랙티브 빈칸 버튼 */
+        .interactive-blank {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f1f5f9;
+            color: #64748b;
+            padding: 3px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 1.5px dashed #94a3b8;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+            user-select: none;
+            margin: 2px 4px;
+        }
+
+        .interactive-blank:hover {
+            background-color: #e2e8f0;
+            border-color: #64748b;
+            color: #334155;
+            transform: translateY(-1px);
+        }
+
+        .interactive-blank.revealed {
+            background-color: var(--emerald-bg);
+            color: var(--accent-emerald);
+            border: 1.5px solid var(--accent-emerald);
+            box-shadow: 0 2px 4px rgba(5, 150, 105, 0.1);
+        }
+
+        /* 탐구 탭 및 카드 (대본 33행 전체집합 비교 인터랙티브) */
+        .explore-box {
+            background: #fafbfc;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            padding: 18px 20px;
+            margin: 18px 0;
+        }
+
+        .explore-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 14px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 6px 14px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+        .tab-pane.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .quiz-item-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-sm);
+            padding: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .quiz-item-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        /* 벤다이어그램 SVG 시각화 박스 */
+        .venn-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-md);
+            padding: 14px;
+            margin: 16px 0;
+        }
+
+        /* 팁 / 하이라이트 박스 */
+        .tip-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-left: 4px solid #3b82f6;
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            font-size: 0.94rem;
+            color: #1e40af;
+            margin: 14px 0;
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #4338ca;
+            background: #e0e7ff;
+            padding: 1px 6px;
+            border-radius: 4px;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .card {
+                padding: 20px 18px;
+            }
+            .canvas-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .toolbar-group {
+                justify-content: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="theme.css">
+
+    <!-- MathJax 수식 설정 -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+    <!-- 상단 스티키 내비게이션 바 -->
+    <header class="top-navbar">
+        <div class="nav-title">
+            <span>📐</span> 26-2 공통수학2
+        </div>
+        <nav class="nav-links">
+            <a href="#section1" class="nav-link-btn">1. 도입 질문</a>
+            <a href="#section2" class="nav-link-btn">2. 유클리드 공준</a>
+            <a href="#section3" class="nav-link-btn">3. 명제</a>
+            <a href="#section4" class="nav-link-btn">4. 조건과 진리집합</a>
+            <a href="#section5" class="nav-link-btn">5. 부정</a>
+            <a href="#section6" class="nav-link-btn">6. $p \rightarrow q$</a>
+            <a href="#section7" class="nav-link-btn">7. 반례 탐구</a>
+            <a href="#section8" class="nav-link-btn">8. 핵심 요약</a>
+        </nav>
+        <button class="toggle-all-dialogue-btn" onclick="toggleAllDialogues()" title="화면의 모든 대화창을 숨기거나 표시합니다">
+            <span id="allDialogueIcon">👁️</span> <span id="allDialogueText">모든 대화 숨기기</span>
+        </button>
+    </header>
+
+    <!-- ==================== 섹션 1: 도입 및 증명 시연 ==================== -->
+    <section class="card" id="section1">
+        <div class="card-header">
+            <h2 class="card-title">1. 명제 수업에 앞서 생각해보는 질문</h2>
+            <span class="card-badge">도입 및 탐구</span>
+        </div>
+
+        <div class="question-box">
+            " 평면 위에 점 A가 있다. 이 점 A를 지나는 원은 몇 개일까? "
+        </div>
+
+        <!-- 대화창 1 -->
+        <div class="dialogue-wrapper">
+            <div class="dialogue-header">
+                <span>💬 수업 대화 (선생님 & 학생)</span>
+                <button class="toggle-btn" onclick="toggleDialogue(this)">
+                    <span>접기</span>
+                </button>
+            </div>
+            <div class="dialogue-content">
+                <div class="dialogue-bubble bubble-teacher">
+                    <div class="bubble-avatar">👨‍🏫</div>
+                    <div class="bubble-text"><strong>선생님:</strong> 답은 무엇일까요?</div>
+                </div>
+                <div class="dialogue-bubble bubble-student">
+                    <div class="bubble-avatar">🙋‍♂️</div>
+                    <div class="bubble-text"><strong>학생:</strong> 무수히 많다!</div>
+                </div>
+                <div class="dialogue-bubble bubble-teacher">
+                    <div class="bubble-avatar">👨‍🏫</div>
+                    <div class="bubble-text"><strong>선생님:</strong> 진짜 그런가요? 왜 그럴까요?</div>
+                </div>
+                <div class="dialogue-bubble bubble-student">
+                    <div class="bubble-avatar">🙋‍♂️</div>
+                    <div class="bubble-text"><strong>학생:</strong> 그려봐요. 당연해요.</div>
+                </div>
+                <div class="dialogue-bubble bubble-teacher">
+                    <div class="bubble-avatar">👨‍🏫</div>
+                    <div class="bubble-text"><strong>선생님:</strong> 여러분의 답이 항상 참임을 직접 증명할 수 있을까요?</div>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-weight: 700; margin-top: 14px; color: #334155;">[증명해봅시다]</p>
+        <ul class="step-list">
+            <li class="step-item">
+                <span class="step-number">1</span>
+                <div>점 $A$를 평면 위에 임의로 정하고, 점 $A$가 아닌 점 $O$를 평면 위에서 찾아봅시다.</div>
+            </li>
+            <li class="step-item">
+                <span class="step-number">2</span>
+                <div>선분 $OA$를 반지름으로 하고, 중심이 점 $O$인 원을 그리면, 점 $A$를 지나는 평면 위의 원 $1$개를 찾았습니다.</div>
+            </li>
+            <li class="step-item">
+                <span class="step-number">3</span>
+                <div>이제 점 $A, O$와 겹치지 않게 또 다른 점 $O_1$을 찾고, 선분 $O_1A$를 반지름으로 하는 중심이 $O_1$인 원을 그리면, 원 $2$개를 찾았습니다.</div>
+            </li>
+            <li class="step-item">
+                <span class="step-number">4</span>
+                <div>이와 마찬가지로 평면 위에 서로 다른 점은 무수히 많으므로, 원의 개수는 <span class="highlight">무수히 많습니다</span>.</div>
+            </li>
+        </ul>
+
+        <!-- 인터랙티브 캔버스 도구 -->
+        <div class="canvas-card">
+            <div class="canvas-toolbar">
+                <div class="toolbar-group">
+                    <button class="btn btn-primary" id="btnPointA" onclick="setMode('pointA')">1. 점 A 찍기</button>
+                    <button class="btn btn-secondary" id="btnPointO" onclick="setMode('pointO')">2. 중심 O 찍고 원 그리기</button>
+                    <button class="btn btn-auto" onclick="autoGenerateCircles()">✨ 원 5개 자동 시연</button>
+                    <button class="btn btn-danger" onclick="clearCanvas()">🔄 초기화</button>
+                </div>
+                <div class="canvas-status" id="canvasStatus">
+                    상태: 먼저 '1. 점 A 찍기'를 클릭하고 캔버스를 눌러주세요.
+                </div>
+            </div>
+            <canvas id="geometryCanvas" width="800" height="300"></canvas>
+        </div>
+    </section>
+
+    <!-- ==================== 섹션 2: 유클리드 5개 공준 ==================== -->
+    <section class="card" id="section2">
+        <div class="card-header">
+            <h2 class="card-title">2. 증명의 배경: 유클리드 5개 공준(공리)</h2>
+            <span class="card-badge">배경 지식</span>
+        </div>
+
+        <!-- 대화창 2 -->
+        <div class="dialogue-wrapper">
+            <div class="dialogue-header">
+                <span>💬 증명 원리 대화</span>
+                <button class="toggle-btn" onclick="toggleDialogue(this)">
+                    <span>접기</span>
+                </button>
+            </div>
+            <div class="dialogue-content">
+                <div class="dialogue-bubble bubble-teacher">
+                    <div class="bubble-avatar">👨‍🏫</div>
+                    <div class="bubble-text"><strong>선생님:</strong> 위 원 개수 증명에서 반복하여 사용된 핵심 개념은 무엇일까요?</div>
+                </div>
+                <div class="dialogue-bubble bubble-student">
+                    <div class="bubble-avatar">🙋‍♂️</div>
+                    <div class="bubble-text"><strong>학생:</strong> 점을 중심으로 <strong>원 그리기</strong>와 <strong>평면 위에 서로 다른 점은 무수히 많다</strong>는 원리입니다!</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <span>💡</span>
+            <div>
+                수학에서는 증명 없이 참으로 받아들이는 가장 기본적인 명제를 <strong>공리(Axiom)</strong> 또는 <strong>공준(Postulate)</strong>이라고 합니다. 유클리드 기하학의 제3공준에 의해 우리는 주어진 중심과 반지름으로 항상 원을 그릴 수 있습니다.
+            </div>
+        </div>
+
+        <!-- 첨부 이미지 1 -->
+        <div class="image-box">
+            <img src="스크린샷 2026-10-20 164602.png" alt="유클리드 5개의 공준(공리)" class="content-image" onerror="this.parentElement.style.display='none'">
+            <div class="source-tag">출처: 사고력을 키우는 수학의 힘 p.128-129</div>
+        </div>
+    </section>
+
+    <!-- ==================== 섹션 3: 명제의 뜻과 판별 ==================== -->
+    <section class="card" id="section3">
+        <div class="card-header">
+            <h2 class="card-title">3. 명제(Proposition)란 무엇인가?</h2>
+            <span class="card-badge">개념 정의</span>
+        </div>
+
+        <p style="font-size: 1.05rem; margin-bottom: 12px;">
+            명제 단원에서 배우는 내용은 이와 같이 <strong>참/거짓을 명확히 판단할 수 있는 문장</strong>을 찾고, 그 문장의 참/거짓을 증명하는 방법을 탐구합니다.
+        </p>
+
+        <div class="tip-box" style="background: #fdf4ff; border-color: #f0abfc; border-left-color: #d946ef; color: #86198f;">
+            <span>📌</span>
+            <div>
+                <strong>명제(Proposition)의 정의:</strong> 참(True)인지 거짓(False)인지를 명확하게 판별할 수 있는 문장이나 식.
+            </div>
+        </div>
+
+        <p style="font-weight: 700; margin: 18px 0 8px 0; color: #1e293b;">
+            [다음 문장 중 명제를 찾아보고 참/거짓을 판별해 봅시다 (빈칸 클릭)]
+        </p>
+
+        <div class="quiz-grid">
+            <div class="quiz-item-card">
+                <div class="quiz-item-title">문장 ①</div>
+                <p>$2 + 3 = 5$</p>
+                <div style="margin-top: 10px;">
+                    <span class="interactive-blank" onclick="reveal(this, '✅ 참인 명제')">👉 클릭하여 확인</span>
+                </div>
+            </div>
+
+            <div class="quiz-item-card">
+                <div class="quiz-item-title">문장 ②</div>
+                <p>$39$는 소수이다.</p>
+                <div style="margin-top: 10px;">
+                    <span class="interactive-blank" onclick="reveal(this, '❌ 거짓인 명제 (39 = 3 × 13)')">👉 클릭하여 확인</span>
+                </div>
+            </div>
+
+            <div class="quiz-item-card">
+                <div class="quiz-item-title">문장 ③</div>
+                <p>$12$는 작은 수이다.</p>
+                <div style="margin-top: 10px;">
+                    <span class="interactive-blank" onclick="reveal(this, '⚠️ 명제가 아님 (기준이 주관적)')">👉 클릭하여 확인</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 섹션 4: 조건과 진리집합 ==================== -->
+    <section class="card" id="section4">
+        <div class="card-header">
+            <h2 class="card-title">4. 조건과 진리집합</h2>
+            <span class="card-badge">심화 탐구</span>
+        </div>
+
+        <p style="margin-bottom: 14px;">
+            변수를 포함하는 문장이나 식 중에서, <strong>변수의 값에 따라 참/거짓을 판별할 수 있는 것</strong>을 <strong>조건</strong>이라 하고, 그 조건을 참이 되게 하는 모든 원소의 집합을 <strong>진리집합</strong>이라고 합니다.
+        </p>
+
+        <!-- 대본 33행: 전체집합과 조건 탐구 인터랙티브 -->
+        <div class="explore-box">
+            <div style="font-weight: 700; margin-bottom: 10px; color: #1e293b;">
+                🔍 [탐구 활동] 전체집합 $U$와 조건의 진리집합 관계 알아보기
+            </div>
+            
+            <div class="explore-tabs">
+                <button class="tab-btn active" onclick="switchTab(this, 'tabSameCondition')">탐구 A. 동일 조건, 다른 전체집합</button>
+                <button class="tab-btn" onclick="switchTab(this, 'tabDiffCondition')">탐구 B. 같은 전체집합, 다른 조건</button>
+            </div>
+
+            <!-- 탭 A -->
+            <div class="tab-pane active" id="tabSameCondition">
+                <p style="margin-bottom: 10px; font-weight: 600;">조건 $p: x^2 - 4 = 0$ ($x = \pm 2$)</p>
+                <div class="quiz-grid">
+                    <div class="quiz-item-card">
+                        <div class="quiz-item-title">전체집합 $U = \text{자연수 전체}$</div>
+                        <p>진리집합 $P$: <span class="interactive-blank" onclick="reveal(this, '{2}')">클릭</span></p>
+                    </div>
+                    <div class="quiz-item-card">
+                        <div class="quiz-item-title">전체집합 $U = \text{정수 전체}$</div>
+                        <p>진리집합 $P$: <span class="interactive-blank" onclick="reveal(this, '{-2, 2}')">클릭</span></p>
+                    </div>
+                    <div class="quiz-item-card">
+                        <div class="quiz-item-title">전체집합 $U = \text{음의 정수 전체}$</div>
+                        <p>진리집합 $P$: <span class="interactive-blank" onclick="reveal(this, '{-2}')">클릭</span></p>
+                    </div>
+                </div>
+                <div class="tip-box" style="margin-top: 12px;">
+                    💡 조건이 동일하더라도 <strong>어떤 전체집합 $U$에서 생각하느냐</strong>에 따라 진리집합이 달라집니다!
+                </div>
+            </div>
+
+            <!-- 탭 B -->
+            <div class="tab-pane" id="tabDiffCondition">
+                <p style="margin-bottom: 10px; font-weight: 600;">전체집합 $U = \{1, 2, 3, 4, 5, 6\}$ (한 자리 주사위 눈)</p>
+                <div class="quiz-grid">
+                    <div class="quiz-item-card">
+                        <div class="quiz-item-title">조건 $p: x\text{는 } 6\text{의 약수}$</div>
+                        <p>진리집합 $P$: <span class="interactive-blank" onclick="reveal(this, '{1, 2, 3, 6}')">클릭</span></p>
+                    </div>
+                    <div class="quiz-item-card">
+                        <div class="quiz-item-title">조건 $q: x\text{는 짝수}$</div>
+                        <p>진리집합 $Q$: <span class="interactive-blank" onclick="reveal(this, '{2, 4, 6}')">클릭</span></p>
+                    </div>
+                    <div class="quiz-item-card">
+                        <div class="quiz-item-title">조건 $r: x \ge 5$</div>
+                        <p>진리집합 $R$: <span class="interactive-blank" onclick="reveal(this, '{5, 6}')">클릭</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 섹션 5: 명제와 조건의 부정 ==================== -->
+    <section class="card" id="section5">
+        <div class="card-header">
+            <h2 class="card-title">5. 명제와 조건의 부정 ($\sim p$)</h2>
+            <span class="card-badge">부정과 여집합</span>
+        </div>
+
+        <p>명제 또는 조건 $p$에 대하여 <strong>"$p$가 아니다"</strong>를 $p$의 <strong>부정</strong>이라 하고, 기호로 <span class="highlight">$\sim p$</span> (not $p$)로 나타냅니다.</p>
+
+        <div class="quiz-grid" style="margin-top: 14px;">
+            <div class="quiz-item-card">
+                <div class="quiz-item-title">예시 1</div>
+                <p><strong>$p$:</strong> $39$는 소수이다.</p>
+                <p style="margin-top: 6px;"><strong>$\sim p$:</strong> <span class="interactive-blank" onclick="reveal(this, '39는 소수가 아니다.')">클릭하여 확인</span></p>
+            </div>
+            <div class="quiz-item-card">
+                <div class="quiz-item-title">예시 2</div>
+                <p><strong>$q$:</strong> $x$는 $3$보다 크다 ($x > 3$).</p>
+                <p style="margin-top: 6px;"><strong>$\sim q$:</strong> <span class="interactive-blank" onclick="reveal(this, 'x는 3보다 크지 않다 (x ≤ 3)')">클릭하여 확인</span></p>
+            </div>
+        </div>
+
+        <p style="font-weight: 700; margin: 20px 0 10px 0; color: #1e293b;">
+            [진리집합의 관계 알아보기]
+        </p>
+        <p>전체집합 $U = \{1, 2, 3, 4, 5\}$ 일 때,</p>
+        <ul style="margin: 8px 0 14px 20px; line-height: 1.8;">
+            <li>조건 $p: x$는 $2$이다. $\rightarrow$ $p$의 진리집합: $P = \{2\}$</li>
+            <li>부정 $\sim p: x$는 $2$가 아니다. $\rightarrow$ $\sim p$의 진리집합: <span class="interactive-blank" onclick="reveal(this, '{1, 3, 4, 5}')">클릭하여 확인</span></li>
+        </ul>
+
+        <!-- 벤다이어그램 SVG 시각화 -->
+        <div class="venn-container">
+            <svg width="340" height="150" viewBox="0 0 340 150">
+                <!-- 전체집합 U 사각형 -->
+                <rect x="10" y="10" width="320" height="130" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+                <text x="25" y="32" font-size="14" font-weight="bold" fill="#475569">U</text>
+                
+                <!-- 여집합 P^c 영역 (음영) -->
+                <rect x="10" y="10" width="320" height="130" rx="10" fill="#e0e7ff" opacity="0.35"/>
+                
+                <!-- 집합 P 원 -->
+                <circle cx="170" cy="75" r="45" fill="#ffffff" stroke="#4f46e5" stroke-width="2.5"/>
+                <text x="170" y="65" font-size="14" font-weight="bold" fill="#4f46e5" text-anchor="middle">P {2}</text>
+                <text x="170" y="85" font-size="12" fill="#6366f1" text-anchor="middle">(조건 p)</text>
+                
+                <!-- 여집합 원소 표시 -->
+                <text x="60" y="70" font-size="12" fill="#475569">1, 3</text>
+                <text x="260" y="70" font-size="12" fill="#475569">4, 5</text>
+                <text x="245" y="115" font-size="13" font-weight="bold" fill="#2563eb">Pᶜ (~p)</text>
+            </svg>
+        </div>
+
+        <div class="tip-box" style="background: #f0fdf4; border-color: #86efac; border-left-color: #22c55e; color: #15803d;">
+            <span>✨</span>
+            <div>
+                <strong>핵심 결론:</strong> 조건 $p$의 진리집합 $P$에 대하여 부정 $\sim p$의 진리집합은 $P$의 
+                <span class="interactive-blank" onclick="reveal(this, '여집합 (Pᶜ)')">__________ (초성: ㅇㅈㅎ)</span>
+                이 됩니다!
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 섹션 6: 명제 p이면 q이다 ==================== -->
+    <section class="card" id="section6">
+        <div class="card-header">
+            <h2 class="card-title">6. 명제 "$p$이면 $q$이다" ($p \longrightarrow q$)</h2>
+            <span class="card-badge">가정과 결론</span>
+        </div>
+
+        <p style="margin-bottom: 12px;">
+            두 조건 $p, q$를 연결하여 <strong>"$p$이면 $q$이다"</strong> 꼴의 새로운 명제를 만들 수 있으며, 기호로 <span class="highlight">$p \longrightarrow q$</span> 와 같이 나타냅니다. 이때 $p$를 <strong>가정</strong>, $q$를 <strong>결론</strong>이라고 부릅니다.
+        </p>
+
+        <!-- 첨부 이미지 2 -->
+        <div class="image-box">
+            <img src="스크린샷 2026-10-20 164543.png" alt="두 조건으로 이루어진 명제 p이면 q이다 와 가정/결론" class="content-image" onerror="this.parentElement.style.display='none'">
+            <div class="source-tag">출처: 교과서 p.84 참고</div>
+        </div>
+
+        <div class="quiz-item-card" style="margin-top: 14px;">
+            <div class="quiz-item-title">📝 교과서 보기 확인 퀴즈</div>
+            <p>명제 <em>"$x = 1$ 이면 $x^2 = 1$ 이다."</em> 에서</p>
+            <p style="margin-top: 6px;">
+                가정: <span class="interactive-blank" onclick="reveal(this, 'x = 1')">클릭</span> &nbsp;&nbsp;|&nbsp;&nbsp;
+                결론: <span class="interactive-blank" onclick="reveal(this, 'x² = 1')">클릭</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== 섹션 7: 반례와 참/거짓 판별 ==================== -->
+    <section class="card" id="section7">
+        <div class="card-header">
+            <h2 class="card-title">7. $p \longrightarrow q$ 의 참·거짓 판별과 반례</h2>
+            <span class="card-badge">반례 탐구</span>
+        </div>
+
+        <p><strong>[생각해보기 예시]</strong></p>
+        <ul style="margin: 6px 0 14px 20px;">
+            <li>가정 $p$: $4$의 배수 ($P = \{4, 8, 12, 16, \dots\}$)</li>
+            <li>결론 $q$: $8$의 배수 ($Q = \{8, 16, 24, \dots\}$)</li>
+        </ul>
+        <p><strong>명제: "$4$의 배수이면 $8$의 배수이다." ($p \longrightarrow q$)</strong></p>
+
+        <!-- 대화창 3 -->
+        <div class="dialogue-wrapper">
+            <div class="dialogue-header">
+                <span>💬 참·거짓 판별 수업 대화</span>
+                <button class="toggle-btn" onclick="toggleDialogue(this)">
+                    <span>접기</span>
+                </button>
+            </div>
+            <div class="dialogue-content">
+                <div class="dialogue-bubble bubble-teacher">
+                    <div class="bubble-avatar">👨‍🏫</div>
+                    <div class="bubble-text"><strong>선생님:</strong> 이 명제는 참일까요, 거짓일까요?</div>
+                </div>
+                <div class="dialogue-bubble bubble-student">
+                    <div class="bubble-avatar">🙋‍♂️</div>
+                    <div class="bubble-text"><strong>학생:</strong> 거짓입니다!</div>
+                </div>
+                <div class="dialogue-bubble bubble-teacher">
+                    <div class="bubble-avatar">👨‍🏫</div>
+                    <div class="bubble-text"><strong>선생님:</strong> 거짓이라면 그 이유는 무엇인가요?</div>
+                </div>
+                <div class="dialogue-bubble bubble-student">
+                    <div class="bubble-avatar">🙋‍♂️</div>
+                    <div class="bubble-text"><strong>학생:</strong> $4$나 $12$는 $4$의 배수이지만, $8$의 배수는 아니기 때문입니다.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-box" style="background: #fff1f2; border-color: #fecdd3; border-left-color: #f43f5e; color: #9f1239;">
+            <span>💡</span>
+            <div>
+                <strong>반례(Counterexample):</strong> 가정은 만족시키지만 결론을 만족시키지 않는 예. 어떤 명제가 거짓임을 보일 때는 <strong>단 1개의 반례</strong>만 찾아도 충분합니다!
+            </div>
+        </div>
+
+        <!-- 대화창 4: 참으로 바꾸기 -->
+        <div class="dialogue-wrapper">
+            <div class="dialogue-header">
+                <span>💬 참이 되도록 명제 바꾸기 대화</span>
+                <button class="toggle-btn" onclick="toggleDialogue(this)">
+                    <span>접기</span>
+                </button>
+            </div>
+            <div class="dialogue-content">
+                <div class="dialogue-bubble bubble-teacher">
+                    <div class="bubble-avatar">👨‍🏫</div>
+                    <div class="bubble-text"><strong>선생님:</strong> 만약 이 명제를 참이 되게 하려면 어떻게 순서를 바꿔야 할까요?</div>
+                </div>
+                <div class="dialogue-bubble bubble-student">
+                    <div class="bubble-avatar">🙋‍♂️</div>
+                    <div class="bubble-text"><strong>학생:</strong> <strong>"$8$의 배수이면 $4$의 배수이다"</strong> ($q \longrightarrow p$) 로 바꿉니다.</div>
+                </div>
+                <div class="dialogue-bubble bubble-teacher">
+                    <div class="bubble-avatar">👨‍🏫</div>
+                    <div class="bubble-text"><strong>선생님:</strong> 그 이유는 무엇인가요?</div>
+                </div>
+                <div class="dialogue-bubble bubble-student">
+                    <div class="bubble-avatar">🙋‍♂️</div>
+                    <div class="bubble-text"><strong>학생:</strong> 모든 $8$의 배수는 $4$의 배수 집합에 전부 <strong>포함($Q \subset P$)</strong>되기 때문입니다!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 섹션 8: 교과서 핵심 정리 ==================== -->
+    <section class="card" id="section8">
+        <div class="card-header">
+            <h2 class="card-title">8. [정리] 교과서 p.84 핵심 요약</h2>
+            <span class="card-badge">최종 요약</span>
+        </div>
+
+        <p style="margin-bottom: 14px;">
+            진리집합의 <strong>포함 관계</strong>를 이용하면 명제의 참과 거짓을 수학적으로 완벽하게 판단할 수 있습니다.
+        </p>
+
+        <!-- 첨부 이미지 3 -->
+        <div class="image-box">
+            <img src="스크린샷 2026-10-20 164441.png" alt="명제 p->q의 참, 거짓과 진리집합 사이의 관계" class="content-image" onerror="this.parentElement.style.display='none'">
+            <div class="source-tag">출처: 교과서 p.84 핵심 요약</div>
+        </div>
+
+        <div class="quiz-grid" style="margin-top: 16px;">
+            <div class="quiz-item-card" style="border-left: 4px solid var(--accent-emerald);">
+                <div class="quiz-item-title" style="color: var(--accent-emerald);">① $p \longrightarrow q$ 가 참일 때</div>
+                <p>진리집합 관계: <span class="highlight">$P \subset Q$</span></p>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 6px;">$P$의 모든 원소가 $Q$에 속하므로 반례가 존재하지 않음.</p>
+            </div>
+            <div class="quiz-item-card" style="border-left: 4px solid var(--accent-coral);">
+                <div class="quiz-item-title" style="color: var(--accent-coral);">② $p \longrightarrow q$ 가 거짓일 때</div>
+                <p>진리집합 관계: <span class="highlight">$P \not\subset Q$</span></p>
+                <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 6px;">$P$에는 속하지만 $Q$에는 속하지 않는 <strong>반례 원소</strong>($P - Q$)가 존재함.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 26px;">
+            <a href="#section1" class="btn btn-secondary">⬆️ 맨 위로 돌아가기</a>
+        </div>
+    </section>
+
+    <!-- 자바스크립트 로직 -->
+    <script>
+        // 1. 개별 대화창 접기/펼치기
+        function toggleDialogue(btn) {
+            const wrapper = btn.closest('.dialogue-wrapper');
+            const content = wrapper.querySelector('.dialogue-content');
+            const label = btn.querySelector('span');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                label.innerText = '접기';
+            } else {
+                content.classList.add('hidden');
+                label.innerText = '대화 보기';
+            }
+        }
+
+        // 2. 모든 대화창 일괄 숨기기 / 보이기 토글
+        let allHidden = false;
+        function toggleAllDialogues() {
+            allHidden = !allHidden;
+            const contents = document.querySelectorAll('.dialogue-content');
+            const btns = document.querySelectorAll('.dialogue-header .toggle-btn span');
+            const navIcon = document.getElementById('allDialogueIcon');
+            const navText = document.getElementById('allDialogueText');
+
+            contents.forEach(content => {
+                if (allHidden) {
+                    content.classList.add('hidden');
+                } else {
+                    content.classList.remove('hidden');
+                }
+            });
+
+            btns.forEach(btn => {
+                btn.innerText = allHidden ? '대화 보기' : '접기';
+            });
+
+            if (allHidden) {
+                navIcon.innerText = '🙈';
+                navText.innerText = '모든 대화 보이기';
+            } else {
+                navIcon.innerText = '👁️';
+                navText.innerText = '모든 대화 숨기기';
+            }
+        }
+
+        // 3. 인터랙티브 빈칸 클릭 시 정답 공개
+        function reveal(element, text) {
+            element.innerText = text;
+            element.classList.add('revealed');
+        }
+
+        // 4. 탐구 활동 탭 전환
+        function switchTab(btn, tabId) {
+            const tabs = btn.parentElement.querySelectorAll('.tab-btn');
+            tabs.forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+
+            const container = btn.closest('.explore-box');
+            const panes = container.querySelectorAll('.tab-pane');
+            panes.forEach(p => p.classList.remove('active'));
+
+            const targetPane = document.getElementById(tabId);
+            if (targetPane) {
+                targetPane.classList.add('active');
+            }
+        }
+
+        // 5. 기하 캔버스 (점 A 찍기, 중심 O 찍고 원 그리기, 자동 시연)
+        const canvas = document.getElementById('geometryCanvas');
+        const ctx = canvas.getContext('2d');
+        const statusEl = document.getElementById('canvasStatus');
+        const btnPointA = document.getElementById('btnPointA');
+        const btnPointO = document.getElementById('btnPointO');
+
+        let mode = null; // 'pointA' | 'pointO'
+        let pointA = null;
+        let pointsO = [];
+
+        function setMode(newMode) {
+            mode = newMode;
+            btnPointA.classList.remove('btn-active');
+            btnPointO.classList.remove('btn-active');
+
+            if (newMode === 'pointA') {
+                btnPointA.classList.add('btn-active');
+                statusEl.innerText = "상태: 캔버스 위를 클릭하여 '점 A'의 위치를 정하세요.";
+            } else if (newMode === 'pointO') {
+                if (!pointA) {
+                    alert("먼저 '1. 점 A 찍기'를 선택하여 점 A를 찍어주세요!");
+                    setMode('pointA');
+                    return;
+                }
+                btnPointO.classList.add('btn-active');
+                statusEl.innerText = "상태: 중심이 될 '점 O'를 클릭하면 점 A를 지나는 원이 그려집니다.";
+            }
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            pointA = null;
+            pointsO = [];
+            mode = null;
+            btnPointA.classList.remove('btn-active');
+            btnPointO.classList.remove('btn-active');
+            statusEl.innerText = "상태: 초기화되었습니다. '1. 점 A 찍기'를 선택하세요.";
+        }
+
+        function drawPoint(x, y, color, label) {
+            ctx.beginPath();
+            ctx.arc(x, y, 5, 0, 2 * Math.PI);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.font = 'bold 15px Pretendard, sans-serif';
+            ctx.fillStyle = '#0f172a';
+            ctx.fillText(label, x + 8, y - 8);
+        }
+
+        function drawCircleFromO(o, index) {
+            const dx = o.x - pointA.x;
+            const dy = o.y - pointA.y;
+            const radius = Math.sqrt(dx * dx + dy * dy);
+
+            // 점 O 표시
+            const label = 'O' + (index > 1 ? index : '');
+            drawPoint(o.x, o.y, '#3b82f6', label);
+
+            // 선분 OA (점선)
+            ctx.beginPath();
+            ctx.setLineDash([4, 4]);
+            ctx.moveTo(pointA.x, pointA.y);
+            ctx.lineTo(o.x, o.y);
+            ctx.strokeStyle = '#94a3b8';
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // 원 그리기
+            ctx.beginPath();
+            ctx.arc(o.x, o.y, radius, 0, 2 * Math.PI);
+            ctx.strokeStyle = `hsl(${(index * 55) % 360}, 75%, 55%)`;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // 점 A 재강조
+            drawPoint(pointA.x, pointA.y, '#ef4444', 'A');
+        }
+
+        canvas.addEventListener('mousedown', function(e) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+            const x = (e.clientX - rect.left) * scaleX;
+            const y = (e.clientY - rect.top) * scaleY;
+
+            if (mode === 'pointA') {
+                clearCanvas();
+                pointA = { x, y };
+                drawPoint(x, y, '#ef4444', 'A');
+                statusEl.innerText = `점 A (${Math.round(x)}, ${Math.round(y)}) 가 생성되었습니다. 이제 '2. 중심 O 찍고 원 그리기'를 선택하세요.`;
+                setMode('pointO');
+            } else if (mode === 'pointO' && pointA) {
+                const o = { x, y };
+                pointsO.push(o);
+                drawCircleFromO(o, pointsO.length);
+                statusEl.innerText = `점 A를 지나는 원 ${pointsO.length}개를 그렸습니다! 다른 곳을 더 클릭해보세요.`;
+            } else if (mode === 'pointO' && !pointA) {
+                alert("먼저 점 A를 찍어주세요.");
+                setMode('pointA');
+            }
+        });
+
+        // 자동 5개 원 시연 애니메이션
+        function autoGenerateCircles() {
+            clearCanvas();
+            // 캔버스 중앙 근처에 점 A 생성
+            pointA = { x: canvas.width / 2, y: canvas.height / 2 };
+            drawPoint(pointA.x, pointA.y, '#ef4444', 'A');
+
+            const angles = [0.2, 1.3, 2.6, 3.9, 5.1];
+            const distances = [60, 85, 70, 95, 65];
+
+            angles.forEach((angle, idx) => {
+                setTimeout(() => {
+                    const dist = distances[idx];
+                    const ox = pointA.x + Math.cos(angle) * dist;
+                    const oy = pointA.y + Math.sin(angle) * dist;
+                    const o = { x: ox, y: oy };
+                    pointsO.push(o);
+                    drawCircleFromO(o, pointsO.length);
+                    statusEl.innerText = `자동 시연: 점 A를 지나는 원 ${pointsO.length}개 생성 완료! 평면 위의 점은 무수히 많으므로 원도 무수히 많습니다.`;
+                }, (idx + 1) * 350);
+            });
+        }
+    </script>
+</body>
+</html>

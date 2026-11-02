@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>집합의 원소나열법 활동지</title>
+  <style>
+    :root { --navy:#173a5e; --blue:#eaf5ff; --line:#bdd4e8; --yellow:#fff6ce; --green:#16824b; --red:#c63939; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:#eef4f8; color:#17212b; font-family:"Malgun Gothic", "Apple SD Gothic Neo", sans-serif; line-height:1.7; }
+    main { max-width:1440px; margin:0 auto; padding:30px 24px 48px; }
+    h1 { margin:0; font-size:clamp(1.8rem, 4vw, 2.7rem); color:var(--navy); line-height:1.3; }
+    h2 { margin:0 0 16px; color:var(--navy); font-size:1.3rem; line-height:1.4; }
+    h3 { margin:20px 0 8px; font-size:1.05rem; }
+    p { margin:9px 0; }
+    .page-head { background:white; border-radius:20px; padding:28px; box-shadow:0 5px 20px #163e5f18; margin-bottom:22px; }
+    .student { display:flex; flex-wrap:wrap; gap:16px 28px; margin-top:18px; }
+    .student label { display:flex; align-items:center; gap:8px; }
+    .student input { width:170px; border:0; border-bottom:2px solid #7491a7; border-radius:0; padding:6px; background:#fff; }
+    .notice { margin-top:16px; background:var(--yellow); border-radius:12px; padding:10px 14px; }
+    .row { display:grid; gap:18px; margin:22px 0; align-items:stretch; }
+    .row-3 { grid-template-columns:repeat(3, minmax(0, 1fr)); }
+    .row-2 { grid-template-columns:repeat(2, minmax(0, 1fr)); }
+    .card { background:#fff; border:2px solid var(--line); border-radius:18px; padding:22px; min-width:0; box-shadow:0 4px 12px #163e5f10; }
+    .words, .numbers { display:flex; flex-wrap:wrap; gap:9px; margin:14px 0; }
+    .word, .number { padding:5px 11px; background:var(--blue); border-radius:9px; font-weight:700; }
+    .answer-line { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:14px 0 5px; }
+    input, button { font:inherit; }
+    .answer { flex:1 1 160px; min-width:0; border:2px solid #7597b1; border-radius:10px; padding:9px 11px; background:white; }
+    .short { max-width:120px; flex:0 1 120px; }
+    .wide { width:100%; }
+    .check, .choice { cursor:pointer; border:0; border-radius:10px; padding:9px 13px; color:white; background:var(--navy); font-weight:700; }
+    .choice { background:#557b9c; margin:4px 4px 4px 0; }
+    .choice.selected { outline:3px solid #ffc928; background:#176cb0; }
+    .select-options { display:flex; flex-wrap:wrap; gap:9px; margin:12px 0; }
+    .select-option { cursor:pointer; min-width:52px; padding:8px 13px; color:var(--navy); background:var(--blue); border:2px solid #83a8c4; border-radius:10px; font-weight:700; }
+    .select-option.selected { color:white; background:#176cb0; border-color:#176cb0; box-shadow:0 0 0 3px #ffc928; }
+    .choice:disabled, .check:disabled, .select-option:disabled, input:disabled { cursor:not-allowed; opacity:.48; background:#e7edf1; }
+    .feedback { min-height:25px; margin:4px 0; font-size:.92rem; font-weight:700; }
+    .ok { color:var(--green); } .no { color:var(--red); }
+    .choices { margin:7px 0; }
+    .tiny { font-size:.9rem; color:#56636e; }
+    .remember { border-color:#e8c241; background:#fffdf0; }
+    .summary { max-width:680px; margin:0 auto; }
+    .complete { display:none; background:#dbf7e8; border:2px solid #62ba88; padding:14px; border-radius:12px; color:#12623a; font-weight:700; }
+    .completion-modal { position:fixed; inset:0; z-index:20; display:none; place-items:center; padding:20px; background:#102b4088; }
+    .completion-modal.show { display:grid; } .modal-card { width:min(410px, 100%); padding:30px; text-align:center; background:white; border-radius:20px; box-shadow:0 14px 40px #00101e66; } .modal-card h2 { font-size:2rem; color:var(--green); } .modal-card button { margin-top:14px; cursor:pointer; border:0; border-radius:10px; padding:10px 24px; color:white; background:var(--navy); font-weight:700; }
+    .rule { padding:5px 0; border-bottom:1px dashed #c5d7e3; }
+    @media (max-width:850px) { .row-3, .row-2 { grid-template-columns:1fr; } main { padding:18px 13px 35px; } .card, .page-head { padding:18px; } }
+    @media print { body { background:white; } main { max-width:none; padding:0; } .page-head, .card { box-shadow:none; } .notice { display:none; } .row { break-inside:avoid; } }
+  </style>
+  <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+  <main>
+    <header class="page-head">
+      <h1>집합의 원소를 하나씩 써 봅시다</h1>
+      <div class="student">
+        <label>날짜: <input type="text" aria-label="날짜"></label>
+      </div>
+      <div class="notice">답을 쓰거나 버튼을 고른 뒤 <strong>확인</strong>을 누르세요. 정답이면 다음 칸이 열립니다.</div>
+    </header>
+
+    <section class="row row-3" aria-label="1번부터 3번 활동">
+      <article class="card">
+        <h2>1. 같은 것끼리 모아요</h2>
+        <p>아래 단어를 보고 같은 종류끼리 모아 보세요.</p>
+        <p><strong>과일 버튼을 눌러 고르세요.</strong></p>
+        <p>내가 고른 것:</p>
+        <div class="select-options select-group" data-answer="사과,바나나,포도" aria-label="과일 고르기">
+          <button class="select-option" data-value="사과">사과</button><button class="select-option" data-value="연필">연필</button><button class="select-option" data-value="바나나">바나나</button><button class="select-option" data-value="지우개">지우개</button><button class="select-option" data-value="포도">포도</button><button class="select-option" data-value="자">자</button>
+        </div>
+        <div class="answer-line"><button class="check">확인</button></div>
+        <p class="feedback" aria-live="polite"></p>
+      </article>
+
+      <article class="card">
+        <h2>2. 왜 같이 모였을까요?</h2>
+        <div class="words"><span class="word">사과</span><span class="word">바나나</span><span class="word">포도</span></div>
+        <p>위에 있는 것은 모두 무엇인가요?</p>
+        <div class="choices" data-choice="과일" data-next="3-1">
+          <button class="choice" data-value="과일">과일</button>
+          <button class="choice" data-value="동물">동물</button>
+          <button class="choice" data-value="학용품">학용품</button>
+        </div>
+        <p>정답: <span class="tiny">알맞은 말을 고르세요.</span></p><p class="feedback" aria-live="polite"></p>
+      </article>
+
+      <article class="card">
+        <h2>3. 들어 있는 것을 말해요</h2>
+        <p>과일 모임 안에 무엇이 있나요?</p>
+        <div class="words"><span class="word">사과</span><span class="word">바나나</span><span class="word">포도</span></div>
+        <p>하나씩 따라 써 보세요.</p>
+        <div class="answer-line">① <input id="3-1" class="answer short" data-answer="사과" aria-label="첫 번째 원소"><button class="check">확인</button></div><p class="feedback"></p>
+        <div class="answer-line">② <input class="answer short" data-answer="바나나" aria-label="두 번째 원소"><button class="check">확인</button></div><p class="feedback"></p>
+        <div class="answer-line">③ <input class="answer short" data-answer="포도" aria-label="세 번째 원소"><button class="check">확인</button></div><p class="feedback"></p>
+      </article>
+    </section>
+
+    <section class="row row-2" aria-label="4번부터 5번 활동">
+      <article class="card">
+        <h2>4. 이런 모임을 ‘집합’이라고 해요</h2>
+        <p>같은 기준으로 모은 것을 <strong>집합</strong>이라고 합니다.</p><p>예)</p><p><strong>과일의 집합</strong></p>
+        <div class="words"><span class="word">사과</span><span class="word">바나나</span><span class="word">포도</span></div>
+        <p>따라 써 보세요.</p><p><strong>“사과, 바나나, 포도를 모은 것은 과일의 집합입니다.”</strong></p>
+        <div class="answer-line"><input class="answer wide" data-answer="사과,바나나,포도를모은것은과일의집합입니다." aria-label="과일의 집합 문장"><button class="check">확인</button></div><p class="feedback"></p>
+      </article>
+      <article class="card">
+        <h2>5. 집합 안에 있는 것은 ‘원소’예요</h2>
+        <p>집합 안에 들어 있는 하나하나를 <strong>원소</strong>라고 합니다.</p><p><strong>과일의 집합</strong></p>
+        <div class="words"><span class="word">사과</span><span class="word">바나나</span><span class="word">포도</span></div>
+        <p>사과는 과일 집합의 원소입니다.</p><p>바나나는 과일 집합의 원소입니다.</p><p>포도는 과일 집합의 원소입니다.</p>
+        <h3>맞으면 ○, 아니면 × 하세요.</h3>
+        <p>1. 사과는 과일의 집합에 들어 있습니다.</p><div class="choices binary" data-answer="○"><button class="choice" data-value="○">○</button><button class="choice" data-value="×">×</button></div>
+        <p>2. 강아지는 과일의 집합에 들어 있습니다.</p><div class="choices binary" data-answer="×"><button class="choice" data-value="○">○</button><button class="choice" data-value="×">×</button></div>
+        <p class="feedback" aria-live="polite"></p>
+      </article>
+    </section>
+
+    <section class="row row-3" aria-label="6번부터 8번 활동">
+      <article class="card">
+        <h2>6. 집합은 { } 안에 써요</h2><p>집합은 <strong>중괄호 { }</strong> 안에 씁니다.</p><p><strong>과일의 집합</strong></p><p><strong>{사과, 바나나, 포도}</strong></p><p>따라 써 보세요.</p>
+        <div class="answer-line"><input class="answer" data-answer="{사과,바나나,포도}" aria-label="과일의 집합"><button class="check">확인</button></div><p class="feedback"></p>
+      </article>
+      <article class="card">
+        <h2>7. 하나씩 나누어 써요</h2><p>집합 안의 원소는 <strong>쉼표(,)</strong>로 나누어 씁니다.</p><p>예)</p><p><strong>{사과, 바나나, 포도}</strong></p><p>아래 낱말을 집합으로 써 보세요.</p><p><strong>연필 / 지우개 / 자</strong></p>
+        <div class="answer-line"><input class="answer" data-answer="{연필,지우개,자}" aria-label="학용품 집합"><button class="check">확인</button></div><p class="feedback"></p>
+      </article>
+      <article class="card">
+        <h2>8. 숫자도 집합으로 쓸 수 있어요</h2><p>다음 숫자를 { } 안에 써 보세요.</p><p><strong>1, 2, 3</strong></p>
+        <div class="answer-line"><input class="answer" data-answer="{1,2,3}" aria-label="1, 2, 3의 집합"><button class="check">확인</button></div><p class="feedback"></p>
+        <p>다음 숫자도 써 보세요.</p><p><strong>2, 4, 6</strong></p>
+        <div class="answer-line"><input class="answer" data-answer="{2,4,6}" aria-label="2, 4, 6의 집합"><button class="check">확인</button></div><p class="feedback"></p>
+      </article>
+    </section>
+
+    <section class="row row-2" aria-label="9번부터 10번 활동">
+      <article class="card">
+        <h2>9. 조건에 맞는 숫자를 찾아요</h2><h3>5보다 작은 자연수를 찾아보세요.</h3>
+        <p>5보다 작은 수 버튼을 눌러 고르세요.</p>
+        <p>내가 찾은 수:</p>
+        <div class="select-options select-group" data-answer="1,2,3,4" aria-label="5보다 작은 자연수 고르기">
+          <button class="select-option" data-value="1">1</button><button class="select-option" data-value="2">2</button><button class="select-option" data-value="3">3</button><button class="select-option" data-value="4">4</button><button class="select-option" data-value="5">5</button><button class="select-option" data-value="6">6</button>
+        </div>
+        <div class="answer-line"><button class="check">확인</button></div><p class="feedback"></p>
+        <p>이 수를 집합으로 써 보세요.</p><div class="answer-line"><input class="answer" data-answer="{1,2,3,4}" aria-label="5보다 작은 자연수의 집합"><button class="check">확인</button></div><p class="feedback"></p>
+      </article>
+      <article class="card">
+        <h2>10. 혼자 해 봐요</h2><h3>8보다 작은 짝수를 찾아보세요.</h3>
+        <p>짝수 버튼을 눌러 고르세요.</p><p>8보다 작은 짝수는</p>
+        <div class="select-options select-group" data-answer="2,4,6" aria-label="8보다 작은 짝수 고르기">
+          <button class="select-option" data-value="1">1</button><button class="select-option" data-value="2">2</button><button class="select-option" data-value="3">3</button><button class="select-option" data-value="4">4</button><button class="select-option" data-value="5">5</button><button class="select-option" data-value="6">6</button><button class="select-option" data-value="7">7</button><button class="select-option" data-value="8">8</button>
+        </div>
+        <div class="answer-line"><button class="check">확인</button></div><p class="feedback"></p>
+        <p>입니다.</p><p>집합으로 쓰면</p><div class="answer-line"><input class="answer" data-answer="{2,4,6}" aria-label="8보다 작은 짝수의 집합"><button class="check">확인</button></div><p class="feedback"></p>
+      </article>
+    </section>
+
+    <section class="card remember summary">
+      <h2>기억해요</h2><p><strong>집합을 원소나열법으로 쓰는 순서</strong></p>
+      <p class="rule">① <strong>조건을 봐요.</strong></p><p class="rule">② <strong>맞는 것을 찾아요.</strong></p><p class="rule">③ <strong>하나씩 말해요.</strong></p><p class="rule">④ <strong>{ } 안에 써요.</strong></p>
+      <p>예)</p><p>5보다 작은 자연수</p><p>→ 1, 2, 3, 4</p><p>→ <strong>{1, 2, 3, 4}</strong></p>
+      <h2>오늘 배운 것</h2><p>빈칸에 알맞은 말을 써 보세요.</p>
+      <p>같은 기준으로 모은 것을 <input class="answer" data-answer="집합" aria-label="집합의 뜻">이라고 합니다. <button class="check">확인</button></p><p class="feedback"></p>
+      <p>집합 안에 들어 있는 하나하나를 <input class="answer" data-answer="원소" aria-label="원소의 뜻">라고 합니다. <button class="check">확인</button></p><p class="feedback"></p>
+      <p>집합은 <strong>{   }</strong> 안에 씁니다.</p>
+      <p id="complete" class="complete" aria-live="polite">모든 활동을 잘 마쳤어요!</p>
+    </section>
+  </main>
+  <div id="completion-modal" class="completion-modal" role="dialog" aria-modal="true" aria-labelledby="completion-title">
+    <div class="modal-card"><h2 id="completion-title">잘했어요!</h2><p>모든 문항을 해결했어요.</p><button id="completion-close" type="button">닫기</button></div>
+  </div>
+  <script>
+    (() => {
+      const fields = [...document.querySelectorAll('.answer')];
+      const choiceGroups = [...document.querySelectorAll('.choices')];
+      const selectionGroups = [...document.querySelectorAll('.select-group')];
+      const normalise = value => value.replace(/\s/g, '').replace(/[，]/g, ',');
+      const controls = [];
+      const addField = input => controls.push({ element: input, button: input.parentElement.querySelector('.check'), feedback: input.parentElement.nextElementSibling, answer: input.dataset.answer });
+      fields.forEach(addField);
+      const group5 = choiceGroups.filter(group => group.classList.contains('binary'));
+      const group2 = choiceGroups.find(group => group.dataset.next);
+      const selectionItem = group => ({
+        element: group,
+        type: 'selection',
+        button: group.nextElementSibling.querySelector('.check'),
+        feedback: group.nextElementSibling.nextElementSibling,
+        answer: group.dataset.answer
+      });
+      const choiceItem = (group, answer, feedback) => ({ element: group, type: 'choice', feedback, answer });
+      const stage = [
+        selectionItem(selectionGroups[0]),
+        choiceItem(group2, group2.dataset.choice, group2.parentElement.querySelector('.feedback')),
+        ...controls.slice(0, 3),
+        controls[3],
+        choiceItem(group5[0], '○', group5[1].parentElement.querySelector('.feedback')),
+        choiceItem(group5[1], '×', group5[1].parentElement.querySelector('.feedback')),
+        ...controls.slice(4, 8),
+        selectionItem(selectionGroups[1]),
+        controls[8],
+        selectionItem(selectionGroups[2]),
+        ...controls.slice(9)
+      ];
+      let current = 0;
+      function setEnabled(item, enabled) {
+        if (item.type === 'choice') item.element.querySelectorAll('button').forEach(button => button.disabled = !enabled);
+        else if (item.type === 'selection') {
+          item.element.querySelectorAll('.select-option').forEach(button => button.disabled = !enabled);
+          item.button.disabled = !enabled;
+        } else { item.element.disabled = !enabled; item.button.disabled = !enabled; }
+      }
+      stage.forEach(item => setEnabled(item, false));
+      setEnabled(stage[0], true);
+      const completionModal = document.getElementById('completion-modal');
+      const showCompletion = () => completionModal.classList.add('show');
+      const resetWorksheet = () => {
+        fields.forEach(input => input.value = '');
+        document.querySelectorAll('.feedback').forEach(feedback => { feedback.textContent = ''; feedback.className = 'feedback'; });
+        document.querySelectorAll('.selected').forEach(choice => choice.classList.remove('selected'));
+        stage.forEach(item => setEnabled(item, false));
+        current = 0;
+        setEnabled(stage[0], true);
+        document.getElementById('complete').style.display = 'none';
+        completionModal.classList.remove('show');
+        document.querySelector('h1').scrollIntoView({ behavior: 'smooth' });
+      };
+      document.getElementById('completion-close').addEventListener('click', resetWorksheet);
+      function success(item) {
+        if (item.type === 'choice') item.element.querySelectorAll('button').forEach(button => button.disabled = true);
+        else if (item.type === 'selection') {
+          item.element.querySelectorAll('.select-option').forEach(button => button.disabled = true);
+          item.button.disabled = true;
+        } else { item.element.disabled = true; item.button.disabled = true; }
+        item.feedback.textContent = '정답이에요!'; item.feedback.className = 'feedback ok';
+        current += 1;
+        if (stage[current]) { setEnabled(stage[current], true); if (!stage[current].type) stage[current].element.focus(); }
+        else { document.getElementById('complete').style.display = 'block'; showCompletion(); }
+      }
+      controls.forEach(item => {
+        item.button.addEventListener('click', () => {
+          if (stage[current] !== item) return;
+          if (normalise(item.element.value) === normalise(item.answer)) success(item);
+          else { item.feedback.textContent = '다시 생각해 보고 써 보세요.'; item.feedback.className = 'feedback no'; item.element.focus(); }
+        });
+        item.element.addEventListener('keydown', event => { if (event.key === 'Enter') item.button.click(); });
+      });
+      choiceGroups.forEach(group => group.querySelectorAll('button').forEach(button => button.addEventListener('click', () => {
+        const item = stage[current];
+        if (!item || item.type !== 'choice' || item.element !== group) return;
+        const correct = button.dataset.value === item.answer;
+        if (!correct) { item.feedback.textContent = '다시 생각해 보고 골라 보세요.'; item.feedback.className = 'feedback no'; return; }
+        button.classList.add('selected'); success(item);
+      })));
+      selectionGroups.forEach(group => {
+        group.querySelectorAll('.select-option').forEach(button => button.addEventListener('click', () => {
+          const item = stage[current];
+          if (!item || item.type !== 'selection' || item.element !== group) return;
+          button.classList.toggle('selected');
+        }));
+        group.nextElementSibling.querySelector('.check').addEventListener('click', () => {
+          const item = stage[current];
+          if (!item || item.type !== 'selection' || item.element !== group) return;
+          const selected = [...group.querySelectorAll('.selected')].map(button => button.dataset.value).join(',');
+          if (normalise(selected) === normalise(item.answer)) success(item);
+          else { item.feedback.textContent = '다시 생각해 보고 버튼을 눌러 보세요.'; item.feedback.className = 'feedback no'; }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
