@@ -44,6 +44,7 @@ const worksheetMenu = [
     items: [
       { title: "명제의 뜻", file: "activities/proposition-individual-worksheet.html" },
       { title: "조건과 진리집합", file: "activities/truth-set-individual-worksheet.html" },
+      { title: "함수", file: "activities/function-individual-worksheet.html" },
       { title: "일대일함수, 일대일대응", file: "activities/one-to-one-bijection-individual-worksheet.html" }
     ]
   }
