@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>함수와 함수가 아닌 대응 - 20분 개인 활동지</title><style>
+    :root {
+      --ink: #173a5e;
+      --ink-light: #2c547d;
+      --sky: #eaf5ff;
+      --sky-card: #f2f8fc;
+      --line: #bdd4e8;
+      --sun: #fff5c9;
+      --sun-border: #e8c241;
+      --sun-text: #785a00;
+      --good: #147a48;
+      --good-bg: #e6f9ed;
+      --good-border: #72bc94;
+      --bad: #b53737;
+      --bad-bg: #fdf0f0;
+      --bad-border: #e69d9d;
+      --paper: #ffffff;
+      --accent: #2567d8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #eef4f8;
+      color: #1b2934;
+      font-family: "Pretendard", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      line-height: 1.6;
+      font-size: 18px;
+    }
+    main {
+      width: min(920px, calc(100% - 24px));
+      margin: 20px auto 60px;
+    }
+
+    /* 상단 헤더 */
+    .top-sheet {
+      background: var(--paper);
+      border: 2px solid var(--line);
+      border-radius: 20px;
+      padding: 24px 28px;
+      box-shadow: 0 4px 18px rgba(23, 58, 94, 0.08);
+      margin-bottom: 20px;
+    }
+    .sheet-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 99px;
+      background: #e0eeff;
+      color: #1952a8;
+      font-size: 0.9rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    h1 {
+      margin: 4px 0 10px;
+      color: var(--ink);
+      font-size: clamp(1.6rem, 4.2vw, 2.2rem);
+      line-height: 1.3;
+    }
+    .sheet-intro {
+      margin: 0;
+      color: #496377;
+      font-size: 1.05rem;
+    }
+
+    /* 고정 컨트롤 바 (타이머 & 소리 & 진행상황 & 인쇄) */
+    .control-panel {
+      position: sticky;
+      top: 12px;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 20px;
+      margin: 16px 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 4px 15px rgba(23, 58, 94, 0.1);
+    }
+    .timer-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .timer-display {
+      background: #173a5e;
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-family: Consolas, monospace;
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+    }
+    .timer-btn, .audio-toggle-btn, .print-btn {
+      background: #f0f5fa;
+      border: 1px solid #7898ae;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .timer-btn:hover, .audio-toggle-btn:hover, .print-btn:hover {
+      background: #e2ecf5;
+    }
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1 1 240px;
+      justify-content: flex-end;
+    }
+    .progress-bar-bg {
+      width: 140px;
+      height: 12px;
+      background: #dbe7f1;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #2567d8, #147a48);
+      border-radius: 99px;
+      transition: width 0.3s ease;
+    }
+    .progress-label {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    /* 1분 복습 가이드 */
+    .review-card {
+      background: #fffdf2;
+      border: 2px solid var(--sun-border);
+      border-radius: 18px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 14px rgba(120, 90, 0, 0.06);
+    }
+    .review-card h2 {
+      margin: 0 0 10px;
+      color: var(--sun-text);
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .review-text-wrap {
+      margin-top: 10px;
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #3b2c04;
+    }
+    .review-text-wrap p {
+      margin: 8px 0;
+    }
+
+    /* 단계 섹션 */
+    .step-section {
+      background: var(--paper);
+      border: 2px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 16px rgba(23, 58, 94, 0.06);
+    }
+    .step-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--sky);
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+    }
+    .step-title {
+      margin: 0;
+      color: var(--ink);
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .step-num {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .step-time-tag {
+      font-size: 0.85rem;
+      background: #eef6ff;
+      color: #1f58b0;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-weight: 700;
+    }
+    .step-guide {
+      margin: 0 0 16px;
+      color: #4f677b;
+      font-size: 1rem;
+    }
+
+    /* 문제 카드 */
+    .question-card {
+      background: var(--sky-card);
+      border: 2px solid #cfe0ed;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      transition: all 0.2s ease;
+    }
+    .question-card.done {
+      border-color: var(--good-border);
+      background: var(--good-bg);
+    }
+    .question-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .q-number {
+      font-weight: 800;
+      color: var(--ink);
+      font-size: 1.05rem;
+    }
+    .tts-btn {
+      background: #fff;
+      border: 1px solid #a9c6dc;
+      border-radius: 8px;
+      padding: 3px 9px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #29577f;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .tts-btn:hover {
+      background: #e4eff8;
+    }
+    .sentence-box {
+      background: #fff;
+      border: 2px solid #b2cde3;
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin: 8px 0 14px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      text-align: center;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.03);
+    }
+    .math-expr {
+      font-family: Consolas, "Courier New", monospace;
+      letter-spacing: 0.05em;
+    }
+
+    /* 선택 버튼 그리드 */
+    .options-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .option-btn {
+      flex: 1 1 120px;
+      min-height: 48px;
+      padding: 10px 16px;
+      border: 2px solid #7ea3bf;
+      border-radius: 12px;
+      background: #ffffff;
+      color: var(--ink);
+      font-size: 1.05rem;
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 2px 4px rgba(23, 58, 94, 0.05);
+    }
+    .option-btn:hover:not(:disabled) {
+      border-color: #2374b8;
+      background: #f0f7fd;
+      transform: translateY(-1px);
+    }
+    .option-btn[aria-pressed="true"] {
+      border-color: #176da3;
+      background: #237fbc;
+      color: #ffffff;
+      outline: 3px solid #ffd447;
+    }
+    .option-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    /* 확인 & 피드백 행 */
+    .action-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .check-btn {
+      background: var(--ink);
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: 800;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .check-btn:hover:not(:disabled) {
+      background: #235882;
+    }
+    .check-btn:disabled {
+      background: #9ab4c7;
+      cursor: not-allowed;
+    }
+    .feedback-msg {
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 6px 12px;
+      border-radius: 8px;
+      display: none;
+    }
+    .feedback-msg.show {
+      display: inline-block;
+    }
+    .feedback-msg.good {
+      color: var(--good);
+      background: #d8f5e3;
+    }
+    .feedback-msg.bad {
+      color: var(--bad);
+      background: #fde6e6;
+    }
+
+    /* 4단계 낱말 조합 블록 */
+    .word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0;
+      padding: 12px;
+      background: #fff;
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+    }
+    .word-chip {
+      padding: 8px 14px;
+      border: 2px solid #85a9c5;
+      border-radius: 10px;
+      background: #f2f7fc;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--ink);
+      cursor: pointer;
+      user-select: none;
+    }
+    .word-chip.selected {
+      background: #2567d8;
+      color: #fff;
+      border-color: #174ea8;
+    }
+    .built-sentence-box {
+      min-height: 52px;
+      background: #fff;
+      border: 2px solid #2567d8;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #1a4da6;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 자기 평가 코너 */
+    .self-eval-section {
+      background: #fffdf5;
+      border: 2px solid var(--sun-border);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .self-eval-section h2 {
+      margin: 0 0 12px;
+      color: var(--sun-text);
+      font-size: 1.3rem;
+    }
+    .eval-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #fae7a5;
+    }
+    .eval-label {
+      font-weight: 700;
+      color: #4a3800;
+    }
+    .star-rating {
+      display: flex;
+      gap: 6px;
+    }
+    .star-btn {
+      background: none;
+      border: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #d1c5a0;
+      transition: transform 0.15s, color 0.15s;
+      padding: 0;
+      line-height: 1;
+    }
+    .star-btn.active {
+      color: #f59e0b;
+      transform: scale(1.1);
+    }
+    .mood-selector {
+      display: flex;
+      gap: 10px;
+    }
+    .mood-btn {
+      padding: 6px 12px;
+      border: 2px solid #e0c878;
+      border-radius: 20px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #614a00;
+    }
+    .mood-btn[aria-pressed="true"] {
+      background: #f59e0b;
+      color: #fff;
+      border-color: #d97706;
+    }
+
+    /* 완료 축하 배너 */
+    .finish-banner {
+      display: none;
+      background: linear-gradient(135deg, #e8f9ef 0%, #d2f4e0 100%);
+      border: 3px solid var(--good-border);
+      border-radius: 20px;
+      padding: 28px;
+      text-align: center;
+      margin-top: 24px;
+      box-shadow: 0 8px 24px rgba(20, 122, 72, 0.12);
+      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .finish-banner.show {
+      display: block;
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.95); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .stamp-badge {
+      display: inline-block;
+      width: 90px;
+      height: 90px;
+      line-height: 90px;
+      border-radius: 50%;
+      border: 4px dashed #147a48;
+      color: #147a48;
+      font-size: 1.4rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+      transform: rotate(-8deg);
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+    .finish-title {
+      margin: 0 0 8px;
+      color: #0f5c36;
+      font-size: 1.8rem;
+    }
+    .finish-desc {
+      margin: 0 0 18px;
+      color: #185a38;
+      font-size: 1.1rem;
+    }
+
+    /* 인쇄 전용 스타일 (@media print) */
+    @media print {
+      body {
+        background: #fff;
+        color: #000;
+        font-size: 14pt;
+        line-height: 1.45;
+      }
+      main {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .control-panel, .tts-btn, .check-btn, .timer-wrap, .audio-toggle-btn, .print-btn, .feedback-msg {
+        display: none !important;
+      }
+      .top-sheet, .step-section, .review-card, .self-eval-section {
+        box-shadow: none !important;
+        border: 1px solid #555 !important;
+        padding: 14px !important;
+        margin-bottom: 14px !important;
+        page-break-inside: avoid;
+      }
+      .question-card {
+        background: #fff !important;
+        border: 1px solid #777 !important;
+        padding: 10px !important;
+        margin-bottom: 10px !important;
+        page-break-inside: avoid;
+      }
+      .sentence-box {
+        border: 1px solid #444 !important;
+        padding: 6px 10px !important;
+        font-size: 1.15rem !important;
+      }
+      .options-grid {
+        display: flex;
+        gap: 15px;
+      }
+      .option-btn {
+        border: 1px solid #444 !important;
+        background: #fff !important;
+        color: #000 !important;
+        padding: 6px 12px !important;
+        box-shadow: none !important;
+      }
+      .option-btn::before {
+        content: "□ ";
+        font-size: 1.1em;
+      }
+      .option-btn[aria-pressed="true"]::before {
+        content: "☑ ";
+      }
+      .finish-banner {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body { font-size: 16px; }
+      .top-sheet, .step-section, .review-card, .self-eval-section { padding: 16px; }
+      .control-panel { flex-direction: column; align-items: stretch; }
+      .progress-wrap { justify-content: space-between; }
+      .option-btn { flex: 1 1 100%; }
+    }
+  
+    .review-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .review-item {padding:12px 14px;border:1px solid #e8d48b;border-radius:12px;background:#fff}
+    .review-item strong {display:block;color:#785a00}
+    .question-prompt {margin:0 0 8px;font-weight:700;color:#2c547d}
+    .fruit-display {font-size:1.45rem;line-height:1.7}
+    .mapping-display {line-height:1.75;font-size:1.15rem}
+    .option-btn:focus-visible,.check-btn:focus-visible,.tts-btn:focus-visible,.timer-btn:focus-visible,.audio-toggle-btn:focus-visible,.print-btn:focus-visible,.mood-btn:focus-visible,.star-btn:focus-visible {outline:3px solid #f5aa19;outline-offset:2px}
+    .timer-done {color:#a02f2f}
+    @media (max-width:600px) {.review-grid {grid-template-columns:1fr}.step-header {align-items:flex-start;flex-direction:column;gap:8px}}
+    @media print {.review-grid {grid-template-columns:repeat(2,minmax(0,1fr))}.review-item {border:1px solid #777}.option-btn:disabled {opacity:1}.question-card {break-inside:avoid}}
+    /* 1~6번: 한 단계의 세 문항을 가로로 배치 */
+    .question-row {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:stretch}
+    .question-row .question-card {min-width:0;margin-bottom:0;padding:14px}
+    #step1 .question-title-row, #step2 .question-title-row {flex-wrap:wrap}
+    #step1 .option-btn, #step2 .option-btn {flex-basis:72px;padding:8px;font-size:.95rem}
+    .mapping-svg {display:block;width:min(100%,430px);height:auto;margin:10px auto 14px;border:2px solid #b2cde3;border-radius:12px;background:#fff;font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif}
+    .mapping-svg .map-title {font-size:14px;font-weight:700;fill:#2c547d}
+    .mapping-svg .map-item {font-size:21px;font-weight:700;fill:#20303c}
+    .mapping-svg .map-line {stroke:#164b73;stroke-width:1.5;stroke-linecap:round}
+    @media print {
+      .question-row {grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+      #step1 .question-card, #step2 .question-card {margin-bottom:0!important;padding:8px!important}
+      #step1 .option-btn, #step2 .option-btn {flex-basis:60px;padding:5px!important;font-size:10pt}
+      .mapping-svg {width:360px;max-width:100%;break-inside:avoid}
+    }
+</style></head>
+<body><main>
+  <header class="top-sheet"><div class="sheet-badge">🌱 공통수학2 · 함수</div><h1>📝 [개인 활동지] 과일로 함수를 알아봐요!</h1>
+    <p class="sheet-intro">과일과 수를 짝지으며 <strong>함수</strong>를 알아보는 20분 활동지예요. 한 문제씩 읽고 답을 고른 뒤 <strong>[정답 확인]</strong>을 누르세요.</p></header>
+  <aside class="control-panel" aria-label="학습 도구">
+    <div class="timer-wrap"><span>⏱️ 시간:</span><span class="timer-display" id="timerDisplay" role="timer">20:00</span><button type="button" class="timer-btn" id="timerToggleBtn">▶️ 시작</button><button type="button" class="timer-btn" id="timerResetBtn">↺ 초기화</button></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="audio-toggle-btn" id="soundToggleBtn" aria-pressed="true">🔔 효과음 켬</button><button type="button" class="print-btn" id="printBtn">🖨️ 인쇄하기</button></div>
+    <div class="progress-wrap"><div class="progress-bar-bg" aria-hidden="true"><div class="progress-bar-fill" id="progressFill"></div></div><span class="progress-label" id="progressText">0 / 15 완료 (0%)</span></div>
+  </aside>
+  <section class="review-card" aria-label="배운 내용 복습"><h2>💡 1분 쏙쏙 복습! 이것만 기억해요</h2><div class="review-grid">
+    <div class="review-item"><strong>① 대응</strong>과일과 수(과일의 개수)처럼 서로 짝짓는 것</div>
+    <div class="review-item"><strong>② 함수 f</strong>과일 하나에 수가 하나씩 대응하는 규칙</div>
+    <div class="review-item"><strong>③ 정의역과 함숫값</strong>과일의 모임이 정의역, 각 과일의 개수가 함숫값이에요.</div>
+    <div class="review-item"><strong>④ 함수의 약속</strong>과일 하나마다 대응되는 수(과일의 개수)가 오직 1개입니다. 서로 다른 과일의 수는 같아도 돼요.</div>
+  </div></section>
+  <section class="step-section" id="step1"><div class="step-header"><h2 class="step-title"><span class="step-num">1</span> 과일의 개수를 세어요</h2><span class="step-time-tag">⏱️ 권장 시간: 5분</span></div><p class="step-guide">과일을 하나씩 가리키며 세어 보세요.</p><div class="question-row"><article class="question-card" data-qid="1" data-answer="3" data-hint="사과를 하나씩 세어 보세요: 하나, 둘, 셋.">
+      <div class="question-title-row"><span class="q-number">1번 문제</span><button type="button" class="tts-btn" data-read="사과가 세 개 있어요. 사과는 몇 개일까요?">🔊 읽어주기</button></div>
+      <div class="sentence-box fruit-display">🍎 🍎 🍎</div><p class="question-prompt">사과는 몇 개일까요?</p>
+      <div class="options-grid" role="group" aria-label="1번 답 고르기"><button type="button" class="option-btn" data-value="1" aria-pressed="false">1개</button><button type="button" class="option-btn" data-value="2" aria-pressed="false">2개</button><button type="button" class="option-btn" data-value="3" aria-pressed="false">3개</button></div>
+      <div class="action-row"><button type="button" class="check-btn">정답 확인</button><span class="feedback-msg" role="status" aria-live="polite"></span></div>
+    </article><article class="question-card" data-qid="2" data-answer="2" data-hint="바나나를 하나씩 세어 보세요: 하나, 둘.">
+      <div class="question-title-row"><span class="q-number">2번 문제</span><button type="button" class="tts-btn" data-read="바나나가 두 개 있어요. 바나나는 몇 개일까요?">🔊 읽어주기</button></div>
+      <div class="sentence-box fruit-display">🍌 🍌</div><p class="question-prompt">바나나는 몇 개일까요?</p>
+      <div class="options-grid" role="group" aria-label="2번 답 고르기"><button type="button" class="option-btn" data-value="1" aria-pressed="false">1개</button><button type="button" class="option-btn" data-value="2" aria-pressed="false">2개</button><button type="button" class="option-btn" data-value="3" aria-pressed="false">3개</button></div>
+      <div class="action-row"><button type="button" class="check-btn">정답 확인</button><span class="feedback-msg" role="status" aria-live="polite"></span></div>
+    </article><article class="question-card" data-qid="3" data-answer="2" data-hint="포도 그림을 하나씩 세어 보세요: 하나, 둘.">
+      <div class="question-title-row"><span class="q-number">3번 문제</span><button type="button" class="tts-btn" data-read="포도 그림이 두 개 있어요. 포도는 몇 개일까요?">🔊 읽어주기</button></div>
+      <div class="sentence-box fruit-display">🍇 🍇</div><p class="question-prompt">포도는 몇 개일까요?</p>
+      <div class="options-grid" role="group" aria-label="3번 답 고르기"><button type="button" class="option-btn" data-value="1" aria-pressed="false">1개</button><button type="button" class="option-btn" data-value="2" aria-pressed="false">2개</button><button type="button" class="option-btn" data-value="3" aria-pressed="false">3개</button></div>
+      <div class="action-row"><button type="button" class="check-btn">정답 확인</button><span class="feedback-msg" role="status" aria-live="polite"></span></div>
+    </article></div></section><section class="step-section" id="step2"><div class="step-header"><h2 class="step-title"><span class="step-num">2</span> 과일과 수를 짝지어요</h2><span class="step-time-tag">⏱️ 권장 시간: 5분</span></div><p class="step-guide">과일 하나와 알맞은 수 하나를 이어 보세요.</p><div class="question-row"><article class="question-card" data-qid="4" data-answer="3" data-hint="사과는 3개였어요.">
+      <div class="question-title-row"><span class="q-number">4번 문제</span><button type="button" class="tts-btn" data-read="사과는 세 개예요. 사과와 짝이 되는 수는 무엇일까요?">🔊 읽어주기</button></div>
+      <div class="sentence-box mapping-display">사과 → □</div><p class="question-prompt">사과와 짝이 되는 수는 무엇일까요?</p>
+      <div class="options-grid" role="group" aria-label="4번 답 고르기"><button type="button" class="option-btn" data-value="1" aria-pressed="false">1</button><button type="button" class="option-btn" data-value="2" aria-pressed="false">2</button><button type="button" class="option-btn" data-value="3" aria-pressed="false">3</button></div>
+      <div class="action-row"><button type="button" class="check-btn">정답 확인</button><span class="feedback-msg" role="status" aria-live="polite"></span></div>
+    </article><article class="question-card" data-qid="5" data-answer="대응" data-hint="과일과 개수를 서로 짝지었어요.">
+      <div class="question-title-row"><span class="q-number">5번 문제</span><button type="button" class="tts-btn" data-read="과일과 개수처럼 한쪽과 다른 쪽을 짝짓는 것을 무엇이라고 할까요?">🔊 읽어주기</button></div>
+      <div class="sentence-box mapping-display">과일 → 개수</div><p class="question-prompt">한쪽과 다른 쪽을 짝짓는 것을 무엇이라고 할까요?</p>
+      <div class="options-grid" role="group" aria-label="5번 답 고르기"><button type="button" class="option-btn" data-value="대응" aria-pressed="false">대응</button><button type="button" class="option-btn" data-value="색칠" aria-pressed="false">색칠</button><button type="button" class="option-btn" data-value="덧셈" aria-pressed="false">덧셈</button></div>
+      <div class="action-row"><button type="button" class="check-btn">정답 확인</button><span class="feedback-msg" role="status" aria-live="polite"></span></div>
+    </article><article class="question-card" data-qid="6" data-answer="개수" data-hint="f(사과)는 3이에요. 사과의 개수도 3개예요.">
+      <div class="question-title-row"><span class="q-number">6번 문제</span><button type="button" class="tts-btn" data-read="에프 괄호 사과는 3. 함수 에프는 과일의 무엇을 알려줄까요?">🔊 읽어주기</button></div>
+      <div class="sentence-box mapping-display">f(사과) = 3<br>f(바나나) = 2<br>f(포도) = 2</div><p class="question-prompt">함수 f는 과일의 무엇을 알려줄까요?</p>
+      <div class="options-grid" role="group" aria-label="6번 답 고르기"><button type="button" class="option-btn" data-value="개수" aria-pressed="false">과일의 개수</button><button type="button" class="option-btn" data-value="색" aria-pressed="false">과일의 색</button></div>
+      <div class="action-row"><button type="button" class="check-btn">정답 확인</button><span class="feedback-msg" role="status" aria-live="polite"></span></div>
+    </article></div></section><section class="step-section" id="step3"><div class="step-header"><h2 class="step-title"><span class="step-num">3</span> 함수 f와 함숫값을 알아봐요</h2><span class="step-time-tag">⏱️ 권장 시간: 5분</span></div><p class="step-guide">함수 f는 과일과 과일의 개수를 대응시키는 규칙입니다.</p><article class="question-card" data-qid="7" data-answer="과일" data-hint="과일을 알면 개수를 알 수 있어요. 바나나와 포도는 둘 다 2개라서, 개수만 보고 과일 이름을 정할 수 없어요.">
+      <div class="question-title-row"><span class="q-number">7번 문제</span><button type="button" class="tts-btn" data-read="사과는 3개, 바나나는 2개, 포도는 2개예요. 함수 에프를 이용해 알 수 있는 것은 무엇일까요?">🔊 읽어주기</button></div>
+      <div class="sentence-box mapping-display">사과 → 3개<br>바나나 → 2개<br>포도 → 2개</div><p class="question-prompt">함수 f를 이용해 알 수 있는 것은 무엇일까요?</p>
+      <div class="options-grid" role="group" aria-label="7번 답 고르기"><button type="button" class="option-btn" data-value="과일" aria-pressed="false">과일이 주어졌을 때, 과일의 개수</button><button type="button" class="option-btn" data-value="수" aria-pressed="false">과일의 개수가 주어졌을 때, 그 과일의 이름</button></div>
+      <div class="action-row"><button type="button" class="check-btn">정답 확인</button><span class="feedback-msg" role="status" aria-live="polite"></span></div>
+    </article><article class="question-card" data-qid="8" data-answer="3" data-hint="등호 오른쪽의 수를 보세요.">
+      <div class="question-title-row"><span class="q-number">8번 문제</span><button type="button" class="tts-btn" data-read="에프 괄호 사과는 3. 사과의 함숫값은 무엇일까요?">🔊 읽어주기</button></div>
+      <div class="sentence-box mapping-display">f(사과) = 3</div><p class="question-prompt">사과를 넣었을 때 나오는 함숫값은 무엇일까요?</p>
+      <div class="options-grid" role="group" aria-label="8번 답 고르기"><button type="button" class="option-btn" data-value="1" aria-pressed="false">1</button><button type="button" class="option-btn" data-value="2" aria-pressed="false">2</button><button type="button" class="option-btn" data-value="3" aria-pressed="false">3</button></div>
+      <div class="action-row"><button type="button" class="check-btn">정답 확인</button><span class="feedback-msg" role="status" aria-live="polite"></span></div>
+    </article><article class="question-card" data-qid="9" data-answer="2" data-hint="등호 오른쪽의 수를 보세요.">
+      <div class="question-title-row"><span class="q-number">9번 문제</span><button type="button" class="tts-btn" data-read="에프 괄호 바나나는 2. 바나나의 함숫값은 무엇일까요?">🔊 읽어주기</button></div>
+      <div class="sentence-box mapping-display">f(바나나) = 2</div><p class="question-prompt">바나나를 넣었을 때 나오는 함숫값은 무엇일까요?</p>
+      <div class="options-grid" role="group" aria-label="9번 답 고르기"><button type="button" class="option-btn" data-value="1" aria-pressed="false">1</button><button type="button" class="option-btn" data-value="2" aria-pressed="false">2</button><button type="button" class="option-btn" data-value="3" aria-pressed="false">3</button></div>
+      <div class="action-row"><button type="button" class="check-btn">정답 확인</button><span class="feedback-msg" role="status" aria-live="polite"></span></div>
+    </article></section><section class="step-section" id="step4"><div class="step-header"><h2 class="step-title"><span class="step-num">4</span> 함수인지 살펴봐요</h2><span class="step-time-tag">⏱️ 권장 시간: 5분</span></div><p class="step-guide">각 그림은 서로 다른 대응이에요. 과일 하나마다 나오는 수가 꼭 하나인지 살펴보세요.</p><article class="question-card" data-qid="10" data-answer="함수" data-hint="바나나와 포도가 모두 2에 대응해도, 과일마다 화살표가 하나씩이면 함수예요.">
+      <div class="question-title-row"><span class="q-number">10번 문제</span><button type="button" class="tts-btn" data-read="사과는 3, 바나나는 2, 포도는 2에 대응해요. 함수일까요?">🔊 읽어주기</button></div>
+      <svg class="mapping-svg" viewBox="0 0 410 215" role="img" aria-label="사과는 3에 대응, 바나나는 2에 대응, 포도는 2에 대응. 수 집합의 수는 1, 2, 3입니다." data-diagram="10" xmlns="http://www.w3.org/2000/svg"><defs><marker id="map-arrow-10" markerUnits="userSpaceOnUse" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#164b73"/></marker></defs><ellipse cx="83" cy="121" rx="69" ry="81" fill="#f0f8ff" stroke="#9fc7df" stroke-width="1.5"/><ellipse cx="319" cy="121" rx="65" ry="81" fill="#fffaf0" stroke="#dfc98c" stroke-width="1.5"/><text x="83" y="34" class="map-title" text-anchor="middle">과일 집합</text><text x="319" y="34" class="map-title" text-anchor="middle">수 집합</text><g class="map-lines"><line class="map-line" x1="114" y1="61" x2="306" y2="181" marker-end="url(#map-arrow-10)"/><line class="map-line" x1="124" y1="121" x2="306" y2="121" marker-end="url(#map-arrow-10)"/><line class="map-line" x1="114" y1="181" x2="306" y2="121" marker-end="url(#map-arrow-10)"/></g><text x="83" y="68" class="map-item" text-anchor="middle">사과</text><text x="83" y="128" class="map-item" text-anchor="middle">바나나</text><text x="83" y="188" class="map-item" text-anchor="middle">포도</text><text x="319" y="68" class="map-item" text-anchor="middle">1</text><text x="319" y="128" class="map-item" text-anchor="middle">2</text><text x="319" y="188" class="map-item" text-anchor="middle">3</text></svg><p class="question-prompt">과일마다 수가 하나씩 정해졌어요. 함수일까요?</p>
+      <div class="options-grid" role="group" aria-label="10번 답 고르기"><button type="button" class="option-btn" data-value="함수" aria-pressed="false">⭕ 함수예요</button><button type="button" class="option-btn" data-value="아님" aria-pressed="false">❌ 함수가 아니에요</button></div>
+      <div class="action-row"><button type="button" class="check-btn">정답 확인</button><span class="feedback-msg" role="status" aria-live="polite"></span></div>
+    </article><article class="question-card" data-qid="11" data-answer="함수" data-hint="서로 다른 과일이 같은 수에 대응해도 괜찮아요. 각 과일의 화살표 수를 보세요.">
+      <div class="question-title-row"><span class="q-number">11번 문제</span><button type="button" class="tts-btn" data-read="사과와 바나나가 모두 3에 대응해요. 과일마다 수는 하나씩이에요. 함수일까요?">🔊 읽어주기</button></div>
+      <svg class="mapping-svg" viewBox="0 0 410 215" role="img" aria-label="사과는 3에 대응, 바나나는 3에 대응, 포도는 1에 대응. 수 집합의 수는 1, 2, 3입니다." data-diagram="11" xmlns="http://www.w3.org/2000/svg"><defs><marker id="map-arrow-11" markerUnits="userSpaceOnUse" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#164b73"/></marker></defs><ellipse cx="83" cy="121" rx="69" ry="81" fill="#f0f8ff" stroke="#9fc7df" stroke-width="1.5"/><ellipse cx="319" cy="121" rx="65" ry="81" fill="#fffaf0" stroke="#dfc98c" stroke-width="1.5"/><text x="83" y="34" class="map-title" text-anchor="middle">과일 집합</text><text x="319" y="34" class="map-title" text-anchor="middle">수 집합</text><g class="map-lines"><line class="map-line" x1="114" y1="61" x2="306" y2="181" marker-end="url(#map-arrow-11)"/><line class="map-line" x1="124" y1="121" x2="306" y2="181" marker-end="url(#map-arrow-11)"/><line class="map-line" x1="114" y1="181" x2="306" y2="61" marker-end="url(#map-arrow-11)"/></g><text x="83" y="68" class="map-item" text-anchor="middle">사과</text><text x="83" y="128" class="map-item" text-anchor="middle">바나나</text><text x="83" y="188" class="map-item" text-anchor="middle">포도</text><text x="319" y="68" class="map-item" text-anchor="middle">1</text><text x="319" y="128" class="map-item" text-anchor="middle">2</text><text x="319" y="188" class="map-item" text-anchor="middle">3</text></svg><p class="question-prompt">사과와 바나나가 같은 수 3에 대응해요. 함수일까요?</p>
+      <div class="options-grid" role="group" aria-label="11번 답 고르기"><button type="button" class="option-btn" data-value="함수" aria-pressed="false">⭕ 함수예요</button><button type="button" class="option-btn" data-value="아님" aria-pressed="false">❌ 함수가 아니에요</button></div>
+      <div class="action-row"><button type="button" class="check-btn">정답 확인</button><span class="feedback-msg" role="status" aria-live="polite"></span></div>
+    </article><article class="question-card" data-qid="12" data-answer="아님" data-hint="사과 하나에서 3과 2, 두 수가 나와요.">
+      <div class="question-title-row"><span class="q-number">12번 문제</span><button type="button" class="tts-btn" data-read="사과 하나가 3과 2, 두 수에 대응해요. 함수일까요?">🔊 읽어주기</button></div>
+      <svg class="mapping-svg" viewBox="0 0 410 215" role="img" aria-label="사과는 3과 2에 대응, 바나나는 2에 대응, 포도는 1에 대응. 수 집합의 수는 1, 2, 3입니다." data-diagram="12" xmlns="http://www.w3.org/2000/svg"><defs><marker id="map-arrow-12" markerUnits="userSpaceOnUse" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#164b73"/></marker></defs><ellipse cx="83" cy="121" rx="69" ry="81" fill="#f0f8ff" stroke="#9fc7df" stroke-width="1.5"/><ellipse cx="319" cy="121" rx="65" ry="81" fill="#fffaf0" stroke="#dfc98c" stroke-width="1.5"/><text x="83" y="34" class="map-title" text-anchor="middle">과일 집합</text><text x="319" y="34" class="map-title" text-anchor="middle">수 집합</text><g class="map-lines"><line class="map-line" x1="114" y1="61" x2="306" y2="181" marker-end="url(#map-arrow-12)"/><line class="map-line" x1="114" y1="61" x2="306" y2="121" marker-end="url(#map-arrow-12)"/><line class="map-line" x1="124" y1="121" x2="306" y2="121" marker-end="url(#map-arrow-12)"/><line class="map-line" x1="114" y1="181" x2="306" y2="61" marker-end="url(#map-arrow-12)"/></g><text x="83" y="68" class="map-item" text-anchor="middle">사과</text><text x="83" y="128" class="map-item" text-anchor="middle">바나나</text><text x="83" y="188" class="map-item" text-anchor="middle">포도</text><text x="319" y="68" class="map-item" text-anchor="middle">1</text><text x="319" y="128" class="map-item" text-anchor="middle">2</text><text x="319" y="188" class="map-item" text-anchor="middle">3</text></svg><p class="question-prompt">사과 하나가 두 수에 대응해요. 함수일까요?</p>
+      <div class="options-grid" role="group" aria-label="12번 답 고르기"><button type="button" class="option-btn" data-value="함수" aria-pressed="false">⭕ 함수예요</button><button type="button" class="option-btn" data-value="아님" aria-pressed="false">❌ 함수가 아니에요</button></div>
+      <div class="action-row"><button type="button" class="check-btn">정답 확인</button><span class="feedback-msg" role="status" aria-live="polite"></span></div>
+    </article>
+    <article class="question-card" data-qid="13" data-answer="아님" data-hint="포도에서 나오는 화살표가 없어요. 모든 과일에 수가 하나씩 정해져야 해요.">
+          <div class="question-title-row"><span class="q-number">13번 문제</span><button type="button" class="tts-btn" data-read="사과는 1, 바나나는 2에 대응해요. 포도에는 화살표가 없어요. 함수일까요?">🔊 읽어주기</button></div>
+          <svg class="mapping-svg" viewBox="0 0 410 215" role="img" aria-label="사과는 1에 대응, 바나나는 2에 대응, 포도는 대응하는 수가 없습니다. 수 집합의 수는 1, 2, 3입니다." data-diagram="13" xmlns="http://www.w3.org/2000/svg"><defs><marker id="map-arrow-13" markerUnits="userSpaceOnUse" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#164b73"/></marker></defs><ellipse cx="83" cy="121" rx="69" ry="81" fill="#f0f8ff" stroke="#9fc7df" stroke-width="1.5"/><ellipse cx="319" cy="121" rx="65" ry="81" fill="#fffaf0" stroke="#dfc98c" stroke-width="1.5"/><text x="83" y="34" class="map-title" text-anchor="middle">과일 집합</text><text x="319" y="34" class="map-title" text-anchor="middle">수 집합</text><g class="map-lines"><line class="map-line" x1="114" y1="61" x2="306" y2="61" marker-end="url(#map-arrow-13)"/><line class="map-line" x1="124" y1="121" x2="306" y2="121" marker-end="url(#map-arrow-13)"/></g><text x="83" y="68" class="map-item" text-anchor="middle">사과</text><text x="83" y="128" class="map-item" text-anchor="middle">바나나</text><text x="83" y="188" class="map-item" text-anchor="middle">포도</text><text x="319" y="68" class="map-item" text-anchor="middle">1</text><text x="319" y="128" class="map-item" text-anchor="middle">2</text><text x="319" y="188" class="map-item" text-anchor="middle">3</text></svg><p class="question-prompt">포도에서 나오는 화살표가 없어요. 함수일까요?</p>
+          <div class="options-grid" role="group" aria-label="13번 답 고르기"><button type="button" class="option-btn" data-value="함수" aria-pressed="false">⭕ 함수예요</button><button type="button" class="option-btn" data-value="아님" aria-pressed="false">❌ 함수가 아니에요</button></div>
+          <div class="action-row"><button type="button" class="check-btn">정답 확인</button><span class="feedback-msg" role="status" aria-live="polite"></span></div>
+        </article>
+        <article class="question-card" data-qid="14" data-answer="함수" data-hint="과일마다 화살표가 하나씩 있어요. 같은 수 2에 모여도 함수예요.">
+          <div class="question-title-row"><span class="q-number">14번 문제</span><button type="button" class="tts-btn" data-read="사과, 바나나, 포도가 모두 2에 대응해요. 함수일까요?">🔊 읽어주기</button></div>
+          <svg class="mapping-svg" viewBox="0 0 410 215" role="img" aria-label="사과, 바나나, 포도는 모두 2에 대응합니다. 수 집합의 수는 1, 2, 3입니다." data-diagram="14" xmlns="http://www.w3.org/2000/svg"><defs><marker id="map-arrow-14" markerUnits="userSpaceOnUse" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#164b73"/></marker></defs><ellipse cx="83" cy="121" rx="69" ry="81" fill="#f0f8ff" stroke="#9fc7df" stroke-width="1.5"/><ellipse cx="319" cy="121" rx="65" ry="81" fill="#fffaf0" stroke="#dfc98c" stroke-width="1.5"/><text x="83" y="34" class="map-title" text-anchor="middle">과일 집합</text><text x="319" y="34" class="map-title" text-anchor="middle">수 집합</text><g class="map-lines"><line class="map-line" x1="114" y1="61" x2="306" y2="121" marker-end="url(#map-arrow-14)"/><line class="map-line" x1="124" y1="121" x2="306" y2="121" marker-end="url(#map-arrow-14)"/><line class="map-line" x1="114" y1="181" x2="306" y2="121" marker-end="url(#map-arrow-14)"/></g><text x="83" y="68" class="map-item" text-anchor="middle">사과</text><text x="83" y="128" class="map-item" text-anchor="middle">바나나</text><text x="83" y="188" class="map-item" text-anchor="middle">포도</text><text x="319" y="68" class="map-item" text-anchor="middle">1</text><text x="319" y="128" class="map-item" text-anchor="middle">2</text><text x="319" y="188" class="map-item" text-anchor="middle">3</text></svg><p class="question-prompt">과일 세 개가 모두 수 2에 대응해요. 함수일까요?</p>
+          <div class="options-grid" role="group" aria-label="14번 답 고르기"><button type="button" class="option-btn" data-value="함수" aria-pressed="false">⭕ 함수예요</button><button type="button" class="option-btn" data-value="아님" aria-pressed="false">❌ 함수가 아니에요</button></div>
+          <div class="action-row"><button type="button" class="check-btn">정답 확인</button><span class="feedback-msg" role="status" aria-live="polite"></span></div>
+        </article>
+        <article class="question-card" data-qid="15" data-answer="아님" data-hint="바나나에서 화살표가 두 개 나와요. 한 과일에는 수가 꼭 하나여야 해요.">
+          <div class="question-title-row"><span class="q-number">15번 문제</span><button type="button" class="tts-btn" data-read="사과는 2, 바나나는 1과 3, 포도는 3에 대응해요. 함수일까요?">🔊 읽어주기</button></div>
+          <svg class="mapping-svg" viewBox="0 0 410 215" role="img" aria-label="사과는 2에 대응, 바나나는 1과 3에 대응, 포도는 3에 대응합니다. 수 집합의 수는 1, 2, 3입니다." data-diagram="15" xmlns="http://www.w3.org/2000/svg"><defs><marker id="map-arrow-15" markerUnits="userSpaceOnUse" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#164b73"/></marker></defs><ellipse cx="83" cy="121" rx="69" ry="81" fill="#f0f8ff" stroke="#9fc7df" stroke-width="1.5"/><ellipse cx="319" cy="121" rx="65" ry="81" fill="#fffaf0" stroke="#dfc98c" stroke-width="1.5"/><text x="83" y="34" class="map-title" text-anchor="middle">과일 집합</text><text x="319" y="34" class="map-title" text-anchor="middle">수 집합</text><g class="map-lines"><line class="map-line" x1="114" y1="61" x2="306" y2="121" marker-end="url(#map-arrow-15)"/><line class="map-line" x1="124" y1="121" x2="306" y2="61" marker-end="url(#map-arrow-15)"/><line class="map-line" x1="124" y1="121" x2="306" y2="181" marker-end="url(#map-arrow-15)"/><line class="map-line" x1="114" y1="181" x2="306" y2="181" marker-end="url(#map-arrow-15)"/></g><text x="83" y="68" class="map-item" text-anchor="middle">사과</text><text x="83" y="128" class="map-item" text-anchor="middle">바나나</text><text x="83" y="188" class="map-item" text-anchor="middle">포도</text><text x="319" y="68" class="map-item" text-anchor="middle">1</text><text x="319" y="128" class="map-item" text-anchor="middle">2</text><text x="319" y="188" class="map-item" text-anchor="middle">3</text></svg><p class="question-prompt">바나나 하나에서 화살표가 두 개 나와요. 함수일까요?</p>
+          <div class="options-grid" role="group" aria-label="15번 답 고르기"><button type="button" class="option-btn" data-value="함수" aria-pressed="false">⭕ 함수예요</button><button type="button" class="option-btn" data-value="아님" aria-pressed="false">❌ 함수가 아니에요</button></div>
+          <div class="action-row"><button type="button" class="check-btn">정답 확인</button><span class="feedback-msg" role="status" aria-live="polite"></span></div>
+        </article>
+  </section>
+  <section class="self-eval-section" aria-label="오늘의 스스로 배움 평가"><h2>🌟 오늘 나의 수학 공부 돌아보기</h2>
+    <div class="eval-row"><span class="eval-label">1. 끝까지 참여했나요?</span><div class="star-rating" id="starRating" role="group" aria-label="참여 별점"><button type="button" class="star-btn" data-star="1" aria-label="1점" aria-pressed="false">★</button><button type="button" class="star-btn" data-star="2" aria-label="2점" aria-pressed="false">★</button><button type="button" class="star-btn" data-star="3" aria-label="3점" aria-pressed="false">★</button><button type="button" class="star-btn" data-star="4" aria-label="4점" aria-pressed="false">★</button><button type="button" class="star-btn" data-star="5" aria-label="5점" aria-pressed="false">★</button></div></div>
+    <div class="eval-row"><span class="eval-label">2. 오늘 공부는 어땠나요?</span><div class="mood-selector" role="group" aria-label="공부 소감"><button type="button" class="mood-btn" aria-pressed="false">😄 잘 알겠어요</button><button type="button" class="mood-btn" aria-pressed="false">🙂 해볼 만했어요</button><button type="button" class="mood-btn" aria-pressed="false">🤔 더 연습할래요</button></div></div>
+  </section>
+  <section class="finish-banner" id="finishBanner" aria-live="polite"><div class="stamp-badge">참 잘했어요! 💮</div><h2 class="finish-title">🎉 모든 문제를 해결했어요!</h2><p class="finish-desc">과일과 수를 짝짓고, 함수와 함수가 아닌 대응을 구별했어요.</p><button type="button" class="timer-btn" id="restartBtn">↺ 처음부터 다시 하기</button></section>
+</main>
+<script>
+(() => {
+  const cards = [...document.querySelectorAll('.question-card')];
+  let soundOn = true;
+  const updateProgress = () => {
+    const done = cards.filter(card => card.classList.contains('done')).length;
+    const percent = Math.round(done / cards.length * 100);
+    document.getElementById('progressFill').style.width = percent + '%';
+    document.getElementById('progressText').textContent = `${done} / ${cards.length} 완료 (${percent}%)`;
+    if (done === cards.length) document.getElementById('finishBanner').classList.add('show');
+  };
+  const tone = good => {
+    if (!soundOn) return;
+    try { const Context = window.AudioContext || window.webkitAudioContext; if (!Context) return;
+      const context = new Context(), oscillator = context.createOscillator(), gain = context.createGain();
+      oscillator.type = 'sine'; oscillator.frequency.value = good ? 660 : 280;
+      gain.gain.setValueAtTime(.07, context.currentTime); gain.gain.exponentialRampToValueAtTime(.001, context.currentTime + .17);
+      oscillator.connect(gain); gain.connect(context.destination); oscillator.start(); oscillator.stop(context.currentTime + .18);
+      oscillator.onended = () => context.close();
+    } catch (_) {}
+  };
+  cards.forEach(card => {
+    const options = [...card.querySelectorAll('.option-btn')], feedback = card.querySelector('.feedback-msg');
+    options.forEach(option => option.addEventListener('click', () => {
+      if (card.classList.contains('done')) return;
+      options.forEach(other => other.setAttribute('aria-pressed', String(other === option)));
+      feedback.className = 'feedback-msg'; feedback.textContent = '';
+    }));
+    card.querySelector('.check-btn').addEventListener('click', () => {
+      const chosen = options.find(option => option.getAttribute('aria-pressed') === 'true')?.dataset.value;
+      if (!chosen) { feedback.textContent = '답을 먼저 골라 보세요.'; feedback.className = 'feedback-msg bad show'; return; }
+      if (chosen === card.dataset.answer) {
+        card.classList.add('done'); options.forEach(option => option.disabled = true); card.querySelector('.check-btn').disabled = true;
+        feedback.textContent = '🎉 정답이에요!'; feedback.className = 'feedback-msg good show'; tone(true); updateProgress();
+      } else {
+        feedback.textContent = '다시 생각해 봐요. ' + card.dataset.hint;
+        feedback.className = 'feedback-msg bad show'; tone(false);
+      }
+    });
+  });
+  document.querySelectorAll('.tts-btn').forEach(button => button.addEventListener('click', () => {
+    if (!('speechSynthesis' in window)) { button.textContent = '읽어주기를 사용할 수 없어요'; return; }
+    speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(button.dataset.read);
+    utterance.lang = 'ko-KR'; utterance.rate = .85; speechSynthesis.speak(utterance);
+  }));
+  const soundButton = document.getElementById('soundToggleBtn');
+  soundButton.addEventListener('click', () => { soundOn = !soundOn; soundButton.setAttribute('aria-pressed', String(soundOn)); soundButton.textContent = soundOn ? '🔔 효과음 켬' : '🔕 효과음 끔'; });
+  const display = document.getElementById('timerDisplay'), timerButton = document.getElementById('timerToggleBtn');
+  let seconds = 20 * 60, timer = null;
+  const renderTime = () => { display.textContent = `${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`; };
+  timerButton.addEventListener('click', () => {
+    if (timer) { clearInterval(timer); timer = null; timerButton.textContent = '▶️ 계속'; return; }
+    if (seconds === 0) seconds = 20 * 60;
+    timerButton.textContent = '⏸️ 잠시 멈춤';
+    timer = setInterval(() => { seconds--; renderTime(); if (seconds <= 0) { clearInterval(timer); timer = null; timerButton.textContent = '▶️ 다시 시작'; display.classList.add('timer-done'); } }, 1000);
+  });
+  document.getElementById('timerResetBtn').addEventListener('click', () => { clearInterval(timer); timer = null; seconds = 20*60; renderTime(); display.classList.remove('timer-done'); timerButton.textContent = '▶️ 시작'; });
+  document.getElementById('printBtn').addEventListener('click', () => window.print());
+  document.getElementById('restartBtn').addEventListener('click', () => location.reload());
+  const stars = [...document.querySelectorAll('.star-btn')];
+  stars.forEach(button => button.addEventListener('click', () => { const score = Number(button.dataset.star); stars.forEach(star => { star.classList.toggle('active', Number(star.dataset.star) <= score); star.setAttribute('aria-pressed', String(Number(star.dataset.star) === score)); }); }));
+  const moods = [...document.querySelectorAll('.mood-btn')];
+  moods.forEach(button => button.addEventListener('click', () => moods.forEach(mood => mood.setAttribute('aria-pressed', String(mood === button)))));
+})();
+</script></body></html>
