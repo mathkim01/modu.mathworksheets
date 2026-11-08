@@ -32,8 +32,8 @@ const worksheetMenu = [
       },
       { title: "3. 함수",
     	items: [
-      	  { title: "명제의 뜻", file: "activities/proposition-truth-set-worksheet.html" },
-      	  { title: "조건과 진리집합", file: "activities/truth-set-steps-6-10-worksheet.html" },
+      	  { title: "함수", file: "activities/function-or-not-function.html" },
+      	  { title: "일대일함수, 일대일대응", file: "activities/one-to-one-function-bijection.html" },
       	  { title: "합성함수", file: "activities/function_boxes.html" }
       	]
       }
